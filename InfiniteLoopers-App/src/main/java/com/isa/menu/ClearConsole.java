@@ -1,4 +1,4 @@
-package menu;
+package com.isa.menu;
 
 public class ClearConsole {
 

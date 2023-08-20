@@ -1,7 +1,7 @@
 package com.isa;
 
-import menu.ClearConsole;
-import menu.Menu;
+import com.isa.menu.ClearConsole;
+import com.isa.menu.Menu;
 
 public class App
 {

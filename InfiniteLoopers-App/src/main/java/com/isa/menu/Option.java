@@ -1,4 +1,4 @@
-package menu;
+package com.isa.menu;
 
 public class Option {
     private int index;
