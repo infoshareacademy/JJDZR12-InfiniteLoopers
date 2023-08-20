@@ -1,13 +1,15 @@
 package com.isa;
 
-/**
- * Hello world!
- *
- */
-public class App 
+import menu.ClearConsole;
+import menu.Menu;
+
+public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        Menu menu =new Menu();
+        ClearConsole.clearConsole();
+        menu.menuInvoke();
+
     }
 }
