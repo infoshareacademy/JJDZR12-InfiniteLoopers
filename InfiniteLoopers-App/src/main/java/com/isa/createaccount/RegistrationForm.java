@@ -32,16 +32,17 @@ public class RegistrationForm {
         } while (ageNewUser < 6 || ageNewUser > 99);
 
         String nameSchoolNewUser = userInputReader.readString("Wporawdz nazwe szkoly: ");
+        String userNewId = IdGenerator.generateUniqueId();
 
         try {
             FileWriter writer = new FileWriter("users.txt", true);
-            writer.write("FirstName: " + firstNameNewUser + "\n");
-            writer.write("LastName: " + lastNameNewUser + "\n");
-            writer.write("Age: " + ageNewUser + "\n");
-            writer.write("School: " + nameSchoolNewUser + "\n");
-            writer.write("Email: " + emailNewUser + "\n");
-            writer.write("Login: " + loginNewUser + "\n");
-            writer.write("Pass: " + passwordNewUser + "\n");
+            writer.write("FirstName: " + firstNameNewUser + " {" + userNewId + "}" + "\n");
+            writer.write("LastName: " + lastNameNewUser + " {" + userNewId + "}" + "\n");
+            writer.write("Age: " + ageNewUser + " {" + userNewId + "}" + "\n");
+            writer.write("School: " + nameSchoolNewUser + " {" + userNewId + "}" + "\n");
+            writer.write("Email: " + emailNewUser + " {" + userNewId + "}" + "\n");
+            writer.write("Login: " + loginNewUser + " {" + userNewId + "}" + "\n");
+            writer.write("Pass: " + passwordNewUser + " {" + userNewId + "}" + "\n");
             writer.write("\n");
             writer.close();
         } catch (IOException e) {
