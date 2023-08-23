@@ -15,28 +15,28 @@ public class User {
 
     public void readUserInput() {
         System.out.println("Rejestracja nowego użytkownika");
-        this.loginNewUser = userInputReader.readString("Wprowadz Login: ");
-        this.passwordNewUser = userInputReader.readString("Wprowadz haslo: ");
+        this.loginNewUser = userInputReader.readNonEmptyString("Wprowadz Login: ");
+        this.passwordNewUser = userInputReader.readNonEmptyString("Wprowadz haslo: ");
 
         do {
-            this.emailNewUser = userInputReader.readString("Wprowadz adres e-mail: ");
+            this.emailNewUser = userInputReader.readNonEmptyString("Wprowadz adres e-mail: ");
             if (!this.emailNewUser.contains("@")) {
                 System.out.println("Adres email ma zawierac @. Prosze wprowadzic poprawny email");
             }
         } while (!this.emailNewUser.contains("@"));
 
-        this.firstNameNewUser = userInputReader.readString("Wprowadz Imie: ");
-        this.lastNameNewUser = userInputReader.readString("Wporawdz Nazwisko: ");
+        this.firstNameNewUser = userInputReader.readNonEmptyString("Wprowadz Imie: ");
+        this.lastNameNewUser = userInputReader.readNonEmptyString("Wporawdz Nazwisko: ");
         int ageNewUser;
 
         do {
-            ageNewUser = Integer.parseInt(userInputReader.readString("Wprowadz wiek: "));
+            ageNewUser = Integer.parseInt(userInputReader.readNonEmptyString("Wprowadz wiek: "));
             if (ageNewUser < 6 || ageNewUser > 99) {
                 System.out.println("Wiek ma byc w przedzialie od 7 do 99");
             }
         } while (ageNewUser < 6 || ageNewUser > 99);
 
-        this.nameSchoolNewUser = userInputReader.readString("Wporawdz nazwe szkoly: ");
+        this.nameSchoolNewUser = userInputReader.readNonEmptyString("Wporawdz nazwe szkoly: ");
         this.userNewId = IdGenerator.generateUniqueId();
     }
 
