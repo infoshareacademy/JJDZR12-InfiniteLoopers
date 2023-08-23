@@ -1,4 +1,4 @@
-package com.isa.createaccount;
+package com.isa.account;
 
 import java.util.Scanner;
 
