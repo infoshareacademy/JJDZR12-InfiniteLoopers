@@ -10,6 +10,7 @@ public class User {
     private int ageNewUser;
     private String nameSchoolNewUser;
     private String userNewId;
+    private UserRole userRole;
 
     public User () {}
 
@@ -100,6 +101,14 @@ public class User {
         return userNewId;
     }
 
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
+    }
+
     @Override
     public String toString() {
         return "\nUser{" +
@@ -112,6 +121,7 @@ public class User {
                 ", ageNewUser=" + ageNewUser +
                 ", nameSchoolNewUser='" + nameSchoolNewUser + '\'' +
                 ", userNewId='" + userNewId + '\'' +
+                ", userRole='" + userRole + '\'' +
                 "}\n";
     }
 }

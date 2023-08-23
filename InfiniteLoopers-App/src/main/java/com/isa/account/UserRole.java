@@ -1,5 +1,5 @@
 package com.isa.account;
 
-public enum UserType {
+public enum UserRole {
     ADMINISTRATOR, UCZEN, NAUCZYCIEL, OPIEKUN
 }
