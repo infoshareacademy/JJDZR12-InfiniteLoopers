@@ -11,11 +11,11 @@ public class RegistrationForm {
         user.readUserInput();
         userManager.addUser(user);
 
-        userManager.saveUsersToFile("/src/main/java/com.isa/resources/users.json");
+        userManager.saveUsersToFile("users.json");
 
-        List<User> loaderUsers = userManager.loadUsersFromFile("/src/main/java/com.isa/resources/users.json");
+        List<User> loaderUsers = userManager.loadUsersFromFile("users.json");
         for (User user2 : loaderUsers) {
-            System.out.println("Loaded users " + user.getLoginNewUser());
+            System.out.println("Dodan uzytkownik " + user.getLoginNewUser());
         }
 
 

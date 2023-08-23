@@ -99,4 +99,19 @@ public class User {
     public String getUserNewId() {
         return userNewId;
     }
+
+    @Override
+    public String toString() {
+        return "\nUser{" +
+                "userInputReader=" + userInputReader +
+                ", loginNewUser='" + loginNewUser + '\'' +
+                ", passwordNewUser='" + passwordNewUser + '\'' +
+                ", emailNewUser='" + emailNewUser + '\'' +
+                ", firstNameNewUser='" + firstNameNewUser + '\'' +
+                ", lastNameNewUser='" + lastNameNewUser + '\'' +
+                ", ageNewUser=" + ageNewUser +
+                ", nameSchoolNewUser='" + nameSchoolNewUser + '\'' +
+                ", userNewId='" + userNewId + '\'' +
+                "}\n";
+    }
 }
