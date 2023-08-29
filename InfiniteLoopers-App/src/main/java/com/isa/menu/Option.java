@@ -1,8 +1,8 @@
 package com.isa.menu;
 
 public class Option {
-    private int index;
-    private String name;
+    private final int index;
+    private final String name;
 
 
 

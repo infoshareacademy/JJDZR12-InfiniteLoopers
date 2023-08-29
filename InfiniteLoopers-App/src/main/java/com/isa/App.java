@@ -1,15 +1,14 @@
 package com.isa;
 
 import com.isa.menu.ClearConsole;
-import com.isa.menu.Menu;
+import static com.isa.menu.Menu.menuInvoke;
 
 public class App
 {
     public static void main( String[] args )
     {
-        Menu menu =new Menu();
         ClearConsole.clearConsole();
-        menu.menuInvoke();
+        menuInvoke();
 
     }
 }

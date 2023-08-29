@@ -2,6 +2,10 @@ package com.isa.menu;
 
 public class ClearConsole {
 
+    private ClearConsole() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
+
     public static void clearConsole() {
         try {
             if (System.getProperty("os.name").contains("Windows")) {

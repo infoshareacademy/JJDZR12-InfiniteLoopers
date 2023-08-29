@@ -2,15 +2,21 @@ package com.isa.menu;
 
 import java.util.List;
 import java.util.Scanner;
+import static com.isa.menu.OptionService.backToMainMenu;
+
 
 public class Menu {
+
+    private Menu() {
+        throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
+    }
         public static void menuInvoke() {
             Scanner scanner = new Scanner(System.in);
             List<Option> optionList = OptionService.getOptionList();
 
 
             System.out.println("**************************************************");
-            System.out.println("                Dziennik XXXXXXXX         ");
+            System.out.println("                Dziennik XXXXXXXX                 ");
             System.out.println("**************************************************");
             System.out.println("\n");
 
@@ -28,14 +34,14 @@ public class Menu {
                 switch (value) {
                     case 1:
                         ClearConsole.clearConsole();
-                        System.out.println("Przechodzi do rejestracji");
-                        menuInvoke();
+                        System.out.println("Przechodzi do logowania");
+                        backToMainMenu();
                         break;
 
                     case 2:
                         ClearConsole.clearConsole();
-                        System.out.println("Przechodzi do logowania");
-                        menuInvoke();
+                        System.out.println("Przechodzi do rejestracji");
+                        backToMainMenu();
                         break;
 
 
@@ -67,5 +73,6 @@ public class Menu {
 
             }
         }
+
 }
 
