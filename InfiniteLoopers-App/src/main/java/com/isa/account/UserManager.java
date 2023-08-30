@@ -35,4 +35,8 @@ public class UserManager {
             return new ArrayList<>();
         }
     }
+
+    public UserList getUserList() {
+        return userList;
+    }
 }

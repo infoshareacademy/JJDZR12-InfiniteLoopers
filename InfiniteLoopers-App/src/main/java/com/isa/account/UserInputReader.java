@@ -24,4 +24,5 @@ public class UserInputReader {
         } while (input.trim().isEmpty());
         return input;
     }
+
 }
