@@ -15,7 +15,7 @@ public class RegistrationForm {
 
         List<User> loaderUsers = userManager.loadUsersFromFile("users.json");
         for (User user2 : loaderUsers) {
-            System.out.println("Dodan uzytkownik " + user.getLoginNewUser());
+            System.out.println("Dodan uzytkownik " + user2.getLoginNewUser());
         }
 
 
