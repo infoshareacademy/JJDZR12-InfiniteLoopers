@@ -11,11 +11,11 @@ public class AdminUser extends User {
     }
 
     private  void setDefaultCredentials () {
-        setLoginNewUser("admin");
-        setPasswordNewUser("admin");
+        setLoginUser("admin");
+        setPasswordUser("admin");
     }
 
     public boolean authenficate(String enteredPassword) {
-        return getPasswordNewUser().equals(enteredPassword);
+        return getPasswordUser().equals(enteredPassword);
     }
 }

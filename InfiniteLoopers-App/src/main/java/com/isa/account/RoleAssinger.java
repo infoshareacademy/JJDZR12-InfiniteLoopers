@@ -8,14 +8,14 @@ public class RoleAssinger {
     public void assingRoles(List<User> userList, AdminUser admin) {
         System.out.println("User: ");
         for (User user : userList) {
-            System.out.println(user.getAgeNewUser());
+            System.out.println(user.getAgeUser());
         }
 
         String selectUserLogin = userInputReader.readNonEmptyString("Wprowadz login do ktorego chcesz przepisac role: ");
 
         User selectedUser = null;
         for (User user : userList) {
-            if (user.getLoginNewUser().equals(selectUserLogin)) {
+            if (user.getLoginUser().equals(selectUserLogin)) {
                 selectedUser = user;
                 break;
             }

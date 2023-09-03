@@ -2,9 +2,16 @@ package com.isa.account;
 
 import java.util.UUID;
 
-public class IdGenerator {
+class IdGenerator {
 
-    public static String generateUniqueId() {
+    private IdGenerator() {
+    }
+
+    private static String generateUniqueId() {
         return UUID.randomUUID().toString();
+    }
+
+    public static String getUniqueId() {
+        return generateUniqueId();
     }
 }

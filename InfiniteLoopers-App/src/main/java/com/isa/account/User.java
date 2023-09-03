@@ -2,103 +2,103 @@ package com.isa.account;
 
 public class User {
     private UserInputReader userInputReader = new UserInputReader();
-    private String loginNewUser;
-    private String passwordNewUser;
-    private String emailNewUser;
-    private String firstNameNewUser;
-    private String lastNameNewUser;
-    private int ageNewUser;
-    private String nameSchoolNewUser;
-    private String userNewId;
+    private String loginUser;
+    private String passwordUser;
+    private String emailUser;
+    private String firstNameUser;
+    private String lastNameUser;
+    private int ageUser;
+    private String nameSchoolUser;
+    private String userId;
     private UserRole userRole;
 
     public User () {}
 
     public void readUserInput() {
         System.out.println("Rejestracja nowego użytkownika");
-        this.loginNewUser = userInputReader.readNonEmptyString("Wprowadz Login: ");
-        this.passwordNewUser = userInputReader.readNonEmptyString("Wprowadz haslo: ");
+        this.loginUser = userInputReader.readNonEmptyString("Wprowadz Login: ");
+        this.passwordUser = userInputReader.readNonEmptyString("Wprowadz haslo: ");
 
         do {
-            this.emailNewUser = userInputReader.readNonEmptyString("Wprowadz adres e-mail: ");
-            if (!this.emailNewUser.contains("@")) {
+            this.emailUser = userInputReader.readNonEmptyString("Wprowadz adres e-mail: ");
+            if (!this.emailUser.contains("@")) {
                 System.out.println("Adres email ma zawierac @. Prosze wprowadzic poprawny email");
             }
-        } while (!this.emailNewUser.contains("@"));
+        } while (!this.emailUser.contains("@"));
 
-        this.firstNameNewUser = userInputReader.readNonEmptyString("Wprowadz Imie: ");
-        this.lastNameNewUser = userInputReader.readNonEmptyString("Wporawdz Nazwisko: ");
-        int ageNewUser;
+        this.firstNameUser = userInputReader.readNonEmptyString("Wprowadz Imie: ");
+        this.lastNameUser = userInputReader.readNonEmptyString("Wporawdz Nazwisko: ");
+        int ageUser;
 
         do {
-            ageNewUser = Integer.parseInt(userInputReader.readNonEmptyString("Wprowadz wiek: "));
-            if (ageNewUser < 6 || ageNewUser > 99) {
+            ageUser = Integer.parseInt(userInputReader.readNonEmptyString("Wprowadz wiek: "));
+            if (ageUser < 6 || ageUser > 99) {
                 System.out.println("Wiek ma byc w przedzialie od 7 do 99");
             }
-        } while (ageNewUser < 6 || ageNewUser > 99);
+        } while (ageUser < 6 || ageUser > 99);
 
-        this.nameSchoolNewUser = userInputReader.readNonEmptyString("Wporawdz nazwe szkoly: ");
-        this.userNewId = IdGenerator.generateUniqueId();
+        this.nameSchoolUser = userInputReader.readNonEmptyString("Wporawdz nazwe szkoly: ");
+        this.userId = IdGenerator.getUniqueId();
     }
 
-    public String getLoginNewUser() {
-        return loginNewUser;
+    public String getLoginUser() {
+        return loginUser;
     }
 
-    public void setLoginNewUser(String loginNewUser) {
-        this.loginNewUser = loginNewUser;
+    public void setLoginUser(String loginUser) {
+        this.loginUser = loginUser;
     }
 
-    public String getPasswordNewUser() {
-        return passwordNewUser;
+    public String getPasswordUser() {
+        return passwordUser;
     }
 
-    public void setPasswordNewUser(String passwordNewUser) {
-        this.passwordNewUser = passwordNewUser;
+    public void setPasswordUser(String passwordUser) {
+        this.passwordUser = passwordUser;
     }
 
-    public String getEmailNewUser() {
-        return emailNewUser;
+    public String getEmailUser() {
+        return emailUser;
     }
 
-    public void setEmailNewUser(String emailNewUser) {
-        this.emailNewUser = emailNewUser;
+    public void setEmailUser(String emailUser) {
+        this.emailUser = emailUser;
     }
 
-    public String getFirstNameNewUser() {
-        return firstNameNewUser;
+    public String getFirstNameUser() {
+        return firstNameUser;
     }
 
-    public void setFirstNameNewUser(String firstNameNewUser) {
-        this.firstNameNewUser = firstNameNewUser;
+    public void setFirstNameUser(String firstNameUser) {
+        this.firstNameUser = firstNameUser;
     }
 
-    public String getLastNameNewUser() {
-        return lastNameNewUser;
+    public String getLastNameUser() {
+        return lastNameUser;
     }
 
-    public void setLastNameNewUser(String lastNameNewUser) {
-        this.lastNameNewUser = lastNameNewUser;
+    public void setLastNameUser(String lastNameUser) {
+        this.lastNameUser = lastNameUser;
     }
 
-    public int getAgeNewUser() {
-        return ageNewUser;
+    public int getAgeUser() {
+        return ageUser;
     }
 
-    public void setAgeNewUser(int ageNewUser) {
-        this.ageNewUser = ageNewUser;
+    public void setAgeUser(int ageUser) {
+        this.ageUser = ageUser;
     }
 
-    public String getNameSchoolNewUser() {
-        return nameSchoolNewUser;
+    public String getNameSchoolUser() {
+        return nameSchoolUser;
     }
 
-    public void setNameSchoolNewUser(String nameSchoolNewUser) {
-        this.nameSchoolNewUser = nameSchoolNewUser;
+    public void setNameSchoolUser(String nameSchoolUser) {
+        this.nameSchoolUser = nameSchoolUser;
     }
 
-    public String getUserNewId() {
-        return userNewId;
+    public String getUserId() {
+        return userId;
     }
 
     public UserRole getUserRole() {
@@ -113,14 +113,14 @@ public class User {
     public String toString() {
         return "\nUser{" +
                 "userInputReader=" + userInputReader +
-                ", loginNewUser='" + loginNewUser + '\'' +
-                ", passwordNewUser='" + passwordNewUser + '\'' +
-                ", emailNewUser='" + emailNewUser + '\'' +
-                ", firstNameNewUser='" + firstNameNewUser + '\'' +
-                ", lastNameNewUser='" + lastNameNewUser + '\'' +
-                ", ageNewUser=" + ageNewUser +
-                ", nameSchoolNewUser='" + nameSchoolNewUser + '\'' +
-                ", userNewId='" + userNewId + '\'' +
+                ", loginUser='" + loginUser + '\'' +
+                ", passwordUser='" + passwordUser + '\'' +
+                ", emailUser='" + emailUser + '\'' +
+                ", firstNameUser='" + firstNameUser + '\'' +
+                ", lastNameUser='" + lastNameUser + '\'' +
+                ", ageUser=" + ageUser +
+                ", nameSchoolUser='" + nameSchoolUser + '\'' +
+                ", userId='" + userId + '\'' +
                 ", userRole='" + userRole + '\'' +
                 "}\n";
     }

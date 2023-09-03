@@ -26,7 +26,7 @@ public class RegistrationForm {
         String enterLogin = userInputReader.readNonEmptyString("Wprowadz login administratora: ");
         String enteredPassword = userInputReader.readNonEmptyString("Wprowadz haslo administratora: ");
 
-        if (admin.getLoginNewUser().equals(enterLogin) && admin.authenficate(enteredPassword)) {
+        if (admin.getLoginUser().equals(enterLogin) && admin.authenficate(enteredPassword)) {
             System.out.println("Administrator zalogowany!");
 
             RoleAssinger roleAssinger = new RoleAssinger();
@@ -39,7 +39,7 @@ public class RegistrationForm {
 
         List<User> loaderUsers = userManager.loadUsersFromFile("users.json");
         for (User user2 : loaderUsers) {
-            System.out.println("Dodan uzytkownik " + user2.getLoginNewUser());
+            System.out.println("Dodan uzytkownik " + user2.getLoginUser());
         }
 
 
