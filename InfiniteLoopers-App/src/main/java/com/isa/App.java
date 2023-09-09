@@ -1,8 +1,6 @@
 package com.isa;
 
-import com.isa.account.RegistrationForm;
-import com.isa.account.UserInputReader;
-import com.isa.account.UserManager;
+import com.isa.account.*;
 
 public class App 
 {
@@ -12,6 +10,13 @@ public class App
         UserManager userManager = new UserManager();
         RegistrationForm registrationForm = new RegistrationForm(userInputReader, userManager);
         registrationForm.registrationFrom();
+
+        AuthenticationService authService = new AuthenticationService(userManager);
+        LoginManager loginManager = new LoginManager(authService);
+
+        loginManager.login();
+
+
 
 
     }
