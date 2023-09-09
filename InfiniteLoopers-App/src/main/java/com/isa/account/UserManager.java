@@ -9,8 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserManager {
-    private ObjectMapper objectMapper = new ObjectMapper();
-    private UserList userList = new UserList();
+    private final ObjectMapper objectMapper = new ObjectMapper();
+    private final UserList userList = new UserList();
 
     public  void  addUser (User user) {
         userList.addUser(user);
@@ -29,7 +29,7 @@ public class UserManager {
 
     public  List<User> loadUsersFromFile (String fileUsers) {
         try {
-            return objectMapper.readValue(new File(fileUsers), new TypeReference<List<User>>() {});
+            return objectMapper.readValue(new File(fileUsers), new TypeReference<>() {});
         } catch (IOException e) {
             System.out.println("Error podczas uzyskania dannych.");
             return new ArrayList<>();

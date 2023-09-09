@@ -4,10 +4,6 @@ import com.isa.account.RegistrationForm;
 import com.isa.account.UserInputReader;
 import com.isa.account.UserManager;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
     public static void main( String[] args )

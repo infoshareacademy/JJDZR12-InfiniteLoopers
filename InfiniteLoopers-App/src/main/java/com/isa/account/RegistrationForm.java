@@ -5,6 +5,7 @@ import java.util.List;
 public class RegistrationForm {
     private UserInputReader userInputReader;
     private UserManager userManager;
+    private static final String fileName = "users.json";
 
     public RegistrationForm (UserInputReader userInputReader, UserManager userManager) {
         this.userInputReader = userInputReader;
@@ -21,7 +22,7 @@ public class RegistrationForm {
         user.readUserInput();
         userManager.addUser(user);
 
-        userManager.saveUsersToFile("users.json");
+        userManager.saveUsersToFile(fileName);
 
         String enterLogin = userInputReader.readNonEmptyString("Wprowadz login administratora: ");
         String enteredPassword = userInputReader.readNonEmptyString("Wprowadz haslo administratora: ");
@@ -35,9 +36,9 @@ public class RegistrationForm {
             System.out.println("Administrator nie jest zalogowany");
         }
 
-        userManager.saveUsersToFile("users.json");
+        userManager.saveUsersToFile(fileName);
 
-        List<User> loaderUsers = userManager.loadUsersFromFile("users.json");
+        List<User> loaderUsers = userManager.loadUsersFromFile(fileName);
         for (User user2 : loaderUsers) {
             System.out.println("Dodan uzytkownik " + user2.getLoginUser());
         }
