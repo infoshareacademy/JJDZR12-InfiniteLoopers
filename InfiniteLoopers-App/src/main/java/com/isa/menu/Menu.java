@@ -3,6 +3,7 @@ package com.isa.menu;
 import java.util.List;
 import java.util.Scanner;
 import static com.isa.menu.OptionService.backToMainMenu;
+import static com.isa.menu.OptionService.closeApp;
 
 
 public class Menu {
@@ -20,9 +21,8 @@ public class Menu {
             System.out.println("**************************************************");
             System.out.println("\n");
 
-            for (Option x : optionList) {
-
-                System.out.println(x.getIndex() + " " + x.getName());
+            for (Option option : optionList) {
+                System.out.println(option.getIndex() + " " + option.getName());
             }
             System.out.println("\n");
             System.out.print("Wybierz opcję wprowadzając numer opcji i zatwierdź ją enterem: ");
@@ -32,45 +32,35 @@ public class Menu {
                 int value = Integer.parseInt(option);
 
                 switch (value) {
-                    case 1:
+                    case 1 -> {
                         ClearConsole.clearConsole();
                         System.out.println("Przechodzi do logowania");
                         backToMainMenu();
-                        break;
+                    }
 
-                    case 2:
+                    case 2 -> {
                         ClearConsole.clearConsole();
                         System.out.println("Przechodzi do rejestracji");
                         backToMainMenu();
-                        break;
+                    }
 
-
-                    case 3:
-                        ClearConsole.clearConsole();
-                        System.out.println("\n");
-                        System.out.println("\n");
-                        System.out.println("**************************************************");
-                        System.out.println("     Program został zakończony...Do widzenia!     ");
-                        System.out.println("**************************************************");
-                        System.out.println("\n");
-                        System.out.println("\n");
-                        break;
-                    default:
+                    case 3 -> {
+                            closeApp();
+                        }
+                    default -> {
                         ClearConsole.clearConsole();
                         System.out.println("**************************************************");
                         System.out.println("Nieprawidłowy wybór opcji! Wybierz prawidłową opcję");
                         System.out.println("**************************************************");
                         menuInvoke();
-                        break;
+                    }
                 }
             } catch (NumberFormatException e) {
-
                 ClearConsole.clearConsole();
-                System.out.println("**************************************************");
+                System.out.println("******************************************************");
                 System.out.println("Opcja nie może być literą! Wybierz opcję podając cyfrę");
-                System.out.println("**************************************************");
+                System.out.println("******************************************************");
                 menuInvoke();
-
             }
         }
 

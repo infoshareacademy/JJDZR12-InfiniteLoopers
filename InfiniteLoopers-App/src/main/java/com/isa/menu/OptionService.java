@@ -11,9 +11,7 @@ public class OptionService {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
 
-
     protected static final List<Option> optionList = createOptionList();
-
 
     public static List <Option> createOptionList() {
 
@@ -25,8 +23,8 @@ public class OptionService {
         Option optionLogOut = new Option(2,"Zarejestruj sie");
         optionList.add(optionLogOut);
 
-        Option optionFilter = new Option(3,"Zakończ program");
-        optionList.add(optionFilter);
+        Option optionQuit = new Option(3,"Zakończ program");
+        optionList.add(optionQuit);
 
         return optionList;
 
@@ -39,7 +37,7 @@ public class OptionService {
     public static void backToMainMenu() {
         System.out.println("\n");
         System.out.println("**************************************************");
-        System.out.println("            Czy wrócić do menu głównego?         ");
+        System.out.println("            Czy wrócić do menu głównego?          ");
         System.out.println("**************************************************");
         System.out.println("\n");
         System.out.println("1. Tak");
@@ -49,7 +47,6 @@ public class OptionService {
         Scanner scanner = new Scanner(System.in);
         String value = scanner.nextLine();
 
-
         try {
             int choice = Integer.parseInt(value);
 
@@ -57,28 +54,35 @@ public class OptionService {
                 case 1:
                     ClearConsole.clearConsole();
                     menuInvoke();
-
                     default:
                     ClearConsole.clearConsole();
-                    System.out.println("**************************************************");
+                    System.out.println("***************************************************");
                     System.out.println("Nieprawidłowy wybór opcji! Wybierz prawidłową opcję");
                     System.out.println("------------Powrót do menu głównego----------------");
-                    System.out.println("**************************************************");
+                    System.out.println("***************************************************");
                     menuInvoke();
                     break;
-
             }
         } catch (NumberFormatException e) {
-
             ClearConsole.clearConsole();
-            System.out.println("**************************************************");
+            System.out.println("******************************************************");
             System.out.println("Opcja nie może być literą! Wybierz opcję podając cyfrę");
-            System.out.println("------------Powrót do menu głównego----------------");
-            System.out.println("**************************************************");
-            menuInvoke();
-
-
+            System.out.println("---------------Powrót do menu głównego----------------");
+            System.out.println("******************************************************");
+            scanner.next();
         }
     }
+
+    public static void closeApp(){
+        System.out.println("\n");
+        System.out.println("\n");
+        System.out.println("**************************************************");
+        System.out.println("     Program został zakończony...Do widzenia!     ");
+        System.out.println("**************************************************");
+        System.out.println("\n");
+        System.out.println("\n");
+    }
+
+
 
 }
