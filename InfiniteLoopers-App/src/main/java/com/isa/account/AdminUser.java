@@ -1,5 +1,5 @@
 package com.isa.account;
-
+//TODO zrobic logowanie razem z User
 public class AdminUser extends User {
     public AdminUser () {
         setUserRole(UserRole.ADMINISTRATOR);
