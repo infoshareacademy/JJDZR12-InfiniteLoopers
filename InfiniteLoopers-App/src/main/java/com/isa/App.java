@@ -1,13 +1,18 @@
 package com.isa;
 
-/**
- * Hello world!
- *
- */
+import com.isa.account.RegistrationForm;
+import com.isa.account.UserInputReader;
+import com.isa.account.UserManager;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        UserInputReader userInputReader = new UserInputReader();
+        UserManager userManager = new UserManager();
+        RegistrationForm registrationForm = new RegistrationForm(userInputReader, userManager);
+        registrationForm.registrationFrom();
+
+
     }
 }
