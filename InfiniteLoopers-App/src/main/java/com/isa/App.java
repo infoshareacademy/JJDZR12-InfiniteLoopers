@@ -10,7 +10,7 @@ public class App
     public static void main( String[] args )
     {
        // ClearConsole.clearConsole();
-        //menuInvoke();
+        menuInvoke();
         GradesManagement gradesManagement = new GradesManagement();
 
         User user1 = new User();
