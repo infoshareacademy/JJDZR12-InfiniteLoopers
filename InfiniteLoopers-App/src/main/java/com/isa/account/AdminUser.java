@@ -12,7 +12,8 @@ public class AdminUser extends User {
     }
 
     public  void  addRoleToUser (User user, UserRole role, List<User> userList) {
-     userList.stream().filter(s -> s.getUserId().equals(user.getUserId())).findFirst().get().setUserRole(role);
+        userManager.loadUsersFromFile(fileName);
+        userList.stream().filter(s -> s.getUserId().equals(user.getUserId())).findFirst().get().setUserRole(role);
         userManager.saveUsersToFile(fileName);
 
     }
