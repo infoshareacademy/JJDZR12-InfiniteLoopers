@@ -31,7 +31,7 @@ public class UserManager {
         try {
             return objectMapper.readValue(new File(fileUsers), new TypeReference<>() {});
         } catch (IOException e) {
-            System.out.println("Error podczas uzyskania dannych.");
+            System.out.println("Error podczas uzyskania danych.");
             return new ArrayList<>();
         }
     }

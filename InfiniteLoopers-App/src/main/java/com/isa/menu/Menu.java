@@ -1,9 +1,14 @@
 package com.isa.menu;
 
+
+import com.isa.account.*;
+
 import java.util.List;
 import java.util.Scanner;
-import static com.isa.menu.OptionService.backToMainMenu;
+
 import static com.isa.menu.OptionService.closeApp;
+import static com.isa.menu.menuAfterLogin.MenuForStudent.menuForStudent;
+import static com.isa.menu.menuAfterLogin.MenuForTeacher.menuForTeacher;
 
 
 public class Menu {
@@ -12,6 +17,7 @@ public class Menu {
         throw new UnsupportedOperationException("This is a utility class and cannot be instantiated");
     }
         public static void menuInvoke() {
+
             Scanner scanner = new Scanner(System.in);
             List<Option> optionList = OptionService.getOptionList();
 
@@ -33,20 +39,55 @@ public class Menu {
 
                 switch (value) {
                     case 1 -> {
-                        ClearConsole.clearConsole();
-                        System.out.println("Przechodzi do logowania");
-                        backToMainMenu();
+
+                        UserManager userManager = new UserManager();
+                        AuthenticationService authService = new AuthenticationService(userManager);
+                        LoginManager loginManager = new LoginManager(authService);
+                        loginManager.login();
+                        UserRole userRole = loginManager.getLoggedUser().getUser().getUserRole();
+                        System.out.println(userRole);
+
+                        try {
+                            if (userRole.equals(UserRole.STUDENT)) {
+                                menuForStudent();
+                            } else {
+                                menuForTeacher();
+                            }
+                        } catch (NullPointerException e){
+                            System.out.println("Poczekaj na potwierdzenie rejestracji i nadanie roli.");
+                            menuInvoke();
+                        }
+
+
+
+
                     }
 
                     case 2 -> {
-                        ClearConsole.clearConsole();
-                        System.out.println("Przechodzi do rejestracji");
-                        backToMainMenu();
+
+                        UserInputReader userInputReader = new UserInputReader();
+                        UserManager userManager = new UserManager();
+                        RegistrationForm registrationForm = new RegistrationForm(userInputReader, userManager);
+                        registrationForm.registrationFrom();
+                        menuInvoke();
+
                     }
 
                     case 3 -> {
                             closeApp();
                         }
+
+                    case 4 -> {
+
+                        UserManager userManager = new UserManager();
+                        AuthenticationService authService = new AuthenticationService(userManager);
+                        LoginManager loginManager = new LoginManager(authService);
+
+                        loginManager.loginAdmin();
+                        menuInvoke();
+
+
+                    }
                     default -> {
                         ClearConsole.clearConsole();
                         System.out.println("**************************************************");

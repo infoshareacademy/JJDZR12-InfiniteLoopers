@@ -26,6 +26,9 @@ public class OptionService {
         Option optionQuit = new Option(3,"Zakończ program");
         optionList.add(optionQuit);
 
+        Option optionLoginAdmin = new Option(4,"Zloguj administratora");
+        optionList.add(optionLoginAdmin);
+
         return optionList;
 
     }

@@ -9,7 +9,7 @@ import static com.isa.menu.OptionService.backToMainMenu;
 import static com.isa.menu.OptionService.closeApp;
 
 public class MenuForStudent {
-    public static void menuForTeacher() {
+    public static void menuForStudent() {
         System.out.println("\n");
         System.out.println("**************************************************");
         System.out.println("          Witaj Uczniu! Co chcesz zrobic?         ");

@@ -8,7 +8,7 @@ public class RoleAssinger {
     public void assingRoles(List<User> userList, AdminUser admin) {
         System.out.println("User: ");
         for (User user : userList) {
-            System.out.println(user.getAgeUser());
+            System.out.println(user.getLoginUser());
         }
 
         String selectUserLogin = userInputReader.readNonEmptyString("Wprowadz login do ktorego chcesz przepisac role: ");
@@ -22,16 +22,16 @@ public class RoleAssinger {
         }
 
         if (selectedUser != null) {
-            System.out.println("Dodana rola: ");
+            System.out.println("ROLE: ");
             for (UserRole role : UserRole.values()) {
                 System.out.println(role);
             }
 
-            String selectedRoleStr = userInputReader.readNonEmptyString("Wprowadz role user: ");
+            String selectedRoleStr = userInputReader.readNonEmptyString("Wprowadz role uzytkownika: ");
 
             try {
                 UserRole selectedRole = UserRole.valueOf(selectedRoleStr);
-                admin.addRoleToUser(selectedUser, selectedRole);
+                admin.addRoleToUser(selectedUser, selectedRole, userList);
                 System.out.println("Rola dodana!");
             } catch (IllegalArgumentException error) {
                 System.out.println("Blad w prowadzeniu roli.");

@@ -3,7 +3,7 @@ package com.isa.account;
 import java.util.Scanner;
 
 public class UserInputReader {
-    private Scanner scanner;
+    private static Scanner scanner;
 
     public UserInputReader() {
         scanner = new Scanner(System.in);
@@ -13,7 +13,7 @@ public class UserInputReader {
         return scanner.nextLine();
     }*/
 
-    public  String readNonEmptyString (String prompt) {
+    public String readNonEmptyString (String prompt) {
         String input;
         do {
             System.out.print(prompt);
