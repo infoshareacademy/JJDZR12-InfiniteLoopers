@@ -1,5 +1,10 @@
 package com.isa.account;
 
+import com.isa.grades.Subjects;
+
+import java.util.List;
+import java.util.Map;
+
 public class User {
     private UserInputReader userInputReader = new UserInputReader();
     private String loginUser;
@@ -10,6 +15,20 @@ public class User {
     private int ageUser;
     private String nameSchoolUser;
     private String userId;
+    private Map<Subjects, List<Integer>> grades;
+
+    public Map<Subjects, List<Integer>> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Map<Subjects, List<Integer>> grades) {
+        this.grades = grades;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     private UserRole userRole;
 
     public User () {}

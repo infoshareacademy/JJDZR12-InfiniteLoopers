@@ -1,5 +1,6 @@
 package com.isa.menu.menuAfterLogin;
 
+import com.isa.grades.GradesManagement;
 import com.isa.menu.ClearConsole;
 
 import java.util.Scanner;
@@ -28,8 +29,9 @@ public class MenuForStudent {
 
             switch (choice) {
                 case 1 ->{
-                    ClearConsole.clearConsole();
-                    menuInvoke();
+                    //GradesManagement gradesManagement = new GradesManagement();
+
+                   // gradesManagement.fillGradesAndSubject()
                 }
 
                 case 2 ->  {

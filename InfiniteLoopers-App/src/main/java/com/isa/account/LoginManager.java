@@ -21,10 +21,10 @@ public class LoginManager {
     public void login() {
         System.out.println("Witam. Prosze wprowadzic login i haslo.");
 
-        String userName = userInputReader.readNonEmptyString("Login: ");
+        String loginUser = userInputReader.readNonEmptyString("Login: ");
         String passwordUser = userInputReader.readNonEmptyString("Haslo: ");
 
-        User user = authService.login(userName, passwordUser);
+        User user = authService.login(loginUser, passwordUser);
 
         if (user != null) {
             loggedUser.logUser(user);
@@ -50,7 +50,7 @@ public class LoginManager {
             System.out.println("Administrator zalogowany!");
 
             RoleAssinger roleAssinger = new RoleAssinger();
-            List<User> userList = userManager.loadUsersFromFile("users.json");
+            List<User> userList = userManager.loadUsersFromFile();
             roleAssinger.assingRoles(userList, admin);
         } else {
             System.out.println("Administrator nie jest zalogowany");

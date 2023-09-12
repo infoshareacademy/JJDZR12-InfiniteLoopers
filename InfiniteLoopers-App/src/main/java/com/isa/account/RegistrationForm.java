@@ -7,7 +7,6 @@ import static com.isa.menu.Menu.menuInvoke;
 public class RegistrationForm {
     private UserInputReader userInputReader;
     private UserManager userManager;
-    private static final String fileName = "users.json";
 
     public RegistrationForm (UserInputReader userInputReader, UserManager userManager) {
         this.userInputReader = userInputReader;
@@ -21,7 +20,7 @@ public class RegistrationForm {
         user.readUserInput();
         userManager.addUser(user);
 
-        userManager.saveUsersToFile(fileName);
+        userManager.saveUsersToFile();
 
 
     }
