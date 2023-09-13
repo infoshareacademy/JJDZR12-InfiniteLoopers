@@ -19,13 +19,12 @@ public class UserManager {
 
     public void saveUsersToFile () {
         List<User> existingUserList = loadUsersFromFile();
-        System.out.println(userList.getUsers());
         existingUserList.addAll(userList.getUsers());
         try {
             objectMapper.writeValue(new File(databasePath), existingUserList);
             System.out.println("Rejestracja przebiegła pomyślnie.");
         } catch (IOException e) {
-            System.out.println("Error podczas rejestracji, sproboj pozniej.");
+            System.out.println("Error podczas rejestracji, sprobuj pozniej.");
         }
     }
 

@@ -45,11 +45,11 @@ public class Menu {
                         LoginManager loginManager = new LoginManager(authService);
                         loginManager.login();
                         UserRole userRole = loginManager.getLoggedUser().getUser().getUserRole();
-                        System.out.println(userRole);
+                        User student = loginManager.getLoggedUser().getUser();
 
                         try {
                             if (userRole.equals(UserRole.STUDENT)) {
-                                menuForStudent();
+                                menuForStudent(student);
                             } else {
                                 menuForTeacher();
                             }

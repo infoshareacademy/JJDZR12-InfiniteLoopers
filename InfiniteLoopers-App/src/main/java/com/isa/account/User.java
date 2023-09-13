@@ -2,8 +2,7 @@ package com.isa.account;
 
 import com.isa.grades.Subjects;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class User {
     private UserInputReader userInputReader = new UserInputReader();
@@ -31,8 +30,15 @@ public class User {
 
     private UserRole userRole;
 
-    public User () {}
-
+    public User () {
+        this.grades = new HashMap<>();
+        grades.put(Subjects.POLSKI,new ArrayList<>());
+        grades.put(Subjects.WF,new ArrayList<>());
+        grades.put(Subjects.BIOLOGIA,new ArrayList<>());
+        grades.put(Subjects.MATEMATYKA,new ArrayList<>());
+        grades.put(Subjects.ANGIELSKI,new ArrayList<>());
+        grades.put(Subjects.SZTUKA,new ArrayList<>());
+    }
     public void readUserInput() {
         System.out.println("Rejestracja nowego użytkownika");
         this.loginUser = userInputReader.readNonEmptyString("Wprowadz Login: ");

@@ -11,8 +11,6 @@ public class AuthenticationService {
         List<User> userList = userManager.loadUsersFromFile();
         for (User user : userList) {
             if (user.getLoginUser().equals(login) && user.getPasswordUser().equals(password)) {
-                System.out.println(user.getLoginUser());
-                System.out.println(login);
                 return user;
             }
         }

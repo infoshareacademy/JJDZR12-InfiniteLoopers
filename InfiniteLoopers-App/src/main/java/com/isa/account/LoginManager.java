@@ -26,12 +26,16 @@ public class LoginManager {
 
         User user = authService.login(loginUser, passwordUser);
 
-        if (user != null) {
+        if (user.getUserRole() == null){
+            System.out.println("Twoje konto nie jest jeszcze aktywne. Sprobuj ponownie pozniej lub skontaktuj sie z administratorem.");
+            menuInvoke();
+        }
+        if (user != null  ) {
             loggedUser.logUser(user);
             System.out.println("Jestes zalogowany");
+        }
 
-
-        } else {
+        else {
             System.out.println("Niepoprawne dane! Sprobuj jeszcze raz!");
             login();
         }
@@ -46,12 +50,16 @@ public class LoginManager {
         String enterLogin = userInputReader.readNonEmptyString("Wprowadz login administratora: ");
         String enteredPassword = userInputReader.readNonEmptyString("Wprowadz haslo administratora: ");
 
-        if (admin.getLoginUser().equals(enterLogin) && admin.authenficate(enteredPassword)) {
+        if (admin.getLoginUser().equals(enterLogin) && admin.authenticate(enteredPassword)) {
             System.out.println("Administrator zalogowany!");
-
             RoleAssinger roleAssinger = new RoleAssinger();
             List<User> userList = userManager.loadUsersFromFile();
-            roleAssinger.assingRoles(userList, admin);
+            if (userList.stream().filter(user -> user.getUserRole() == null).toArray().length != 0){
+                roleAssinger.assingRoles(userList, admin);
+            } else {
+                menuInvoke();
+            }
+
         } else {
             System.out.println("Administrator nie jest zalogowany");
         }

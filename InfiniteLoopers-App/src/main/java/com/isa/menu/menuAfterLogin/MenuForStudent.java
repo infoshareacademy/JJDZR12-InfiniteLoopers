@@ -1,8 +1,13 @@
 package com.isa.menu.menuAfterLogin;
 
+import com.isa.account.LoggedUser;
+import com.isa.account.User;
+import com.isa.account.UserInputReader;
+import com.isa.account.UserManager;
 import com.isa.grades.GradesManagement;
 import com.isa.menu.ClearConsole;
 
+import java.util.List;
 import java.util.Scanner;
 
 import static com.isa.menu.Menu.menuInvoke;
@@ -10,10 +15,15 @@ import static com.isa.menu.OptionService.backToMainMenu;
 import static com.isa.menu.OptionService.closeApp;
 
 public class MenuForStudent {
-    public static void menuForStudent() {
+    public static void menuForStudent(User student) {
+
+        UserManager userManager = new UserManager();
+        List<User> userList = userManager.loadUsersFromFile();
+        UserInputReader userInputReader = new UserInputReader();
+
         System.out.println("\n");
         System.out.println("**************************************************");
-        System.out.println("          Witaj Uczniu! Co chcesz zrobic?         ");
+        System.out.println("          Uczniu, co chcesz zrobic?         ");
         System.out.println("**************************************************");
         System.out.println("\n");
         System.out.println("1. Wyswietl swoje oceny.");
@@ -21,17 +31,24 @@ public class MenuForStudent {
         System.out.println("3. Zamknij aplikacje.");
         System.out.println("\n");
         System.out.print("Wybierz opcję wprowadzając numer opcji i zatwierdź ją enterem: ");
-        Scanner scanner = new Scanner(System.in);
-        String value = scanner.nextLine();
+        System.out.println("\n");
+        String value = userInputReader.readNonEmptyString("podaj wartosc: ");;
 
         try {
-            int choice = Integer.parseInt(value);
+            Integer choice = Integer.valueOf(value);
 
             switch (choice) {
                 case 1 ->{
-                    //GradesManagement gradesManagement = new GradesManagement();
-
-                   // gradesManagement.fillGradesAndSubject()
+                    System.out.println("Twoje oceny: ");
+                    System.out.println("\n");
+                    System.out.println(userList
+                            .stream()
+                            .filter(user -> user.getLoginUser().equals(student.getLoginUser()))
+                            .findFirst()
+                            .orElseThrow()
+                            .getGrades()
+                            .toString());
+                    menuForStudent(student);
                 }
 
                 case 2 ->  {
@@ -46,16 +63,15 @@ public class MenuForStudent {
                     System.out.println("***************************************************");
                     System.out.println("Nieprawidłowy wybór opcji! Wybierz prawidłową opcję");
                     System.out.println("***************************************************");
-                    scanner.next();
+                    menuForStudent(student);
                 }
             }
         } catch (NumberFormatException e) {
             ClearConsole.clearConsole();
             System.out.println("******************************************************");
             System.out.println("Opcja nie może być literą! Wybierz opcję podając cyfrę");
-            System.out.println("---------------Powrót do menu głównego----------------");
             System.out.println("******************************************************");
-            scanner.next();
+            menuForStudent(student);
         }
     }
 }

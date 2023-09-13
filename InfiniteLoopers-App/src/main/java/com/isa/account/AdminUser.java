@@ -23,7 +23,7 @@ public class AdminUser extends User {
         setUserId("null");
     }
 
-    public boolean authenficate(String enteredPassword) {
+    public boolean authenticate(String enteredPassword) {
         return getPasswordUser().equals(enteredPassword);
     }
 }
