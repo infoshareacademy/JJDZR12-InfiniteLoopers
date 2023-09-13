@@ -1,6 +1,6 @@
 package com.isa.account;
 
-import com.isa.grades.Subjects;
+import com.isa.subjects.Subjects;
 
 import java.util.*;
 

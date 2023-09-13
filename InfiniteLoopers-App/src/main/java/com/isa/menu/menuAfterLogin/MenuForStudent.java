@@ -1,16 +1,12 @@
 package com.isa.menu.menuAfterLogin;
 
-import com.isa.account.LoggedUser;
 import com.isa.account.User;
 import com.isa.account.UserInputReader;
 import com.isa.account.UserManager;
-import com.isa.grades.GradesManagement;
 import com.isa.menu.ClearConsole;
 
 import java.util.List;
-import java.util.Scanner;
 
-import static com.isa.menu.Menu.menuInvoke;
 import static com.isa.menu.OptionService.backToMainMenu;
 import static com.isa.menu.OptionService.closeApp;
 
@@ -63,6 +59,7 @@ public class MenuForStudent {
                     System.out.println("***************************************************");
                     System.out.println("Nieprawidłowy wybór opcji! Wybierz prawidłową opcję");
                     System.out.println("***************************************************");
+                    System.out.println("\n");
                     menuForStudent(student);
                 }
             }
@@ -71,6 +68,7 @@ public class MenuForStudent {
             System.out.println("******************************************************");
             System.out.println("Opcja nie może być literą! Wybierz opcję podając cyfrę");
             System.out.println("******************************************************");
+            System.out.println("\n");
             menuForStudent(student);
         }
     }

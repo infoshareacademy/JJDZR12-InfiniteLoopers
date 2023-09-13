@@ -50,8 +50,13 @@ public class Menu {
                         try {
                             if (userRole.equals(UserRole.STUDENT)) {
                                 menuForStudent(student);
-                            } else {
+                            }
+                            if (userRole.equals(UserRole.TEACHER)) {
                                 menuForTeacher();
+                            }
+                            else {
+                                System.out.println("Jesli chcesz zalogowac sie jako administrator wybierz 4.");
+                                menuInvoke();
                             }
                         } catch (NullPointerException e){
                             System.out.println("Poczekaj na potwierdzenie rejestracji i nadanie roli.");
@@ -78,15 +83,11 @@ public class Menu {
                         }
 
                     case 4 -> {
-
                         UserManager userManager = new UserManager();
                         AuthenticationService authService = new AuthenticationService(userManager);
                         LoginManager loginManager = new LoginManager(authService);
-
                         loginManager.loginAdmin();
                         menuInvoke();
-
-
                     }
                     default -> {
                         ClearConsole.clearConsole();
