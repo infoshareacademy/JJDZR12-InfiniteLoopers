@@ -28,7 +28,7 @@ public class MenuForStudent {
         System.out.println("\n");
         System.out.print("Wybierz opcję wprowadzając numer opcji i zatwierdź ją enterem: ");
         System.out.println("\n");
-        String value = userInputReader.readNonEmptyString("podaj wartosc: ");;
+        String value = userInputReader.readNonEmptyString("Podaj wartosc: ");;
 
         try {
             Integer choice = Integer.valueOf(value);

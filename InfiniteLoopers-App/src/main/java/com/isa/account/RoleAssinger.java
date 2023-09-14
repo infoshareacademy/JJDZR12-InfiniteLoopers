@@ -11,7 +11,9 @@ public class RoleAssinger {
         RoleAssinger roleAssinger = new RoleAssinger();
         UserRole selectedRole = null;
         System.out.println("Uzytkownicy ktorym trzeba przypisac role: ");
-        userList.stream().filter(user -> !user.getUserId().equals("null")).filter(user -> user.getUserRole() == null).map(user -> "Login: " + user.getLoginUser() + ", Imie i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
+        userList.stream()
+                .filter(user -> !user.getUserId().equals("null"))
+                .filter(user -> user.getUserRole() == null).map(user -> "Login: " + user.getLoginUser() + ", Imie i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
 
         String selectUserLogin = userInputReader.readNonEmptyString("Wprowadz login do ktorego chcesz przepisac role: ");
 
@@ -23,10 +25,11 @@ public class RoleAssinger {
                 break;
             }
         }
-
         if (selectedUser != null) {
             System.out.println("ROLE: ");
-            Arrays.stream(UserRole.values()).filter(value -> !value.equals(UserRole.ADMINISTRATOR)).forEach(System.out::println);
+            Arrays.stream(UserRole.values())
+                    .filter(value -> !value.equals(UserRole.ADMINISTRATOR))
+                    .forEach(System.out::println);
 
             do {
                 try {

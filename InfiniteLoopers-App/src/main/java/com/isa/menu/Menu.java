@@ -51,7 +51,7 @@ public class Menu {
                             if (userRole.equals(UserRole.STUDENT)) {
                                 menuForStudent(student);
                             }
-                            if (userRole.equals(UserRole.TEACHER)) {
+                             else if (userRole.equals(UserRole.TEACHER)) {
                                 menuForTeacher();
                             }
                             else {
@@ -77,7 +77,6 @@ public class Menu {
                         menuInvoke();
 
                     }
-
                     case 3 -> {
                             closeApp();
                         }

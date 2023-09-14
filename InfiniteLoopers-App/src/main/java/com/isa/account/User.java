@@ -82,44 +82,12 @@ public class User {
         this.passwordUser = passwordUser;
     }
 
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
-
     public String getFirstNameUser() {
         return firstNameUser;
     }
 
-    public void setFirstNameUser(String firstNameUser) {
-        this.firstNameUser = firstNameUser;
-    }
-
     public String getLastNameUser() {
         return lastNameUser;
-    }
-
-    public void setLastNameUser(String lastNameUser) {
-        this.lastNameUser = lastNameUser;
-    }
-
-    public int getAgeUser() {
-        return ageUser;
-    }
-
-    public void setAgeUser(int ageUser) {
-        this.ageUser = ageUser;
-    }
-
-    public String getNameSchoolUser() {
-        return nameSchoolUser;
-    }
-
-    public void setNameSchoolUser(String nameSchoolUser) {
-        this.nameSchoolUser = nameSchoolUser;
     }
 
     public String getUserId() {

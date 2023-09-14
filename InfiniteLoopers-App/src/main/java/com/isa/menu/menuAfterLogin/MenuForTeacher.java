@@ -63,17 +63,19 @@ public class MenuForTeacher  {
 
                         if (isLoginMatching){
 
-                            System.out.println("Oceny dla ucznia: " + finalSelectUserLogin);
-                            System.out.println("\n");
-                            System.out.println(userList
+                            userList
                                     .stream()
                                     .filter(userFromList -> userFromList.getLoginUser().equals(finalSelectUserLogin))
                                     .findFirst()
-                                    .orElseThrow(() -> {
-                                        return new NoSuchElementException("zly login");
-                                    })
-                                    .getGrades()
-                                    .toString());
+                                    .ifPresentOrElse(user -> {
+                                        System.out.println("Oceny ucznia: " + user.getFirstNameUser() + " " + user.getLastNameUser() );
+                                        System.out.println("\n");
+                                        System.out.println(user.getGrades().toString());
+                                    }, () -> {
+                                        throw new NoSuchElementException("Zly login");
+                                    });
+
+
                         }
                         menuForTeacher();
                     }
@@ -96,9 +98,8 @@ public class MenuForTeacher  {
                                 if (userList.get(i).getLoginUser().equals(selectUserLogin)) {
                                     isLoginMatching = true;
                                     break;
-                                };
+                                }
                             }
-
                         }
                         finalSelectUserLogin = selectUserLogin;
 
@@ -115,7 +116,7 @@ public class MenuForTeacher  {
                                 if (Arrays.stream(Subjects.values()).toArray()[i] == selectUserSubject) {
                                     isSubjectMatching = true;
                                     break;
-                                };
+                                }
                             }
 
                         }

@@ -1,9 +1,5 @@
 package com.isa.account;
 
-import java.util.List;
-
-import static com.isa.menu.Menu.menuInvoke;
-
 public class RegistrationForm {
     private UserInputReader userInputReader;
     private UserManager userManager;
@@ -21,7 +17,5 @@ public class RegistrationForm {
         userManager.addUser(user);
 
         userManager.saveUsersToFile();
-
-
     }
 }

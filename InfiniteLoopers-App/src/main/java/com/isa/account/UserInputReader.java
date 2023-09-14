@@ -8,10 +8,6 @@ public class UserInputReader {
     public UserInputReader() {
         scanner = new Scanner(System.in);
     }
-/*    public String readString(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine();
-    }*/
 
     public String readNonEmptyString (String prompt) {
         String input;
@@ -24,5 +20,4 @@ public class UserInputReader {
         } while (input.trim().isEmpty());
         return input;
     }
-
 }
