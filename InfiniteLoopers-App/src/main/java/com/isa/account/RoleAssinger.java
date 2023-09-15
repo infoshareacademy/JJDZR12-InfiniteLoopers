@@ -3,6 +3,7 @@ package com.isa.account;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 public class RoleAssinger {
     private UserInputReader userInputReader = new UserInputReader();
@@ -37,8 +38,10 @@ public class RoleAssinger {
                     selectedRole = UserRole.valueOf(selectedRoleStr);
                     admin.addRoleToUser(selectedUser, selectedRole, userList);
                     System.out.println("Rola dodana!");
+                    waitingEnter();
                 } catch (IllegalArgumentException error) {
                     System.out.println("Podaj poprawna role.");
+                    waitingEnter();
                     System.out.println("ROLE: ");
                     Arrays.stream(UserRole.values()).filter(value -> !value.equals(UserRole.ADMINISTRATOR)).forEach(System.out::println);
 
@@ -48,8 +51,15 @@ public class RoleAssinger {
             } while (selectedRole == null);
         } else {
             System.out.println("User nie zostal znaleziony");
+            waitingEnter();
             roleAssinger.assingRoles(userList, admin);
         }
+    }
+
+    public static void waitingEnter () {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Naciśnij Enter, aby kontynuować...");
+        scanner.nextLine();
     }
 }
 

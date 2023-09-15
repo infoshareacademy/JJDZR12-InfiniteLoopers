@@ -9,11 +9,10 @@ public class AuthenticationService {
     }
     public User login(String login, String password) {
         List<User> userList = userManager.loadUsersFromFile();
-        for (User user : userList) {
-            if (user.getLoginUser().equals(login) && user.getPasswordUser().equals(password)) {
-                return user;
-            }
-        }
-        return null;
+
+        return userList.stream()
+                .filter(user -> user.getLoginUser().equals(login) && user.getPasswordUser().equals(password))
+                .findFirst()
+                .orElse(null);
     }
 }

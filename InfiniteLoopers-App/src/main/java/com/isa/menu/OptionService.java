@@ -17,10 +17,10 @@ public class OptionService {
 
         List <Option> optionList = new ArrayList<>();
 
-        Option optionLogin = new Option(1,"Zaloguj sie");
+        Option optionLogin = new Option(1,"Zaloguj się");
         optionList.add(optionLogin);
 
-        Option optionLogOut = new Option(2,"Zarejestruj sie");
+        Option optionLogOut = new Option(2,"Zarejestruj się");
         optionList.add(optionLogOut);
 
         Option optionQuit = new Option(3,"Zakończ program");
