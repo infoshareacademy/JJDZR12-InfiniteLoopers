@@ -1,4 +1,4 @@
-package com.isa.menu.menuAfterLogin;
+package com.isa.menu.menuafterlogin;
 
 import com.isa.account.User;
 import com.isa.account.UserInputReader;
@@ -30,7 +30,7 @@ public class MenuForTeacher  {
             System.out.println("\n");
             System.out.println("1. Wyswietl oceny ucznia.");
             System.out.println("2. Dodaj oceny ucznia.");
-            System.out.println("3. Powrot do menu glownego.");
+            System.out.println("3. Powrót do menu głównego.");
             System.out.println("4. Zamknij aplikacje.");
             System.out.println("\n");
             System.out.print("Wybierz opcję wprowadzając numer opcji i zatwierdź ją enterem: ");
@@ -46,10 +46,10 @@ public class MenuForTeacher  {
                         boolean isLoginMatching = false;
 
                         System.out.println("Uczniowie: ");
-                        userList.stream().filter(user -> !user.getUserId().equals("null")).filter(user -> user.getUserRole() == UserRole.STUDENT).map(user -> "Login: " + user.getLoginUser() + ", Imie i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
+                        userList.stream().filter(user -> !user.getUserId().equals("null")).filter(user -> user.getUserRole() == UserRole.STUDENT).map(user -> "Login: " + user.getLoginUser() + ", Imię i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
 
                         while (!isLoginMatching) {
-                            System.out.println("Podaj login ucznia dla ktorego chcesz wyswietlic oceny: ");
+                            System.out.println("Podaj login ucznia dla którego chcesz wyswietlić oceny: ");
                             selectUserLogin = scanner.nextLine();
                             for (int i = 0; i < userList.size(); i++) {
                                 if (userList.get(i).getLoginUser().equals(selectUserLogin)) {
@@ -72,7 +72,7 @@ public class MenuForTeacher  {
                                         System.out.println("\n");
                                         System.out.println(user.getGrades().toString());
                                     }, () -> {
-                                        throw new NoSuchElementException("Zly login");
+                                        throw new NoSuchElementException("Zły login");
                                     });
 
 
@@ -90,10 +90,10 @@ public class MenuForTeacher  {
                         boolean isGradeValid = false;
 
                         System.out.println("Uczniowie: ");
-                        userList.stream().filter(user -> !user.getUserId().equals("null")).filter(user -> user.getUserRole() == UserRole.STUDENT).map(user -> "Login: " + user.getLoginUser() + ", Imie i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
+                        userList.stream().filter(user -> !user.getUserId().equals("null")).filter(user -> user.getUserRole() == UserRole.STUDENT).map(user -> "Login: " + user.getLoginUser() + ", Imię i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
 
                         while (!isLoginMatching) {
-                            selectUserLogin = userInputReader.readNonEmptyString("Podaj login ucznia dla ktorego chcesz dodac ocene: ");;
+                            selectUserLogin = userInputReader.readNonEmptyString("Podaj login ucznia dla którego chcesz dodać ocenę: ");;
                             for (int i = 0; i < userList.size(); i++) {
                                 if (userList.get(i).getLoginUser().equals(selectUserLogin)) {
                                     isLoginMatching = true;
@@ -121,7 +121,7 @@ public class MenuForTeacher  {
 
                         }
                         finalSelectUserSubject = selectUserSubject;
-                        System.out.println("Podaj ocene: ");
+                        System.out.println("Podaj ocenę: ");
 
                         while (!isGradeValid) {
                             String scannedValue = scanner.nextLine();
@@ -130,13 +130,13 @@ public class MenuForTeacher  {
                                 if (selectUserGrade < 7 && selectUserGrade > 0) {
                                     isGradeValid = true;
                                 } else {
-                                    System.out.println("Ocena musi byc w przedzial od 1 do 6");
+                                    System.out.println("Ocena musi byę w przedzialie od 1 do 6");
                                 }
                             } catch (NumberFormatException e) {
-                                System.out.println("Podaj poprawna liczbe: ");
+                                System.out.println("Podaj poprawną liczbę: ");
                             }
                             catch (InputMismatchException e) {
-                                System.out.println("Podaj poprawna liczbe: ");
+                                System.out.println("Podaj poprawną liczbę: ");
                             }
                         }
                         userList.stream().filter(user -> user.getLoginUser().equals(finalSelectUserLogin)).findFirst().orElseThrow().getGrades().get(finalSelectUserSubject).add(selectUserGrade);

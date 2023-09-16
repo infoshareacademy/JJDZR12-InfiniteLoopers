@@ -104,6 +104,14 @@ public class User {
 
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Класс: ").append(this.getClass().getSimpleName()).append("\n");
+        sb.append("Оценки:\n");
+
+        for (Map.Entry<Subjects, List<Integer>> entry : grades.entrySet()) {
+            sb.append(entry.getKey().name()).append(": ").append(entry.getValue()).append("\n");
+        }
+
         return "\nUser{" +
                 "userInputReader=" + userInputReader +
                 ", loginUser='" + loginUser + '\'' +

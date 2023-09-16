@@ -1,4 +1,4 @@
-package com.isa.menu.menuAfterLogin;
+package com.isa.menu.menuafterlogin;
 
 import com.isa.account.User;
 import com.isa.account.UserInputReader;
@@ -24,11 +24,11 @@ public class MenuForStudent {
         System.out.println("\n");
         System.out.println("1. Wyswietl swoje oceny.");
         System.out.println("2. Powrot do menu glownego.");
-        System.out.println("3. Zamknij aplikacje.");
+        System.out.println("3. Zamknij aplikację.");
         System.out.println("\n");
         System.out.print("Wybierz opcję wprowadzając numer opcji i zatwierdź ją enterem: ");
         System.out.println("\n");
-        String value = userInputReader.readNonEmptyString("Podaj wartosc: ");;
+        String value = userInputReader.readNonEmptyString("Podaj wartość: ");;
 
         try {
             Integer choice = Integer.valueOf(value);

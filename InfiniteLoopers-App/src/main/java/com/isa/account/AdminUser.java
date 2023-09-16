@@ -10,7 +10,11 @@ public class AdminUser extends User {
         setDefaultCredentials();
     }
     public  void  addRoleToUser (User user, UserRole role, List<User> userList) throws IOException {
-        userList.stream().filter(s -> s.getUserId().equals(user.getUserId())).findFirst().orElseThrow().setUserRole(role);
+        userList.stream()
+                .filter(s -> s.getUserId().equals(user.getUserId()))
+                .findFirst()
+                .orElseThrow()
+                .setUserRole(role);
         userManager.updateUser(userList);
     }
     private  void setDefaultCredentials () {

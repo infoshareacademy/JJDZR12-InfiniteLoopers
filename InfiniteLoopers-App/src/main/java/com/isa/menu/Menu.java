@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.isa.menu.OptionService.closeApp;
-import static com.isa.menu.menuAfterLogin.MenuForStudent.menuForStudent;
-import static com.isa.menu.menuAfterLogin.MenuForTeacher.menuForTeacher;
+import static com.isa.menu.menuafterlogin.MenuForStudent.menuForStudent;
+import static com.isa.menu.menuafterlogin.MenuForTeacher.menuForTeacher;
 
 
 public class Menu {
@@ -23,7 +23,7 @@ public class Menu {
 
 
             System.out.println("**************************************************");
-            System.out.println("                Dziennik XXXXXXXX                 ");
+            System.out.println("                Dziennik InfiniteLoopers          ");
             System.out.println("**************************************************");
             System.out.println("\n");
 
