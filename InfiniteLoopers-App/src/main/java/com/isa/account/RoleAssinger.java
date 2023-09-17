@@ -11,18 +11,18 @@ public class RoleAssinger {
     public void assingRoles(List<User> userList, AdminUser admin) {
         RoleAssinger roleAssinger = new RoleAssinger();
         UserRole selectedRole = null;
-        System.out.println("Uzytkownicy ktorym trzeba przypisac role: ");
+        System.out.println("Użytkownicy którym trzeba przypisać role: \n__________________________________________");
         userList.stream()
                 .filter(user -> !user.getUserId().equals("null"))
                 .filter(user -> user.getUserRole() == null).map(user -> "Login: " + user.getLoginUser() + ", Imie i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
 
-        String selectUserLogin = userInputReader.readNonEmptyString("Wprowadz login do ktorego chcesz przepisac role: ");
+        String selectUserLogin = userInputReader.readNonEmptyString("__________________________________________\nWprowadź login do którego chcesz przepisać role: ");
 
         User selectedUser = null;
         for (User user : userList) {
             if (user.getLoginUser().equals(selectUserLogin)) {
                 selectedUser = user;
-                System.out.println("Wybrany uzytkownik: " + selectedUser.getFirstNameUser() + " " +selectedUser.getLastNameUser());
+                System.out.println("Wybrany uzytkownik: " + selectedUser.getFirstNameUser() + " " +selectedUser.getLastNameUser() + "\n*");
                 break;
             }
         }
@@ -34,10 +34,10 @@ public class RoleAssinger {
 
             do {
                 try {
-                    String selectedRoleStr = userInputReader.readNonEmptyString("Wprowadz role uzytkownika: ").toUpperCase();
+                    String selectedRoleStr = userInputReader.readNonEmptyString("*\nWprowadź role użytkownika: ").toUpperCase();
                     selectedRole = UserRole.valueOf(selectedRoleStr);
                     admin.addRoleToUser(selectedUser, selectedRole, userList);
-                    System.out.println("Rola dodana!");
+                    System.out.println("*\nRola dodana!\n*");
                     waitingEnter();
                 } catch (IllegalArgumentException error) {
                     System.out.println("Podaj poprawna role.");

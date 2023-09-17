@@ -1,5 +1,6 @@
 package com.isa.menu.menuafterlogin;
 
+import com.isa.account.RoleAssinger;
 import com.isa.account.User;
 import com.isa.account.UserInputReader;
 import com.isa.account.UserManager;
@@ -44,6 +45,7 @@ public class MenuForStudent {
                             .orElseThrow()
                             .getGrades()
                             .toString());
+                    RoleAssinger.waitingEnter();
                     menuForStudent(student);
                 }
 

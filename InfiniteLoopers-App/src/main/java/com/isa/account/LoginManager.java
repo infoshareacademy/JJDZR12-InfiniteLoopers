@@ -39,6 +39,7 @@ public class LoginManager {
             } else {
                 loggedUser.logUser(user);
                 System.out.println("Jesteś zalogowany :)!");
+                RoleAssinger.waitingEnter();
             }
         } else {
             System.out.println("Niepoprawne dane! Spróbuj jeszcze raz!");

@@ -1,9 +1,6 @@
 package com.isa.menu.menuafterlogin;
 
-import com.isa.account.User;
-import com.isa.account.UserInputReader;
-import com.isa.account.UserManager;
-import com.isa.account.UserRole;
+import com.isa.account.*;
 import com.isa.subjects.Subjects;
 import com.isa.menu.ClearConsole;
 
@@ -49,7 +46,7 @@ public class MenuForTeacher  {
                         userList.stream().filter(user -> !user.getUserId().equals("null")).filter(user -> user.getUserRole() == UserRole.STUDENT).map(user -> "Login: " + user.getLoginUser() + ", Imię i nazwisko: " + user.getFirstNameUser() + " " + user.getLastNameUser()).forEach(System.out::println);
 
                         while (!isLoginMatching) {
-                            System.out.println("Podaj login ucznia dla którego chcesz wyswietlić oceny: ");
+                            System.out.print("Podaj login ucznia dla którego chcesz wyswietlić oceny: ");
                             selectUserLogin = scanner.nextLine();
                             for (int i = 0; i < userList.size(); i++) {
                                 if (userList.get(i).getLoginUser().equals(selectUserLogin)) {
@@ -57,7 +54,6 @@ public class MenuForTeacher  {
                                     break;
                                 };
                             }
-
                         }
                         finalSelectUserLogin = selectUserLogin;
 
@@ -77,6 +73,7 @@ public class MenuForTeacher  {
 
 
                         }
+                        RoleAssinger.waitingEnter();
                         menuForTeacher();
                     }
                     case 2 ->  {
@@ -121,7 +118,7 @@ public class MenuForTeacher  {
 
                         }
                         finalSelectUserSubject = selectUserSubject;
-                        System.out.println("Podaj ocenę: ");
+                        System.out.print("Podaj ocenę: ");
 
                         while (!isGradeValid) {
                             String scannedValue = scanner.nextLine();
