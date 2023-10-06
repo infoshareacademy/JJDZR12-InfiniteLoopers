@@ -1,4 +1,4 @@
-package com.isa.grades;
+package com.isa.subjects;
 
 public enum Subjects {
     POLSKI,

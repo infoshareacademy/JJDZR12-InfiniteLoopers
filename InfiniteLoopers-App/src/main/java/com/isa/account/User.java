@@ -1,5 +1,9 @@
 package com.isa.account;
 
+import com.isa.subjects.Subjects;
+
+import java.util.*;
+
 public class User {
     private UserInputReader userInputReader = new UserInputReader();
     private String loginUser;
@@ -10,10 +14,31 @@ public class User {
     private int ageUser;
     private String nameSchoolUser;
     private String userId;
+    private Map<Subjects, List<Integer>> grades;
+
+    public Map<Subjects, List<Integer>> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Map<Subjects, List<Integer>> grades) {
+        this.grades = grades;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
     private UserRole userRole;
 
-    public User () {}
-
+    public User () {
+        this.grades = new HashMap<>();
+        grades.put(Subjects.POLSKI,new ArrayList<>());
+        grades.put(Subjects.WF,new ArrayList<>());
+        grades.put(Subjects.BIOLOGIA,new ArrayList<>());
+        grades.put(Subjects.MATEMATYKA,new ArrayList<>());
+        grades.put(Subjects.ANGIELSKI,new ArrayList<>());
+        grades.put(Subjects.SZTUKA,new ArrayList<>());
+    }
     public void readUserInput() {
         System.out.println("Rejestracja nowego użytkownika");
         this.loginUser = userInputReader.readNonEmptyString("Wprowadz Login: ");
@@ -57,44 +82,12 @@ public class User {
         this.passwordUser = passwordUser;
     }
 
-    public String getEmailUser() {
-        return emailUser;
-    }
-
-    public void setEmailUser(String emailUser) {
-        this.emailUser = emailUser;
-    }
-
     public String getFirstNameUser() {
         return firstNameUser;
     }
 
-    public void setFirstNameUser(String firstNameUser) {
-        this.firstNameUser = firstNameUser;
-    }
-
     public String getLastNameUser() {
         return lastNameUser;
-    }
-
-    public void setLastNameUser(String lastNameUser) {
-        this.lastNameUser = lastNameUser;
-    }
-
-    public int getAgeUser() {
-        return ageUser;
-    }
-
-    public void setAgeUser(int ageUser) {
-        this.ageUser = ageUser;
-    }
-
-    public String getNameSchoolUser() {
-        return nameSchoolUser;
-    }
-
-    public void setNameSchoolUser(String nameSchoolUser) {
-        this.nameSchoolUser = nameSchoolUser;
     }
 
     public String getUserId() {
@@ -111,6 +104,14 @@ public class User {
 
     @Override
     public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Класс: ").append(this.getClass().getSimpleName()).append("\n");
+        sb.append("Оценки:\n");
+
+        for (Map.Entry<Subjects, List<Integer>> entry : grades.entrySet()) {
+            sb.append(entry.getKey().name()).append(": ").append(entry.getValue()).append("\n");
+        }
+
         return "\nUser{" +
                 "userInputReader=" + userInputReader +
                 ", loginUser='" + loginUser + '\'' +

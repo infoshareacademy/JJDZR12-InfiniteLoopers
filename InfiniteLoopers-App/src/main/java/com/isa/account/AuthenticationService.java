@@ -7,13 +7,12 @@ public class AuthenticationService {
     public AuthenticationService (UserManager userManager) {
         this.userManager = userManager;
     }
-    public User login(String userName, String password) {
-        List<User> userList = userManager.loadUsersFromFile("users.json");
-        for (User user : userList) {
-            if (user.getLoginUser().equals(userName) && user.getPasswordUser().equals(password)) {
-                return user;
-            }
-        }
-        return null;
+    public User login(String login, String password) {
+        List<User> userList = userManager.loadUsersFromFile();
+
+        return userList.stream()
+                .filter(user -> user.getLoginUser().equals(login) && user.getPasswordUser().equals(password))
+                .findFirst()
+                .orElse(null);
     }
 }

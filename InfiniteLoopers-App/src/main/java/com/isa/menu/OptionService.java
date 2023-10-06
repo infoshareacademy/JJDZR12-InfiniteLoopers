@@ -17,14 +17,17 @@ public class OptionService {
 
         List <Option> optionList = new ArrayList<>();
 
-        Option optionLogin = new Option(1,"Zaloguj sie");
+        Option optionLogin = new Option(1,"Zaloguj się");
         optionList.add(optionLogin);
 
-        Option optionLogOut = new Option(2,"Zarejestruj sie");
+        Option optionLogOut = new Option(2,"Zarejestruj się");
         optionList.add(optionLogOut);
 
         Option optionQuit = new Option(3,"Zakończ program");
         optionList.add(optionQuit);
+
+        Option optionLoginAdmin = new Option(4,"Zaloguj administratora");
+        optionList.add(optionLoginAdmin);
 
         return optionList;
 
@@ -35,42 +38,7 @@ public class OptionService {
     }
 
     public static void backToMainMenu() {
-        System.out.println("\n");
-        System.out.println("**************************************************");
-        System.out.println("            Czy wrócić do menu głównego?          ");
-        System.out.println("**************************************************");
-        System.out.println("\n");
-        System.out.println("1. Tak");
-        System.out.println("2. Nie, powróć do głównego menu");
-        System.out.println("\n");
-        System.out.print("Wybierz opcję wprowadzając numer opcji i zatwierdź ją enterem: ");
-        Scanner scanner = new Scanner(System.in);
-        String value = scanner.nextLine();
-
-        try {
-            int choice = Integer.parseInt(value);
-
-            switch (choice) {
-                case 1:
-                    ClearConsole.clearConsole();
-                    menuInvoke();
-                    default:
-                    ClearConsole.clearConsole();
-                    System.out.println("***************************************************");
-                    System.out.println("Nieprawidłowy wybór opcji! Wybierz prawidłową opcję");
-                    System.out.println("------------Powrót do menu głównego----------------");
-                    System.out.println("***************************************************");
-                    menuInvoke();
-                    break;
-            }
-        } catch (NumberFormatException e) {
-            ClearConsole.clearConsole();
-            System.out.println("******************************************************");
-            System.out.println("Opcja nie może być literą! Wybierz opcję podając cyfrę");
-            System.out.println("---------------Powrót do menu głównego----------------");
-            System.out.println("******************************************************");
-            scanner.next();
-        }
+       menuInvoke();
     }
 
     public static void closeApp(){

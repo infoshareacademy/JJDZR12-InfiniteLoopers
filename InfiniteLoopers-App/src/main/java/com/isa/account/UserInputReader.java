@@ -3,17 +3,13 @@ package com.isa.account;
 import java.util.Scanner;
 
 public class UserInputReader {
-    private Scanner scanner;
+    private static Scanner scanner;
 
     public UserInputReader() {
         scanner = new Scanner(System.in);
     }
-/*    public String readString(String prompt) {
-        System.out.print(prompt);
-        return scanner.nextLine();
-    }*/
 
-    public  String readNonEmptyString (String prompt) {
+    public String readNonEmptyString (String prompt) {
         String input;
         do {
             System.out.print(prompt);
@@ -24,5 +20,4 @@ public class UserInputReader {
         } while (input.trim().isEmpty());
         return input;
     }
-
 }

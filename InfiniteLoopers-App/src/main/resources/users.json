@@ -1,0 +1,76 @@
+[ {
+  "loginUser" : "Roman",
+  "passwordUser" : "111",
+  "firstNameUser" : "Roman",
+  "lastNameUser" : "Kachniuk",
+  "userId" : "94d75530-e354-4682-b19d-ea5ffd34d7a7",
+  "grades" : {
+    "MATEMATYKA" : [ ],
+    "SZTUKA" : [ ],
+    "POLSKI" : [ ],
+    "BIOLOGIA" : [ ],
+    "WF" : [ ],
+    "ANGIELSKI" : [ ]
+  },
+  "userRole" : "TEACHER"
+}, {
+  "loginUser" : "Piotr",
+  "passwordUser" : "111",
+  "firstNameUser" : "Piotr",
+  "lastNameUser" : "Kowalski",
+  "userId" : "1c4dfbff-698c-44ac-a3f4-04be2c4ef69e",
+  "grades" : {
+    "MATEMATYKA" : [ ],
+    "SZTUKA" : [ ],
+    "POLSKI" : [ 4 ],
+    "BIOLOGIA" : [ ],
+    "WF" : [ ],
+    "ANGIELSKI" : [ ]
+  },
+  "userRole" : "STUDENT"
+}, {
+  "loginUser" : "Marta",
+  "passwordUser" : "111",
+  "firstNameUser" : "Marta",
+  "lastNameUser" : "Nowak",
+  "userId" : "63063070-65af-4fdb-9c98-436b6ca2ef9b",
+  "grades" : {
+    "MATEMATYKA" : [ ],
+    "SZTUKA" : [ 3 ],
+    "POLSKI" : [ 5 ],
+    "BIOLOGIA" : [ ],
+    "WF" : [ ],
+    "ANGIELSKI" : [ ]
+  },
+  "userRole" : "STUDENT"
+}, {
+  "loginUser" : "Filip",
+  "passwordUser" : "111",
+  "firstNameUser" : "Filip",
+  "lastNameUser" : "Tab",
+  "userId" : "993f4116-9b1d-46d9-9c2e-a10a2bda901f",
+  "grades" : {
+    "SZTUKA" : [ ],
+    "POLSKI" : [ ],
+    "BIOLOGIA" : [ ],
+    "WF" : [ ],
+    "MATEMATYKA" : [ ],
+    "ANGIELSKI" : [ ]
+  },
+  "userRole" : "STUDENT"
+}, {
+  "loginUser" : "Tomasz",
+  "passwordUser" : "111",
+  "firstNameUser" : "Tomasz",
+  "lastNameUser" : "Kozel",
+  "userId" : "8bb03063-24cd-4375-b791-7383b427b39d",
+  "grades" : {
+    "POLSKI" : [ ],
+    "ANGIELSKI" : [ ],
+    "SZTUKA" : [ ],
+    "MATEMATYKA" : [ ],
+    "WF" : [ ],
+    "BIOLOGIA" : [ ]
+  },
+  "userRole" : null
+} ]

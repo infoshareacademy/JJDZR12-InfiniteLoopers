@@ -5,22 +5,12 @@ import com.isa.account.RegistrationForm;
 import com.isa.account.UserInputReader;
 import com.isa.account.UserManager;
 
+import static com.isa.menu.Menu.menuInvoke;
+
 public class App 
 {
     public static void main( String[] args )
     {
-        UserInputReader userInputReader = new UserInputReader();
-        UserManager userManager = new UserManager();
-        RegistrationForm registrationForm = new RegistrationForm(userInputReader, userManager);
-        registrationForm.registrationFrom();
-
-        AuthenticationService authService = new AuthenticationService(userManager);
-        LoginManager loginManager = new LoginManager(authService);
-
-        loginManager.login();
-
-
-
-
+        menuInvoke();
     }
 }
