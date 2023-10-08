@@ -1,23 +1,24 @@
 package com.isa.webapp.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
 
     @GetMapping("/")
-    public String getHomePage () {
+    public String getHomePage() {
         return "index";
     }
 
     @GetMapping("/login")
-    public String getLoginaPage () {
+    public String getLoginPage() {
         return "login";
     }
 
     @GetMapping("/registration")
-    public String getRegistrationPage () {
+    public String getRegistrationPage() {
         return "registration";
     }
 }
