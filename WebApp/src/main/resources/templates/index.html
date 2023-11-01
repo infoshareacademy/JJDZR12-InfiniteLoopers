@@ -1,17 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-
-<h1>Main Page</h1>
-
-<nav>
-    <a th:href="@{/}">Main page</a> | <a th:href="@{/login}">Login</a> | <a th:href="@{/registration}">Registration</a>
-</nav>
-
-</body>
-</html>
+<div th:fragment="content" class="container text-center">
+    <div class="card index-card mt-5">
+        <div class="card-body">
+            <h3 class="card-title">Witaj w Dzienniku internetowym Infinite Loppers!</h3>
+        </div>
+    </div>
+</div>
