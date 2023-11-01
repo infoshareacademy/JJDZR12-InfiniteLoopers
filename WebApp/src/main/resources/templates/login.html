@@ -1,16 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<div th:fragment="content" class="container mt-5">
+    <h2>Logowanie</h2>
+    <form th:action="@{/login}" method="post">
+        <div class="form-group">
+            <label for="loginUser">Login:</label>
+            <input type="text" class="form-control" id="loginUser" name="loginUser" required>
+        </div>
+        <div class="form-group">
+            <label for="passwordUser">Hasło:</label>
+            <input type="password" class="form-control" id="passwordUser" name="passwordUser" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Zaloguj się</button>
+    </form>
+</div>
 
-<h1>Login Page</h1>
-<nav>
-    <a th:href="@{/}">Main page</a> | <a th:href="@{/login}">Login</a> | <a th:href="@{/registration}">Registration</a>
-</nav>
 
-</body>
-</html>

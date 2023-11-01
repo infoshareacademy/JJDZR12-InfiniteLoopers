@@ -9,13 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
     @GetMapping("/")
-    String index(Model model) {
+     public String index(Model model) {
         model.addAttribute("content", "index");
-        return "main";
-    }
-    @GetMapping("/login")
-    String getLoginPage(Model model) {
-        model.addAttribute("content", "login");
         return "main";
     }
 
@@ -25,6 +20,12 @@ public class MainController {
         model.addAttribute("user", user); // Dodawanie obiektu do modelu
         model.addAttribute("content", "registration"); // Ustawienie treści na "registration"
         return "main"; // Zwracanie widoku "main"
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage(Model model) {
+        model.addAttribute("content", "login");
+        return "main";
     }
 
 }

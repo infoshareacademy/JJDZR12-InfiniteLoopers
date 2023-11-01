@@ -66,4 +66,21 @@
     "MATEMATYKA" : [ ],
     "ANGIELSKI" : [ ]
   }
+}, {
+  "loginUser" : "Szymon2",
+  "passwordUser" : "1234",
+  "emailUser" : "szymon2@wp.pl",
+  "firstNameUser" : "Szymon",
+  "lastNameUser" : "Olszewski",
+  "nameSchoolUser" : "Szkola",
+  "userId" : "9222f4c0-2216-4fb7-954b-9df9262daf52",
+  "userRole" : "STUDENT",
+  "grades" : {
+    "MATEMATYKA" : [ ],
+    "BIOLOGIA" : [ ],
+    "ANGIELSKI" : [ ],
+    "POLSKI" : [ ],
+    "WF" : [ ],
+    "SZTUKA" : [ ]
+  }
 } ]
