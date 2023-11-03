@@ -1,17 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding-top: 60px; /* выровнять контент под навигационной панелью */
+        }
+    </style>
 </head>
 <body>
 
-<h1>Main Page</h1>
-
-<nav>
-    <a th:href="@{/}">Main page</a> | <a th:href="@{/login}">Login</a> | <a th:href="@{/registration}">Registration</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top"> <!-- изменен цвет и добавлен класс fixed-top -->
+    <a class="navbar-brand" href="#">Your App Name</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto"> <!-- добавлен класс ml-auto для выравнивания элементов вправо -->
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Modules
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="/modules/grades">Grades</a>
+                    <a class="dropdown-item" href="/modules/messages">Messages</a>
+                    <a class="dropdown-item" href="/modules/calendar">Calendar</a>
+                    <a class="dropdown-item" href="/modules/add-assignment">Add Assignment</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/settings">Settings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/info">Information</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+            </li>
+        </ul>
+    </div>
 </nav>
+
+<div class="container mt-5">
+    <div class="jumbotron"> <!-- добавлен стиль jumbotron для выделения контента -->
+        <h1 class="display-4">Добро пожаловать в наше приложение!</h1>
+        <p class="lead">Это стартовая страница нашего веб-приложения.</p>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>
