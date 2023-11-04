@@ -1,5 +1,13 @@
 [ {
   "id" : "271c876d-8dd6-4c59-9d15-dddaad1ce364",
+  "firstName" : null,
+  "lastName" : null,
   "email" : "roman@gamil.com",
+  "password" : "111q111"
+}, {
+  "id" : "1e939ab1-634a-4aa6-a3bb-ae65f0367e55",
+  "firstName" : "Roman",
+  "lastName" : "Kachniuk",
+  "email" : "roman.k@gmail.com",
   "password" : "111q111"
 } ]

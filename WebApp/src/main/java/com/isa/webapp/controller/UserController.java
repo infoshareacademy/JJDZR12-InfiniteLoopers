@@ -22,9 +22,14 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestParam String email,
+                                      @RequestParam String confirmEmail,
                                       @RequestParam String password,
                                       @RequestParam String firstName,
                                       @RequestParam String lastName) {
+
+        if (!email.equals(confirmEmail)) {
+            return ResponseEntity.badRequest().body("Weryfikacja email nie udała się");
+        }
         User user = userService.registerUser(email,password,firstName,lastName);
         return ResponseEntity.ok().body(user);
     }
