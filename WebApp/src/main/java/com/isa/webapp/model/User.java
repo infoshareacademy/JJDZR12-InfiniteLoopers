@@ -11,6 +11,13 @@ public class User {
     private String firstNameUser;
     private String lastNameUser;
     private String nameSchoolUser;
+    private String userId;
+    private UserRole userRole;
+    private Map<Subjects, List<Integer>> grades;
+
+    public Map<Subjects, List<Integer>> getGrades() {
+        return grades;
+    }
 
     public String getEmailUser() {
         return emailUser;
@@ -36,13 +43,7 @@ public class User {
         this.nameSchoolUser = nameSchoolUser;
     }
 
-    private String userId;
-    private UserRole userRole;
-    private Map<Subjects, List<Integer>> grades;
 
-    public Map<Subjects, List<Integer>> getGrades() {
-        return grades;
-    }
 
     public void setGrades(Map<Subjects, List<Integer>> grades) {
         this.grades = grades;
