@@ -27,11 +27,11 @@ public class LoginController {
 
             User registeredUser = getUserFromRegistrationData(user);
             assert registeredUser != null;
-            user.setGrades(registeredUser.getGrades()); // Przypisz oceny zarejestrowanego użytkownika
+            user.setGrades(registeredUser.getGrades());
             session.setAttribute("loggedInUser", user);
             if (registeredUser != null) {
-                user.setUserRole(registeredUser.getUserRole()); // Ustaw rolę z danych rejestracji
-                session.setAttribute("loggedInUser", user); // Ustaw zalogowanego użytkownika w sesji
+                user.setUserRole(registeredUser.getUserRole());
+                session.setAttribute("loggedInUser", user);
             }
 
             if (user.getUserRole() == UserRole.STUDENT) {

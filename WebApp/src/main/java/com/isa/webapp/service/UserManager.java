@@ -20,7 +20,7 @@ public class UserManager {
         ObjectMapper objectMapper = new ObjectMapper();
         ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
 
-        File file = new File("/home/user/Desktop/JJDZR12-InfiniteLoopers/WebApp/src/main/resources/users.json"); // Ścieżka do pliku JSON
+        File file = new File("/home/user/Desktop/JJDZR12-InfiniteLoopers/WebApp/src/main/resources/users.json");
         List<User> userList = new ArrayList<>();
 
         if (file.exists()) {

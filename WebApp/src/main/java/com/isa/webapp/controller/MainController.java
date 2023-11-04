@@ -16,10 +16,10 @@ public class MainController {
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
-        User user = new User(); // Tworzenie nowego obiektu User
-        model.addAttribute("user", user); // Dodawanie obiektu do modelu
-        model.addAttribute("content", "registration"); // Ustawienie treści na "registration"
-        return "main"; // Zwracanie widoku "main"
+        User user = new User();
+        model.addAttribute("user", user);
+        model.addAttribute("content", "registration");
+        return "main";
     }
 
     @GetMapping("/login")

@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <title>Lista Uczniów</title>
-
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<form action="/logout" method="post" class="text-right">
+  <button type="submit" class="btn btn-danger">Wyloguj się</button>
+</form>
 <div class="container mt-5">
   <h2>Lista Uczniów</h2>
   <table class="table table-striped">
@@ -24,6 +26,7 @@
 
       <td>
         <a class="btn btn-primary" th:href="'/teacher/add-grade/' + ${student.userId}">Dodaj Ocenę</a>
+        <a class="btn btn-success" th:href="'/teacher/view-grades/' + ${student.userId}">Wyświetl Oceny</a>
       </td>
     </tr>
     </tbody>

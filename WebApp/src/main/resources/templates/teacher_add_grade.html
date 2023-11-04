@@ -6,6 +6,9 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+<form action="/logout" method="post" class="text-right">
+  <button type="submit" class="btn btn-danger">Wyloguj się</button>
+</form>
 <div class="container mt-5">
   <h2>Dodaj Ocenę</h2>
   <form th:action="@{/teacher/add-grade}" method="post" th:object="${gradeForm}">

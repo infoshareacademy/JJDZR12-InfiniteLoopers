@@ -6,6 +6,8 @@ import com.isa.webapp.model.GradeForm;
 import com.isa.webapp.model.Subjects;
 import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
+import com.isa.webapp.service.StudentService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,12 +27,17 @@ import java.util.stream.Collectors;
 @Controller
 public class TeacherController {
 
+    private final StudentService studentService;
+
+    @Autowired
+    public TeacherController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     private static final String USERS_JSON_FILE = "/home/user/Desktop/JJDZR12-InfiniteLoopers/WebApp/src/main/resources/users.json";
 
     @GetMapping("/teacher/students")
     public String showStudentList(Model model) throws IOException {
-        // Przykładowa logika - pobierz listę uczniów i przekaż ją do widoku
         List<User> students = getStudentsForTeacher();
         model.addAttribute("students", students);
         return "teacher_student_list";
@@ -47,10 +54,16 @@ public class TeacherController {
         return "teacher_add_grade";
     }
 
+    @GetMapping("/teacher/view-grades/{studentId}")
+    public String viewGrades(@PathVariable String studentId, Model model) {
+        Map<Subjects, List<Integer>> grades = studentService.getGradesForStudent(studentId);
+        model.addAttribute("grades", grades);
+        return "teacher_view_grades";
+    }
+
 
     @PostMapping("/teacher/add-grade")
     public String addGrade(@ModelAttribute("gradeForm") GradeForm gradeForm) {
-        // Przykładowa logika - dodaj ocenę do ocen ucznia
         addGradeToStudent(gradeForm.getStudentId(), gradeForm.getSubject(), gradeForm.getGrade());
         return "redirect:/teacher/students";
     }
@@ -72,10 +85,8 @@ public class TeacherController {
                 if (user.getUserId().equals(studentId)) {
                     Map<Subjects, List<Integer>> grades = user.getGrades();
                     grades.computeIfAbsent(subject, key -> new ArrayList<>()).add(grade);
-
-                    // Aktualizuj dane użytkownika w pliku JSON
                     Files.write(Paths.get(USERS_JSON_FILE), mapper.writeValueAsBytes(users));
-                    break; // Przerwij pętlę po znalezieniu ucznia
+                    break;
                 }
             }
         } catch (IOException e) {
