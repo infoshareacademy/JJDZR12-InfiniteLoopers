@@ -2,28 +2,24 @@
 <div th:fragment="content" class="container mt-5">
     <form th:action="@{/registration}" method="post">
         <div class="form-group">
-            <label for="loginUser">Login użytkownika:</label>
-            <input type="text" class="form-control" id="loginUser" name="loginUser" th:field="*{user.loginUser}" required>
-        </div>
-        <div class="form-group">
             <label for="passwordUser">Hasło:</label>
-            <input type="password" class="form-control" id="passwordUser" name="passwordUser" th:field="*{user.passwordUser}" required>
+            <input type="password" class="form-control" id="passwordUser" name="passwordUser" th:field="*{user.password}" required>
         </div>
         <div class="form-group">
             <label for="emailUser">Adres email:</label>
-            <input type="email" class="form-control" id="emailUser" name="emailUser" th:field="*{user.emailUser}" required>
+            <input type="email" class="form-control" id="emailUser" name="emailUser" th:field="*{user.email}" required>
         </div>
         <div class="form-group">
             <label for="firstNameUser">Imię:</label>
-            <input type="text" class="form-control" id="firstNameUser" name="firstNameUser" th:field="*{user.firstNameUser}" required>
+            <input type="text" class="form-control" id="firstNameUser" name="firstNameUser" th:field="*{user.firstName}" required>
         </div>
         <div class="form-group">
             <label for="lastNameUser">Nazwisko:</label>
-            <input type="text" class="form-control" id="lastNameUser" name="lastNameUser" th:field="*{user.lastNameUser}" required>
+            <input type="text" class="form-control" id="lastNameUser" name="lastNameUser" th:field="*{user.lastName}" required>
         </div>
         <div class="form-group">
             <label for="nameSchoolUser">Nazwa szkoły:</label>
-            <input type="text" class="form-control" id="nameSchoolUser" name="nameSchoolUser" th:field="*{user.nameSchoolUser}" required>
+            <input type="text" class="form-control" id="nameSchoolUser" name="nameSchoolUser" th:field="*{user.schoolName}" required>
         </div>
         <div class="form-group">
             <label for="userRole">Rola użytkownika:</label>

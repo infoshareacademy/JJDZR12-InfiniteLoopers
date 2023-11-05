@@ -2,12 +2,12 @@
     <h2>Logowanie</h2>
     <form th:action="@{/login}" method="post">
         <div class="form-group">
-            <label for="loginUser">Login:</label>
-            <input type="text" class="form-control" id="loginUser" name="loginUser" required>
+            <label for="email">Login:</label>
+            <input type="text" class="form-control" id="email" name="email" required>
         </div>
         <div class="form-group">
-            <label for="passwordUser">Hasło:</label>
-            <input type="password" class="form-control" id="passwordUser" name="passwordUser" required>
+            <label for="password">Hasło:</label>
+            <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <button type="submit" class="btn btn-primary">Zaloguj się</button>
     </form>

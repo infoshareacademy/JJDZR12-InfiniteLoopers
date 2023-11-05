@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class LoginController {
 
-    private static final String USERS_JSON_FILE = "/home/user/Desktop/JJDZR12-InfiniteLoopers/WebApp/src/main/resources/users.json";
+    private static final String USERS_JSON_FILE = "users.json";
 
     @PostMapping("/login")
     public String postLogin(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpSession session) {
@@ -26,10 +26,9 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("successMessage", "Zalogowano pomyślnie!");
 
             User registeredUser = getUserFromRegistrationData(user);
-            assert registeredUser != null;
-            user.setGrades(registeredUser.getGrades());
-            session.setAttribute("loggedInUser", user);
+
             if (registeredUser != null) {
+                user.setGrades(registeredUser.getGrades());
                 user.setUserRole(registeredUser.getUserRole());
                 session.setAttribute("loggedInUser", user);
             }
@@ -54,7 +53,7 @@ public class LoginController {
             });
 
             for (User registeredUser : users) {
-                if (user.getLoginUser().equals(registeredUser.getLoginUser())) {
+                if (user.getEmail().equals(registeredUser.getEmail())) {
                     return registeredUser;
                 }
             }
@@ -72,7 +71,7 @@ public class LoginController {
             });
 
             for (User storedUser : users) {
-                if (user.getLoginUser().equals(storedUser.getLoginUser()) && user.getPasswordUser().equals(storedUser.getPasswordUser())) {
+                if (user.getEmail().equals(storedUser.getEmail()) && user.getPassword().equals(storedUser.getPassword())) {
                     return true;
                 }
             }

@@ -1,24 +1,15 @@
 package com.isa.webapp.service;
 
-<<<<<<< HEAD
-import com.isa.webapp.util.User;
-import com.isa.webapp.util.UserManager;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
-import java.util.UUID;
-=======
-
 import com.isa.webapp.model.Subjects;
 import com.isa.webapp.model.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
-
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
->>>>>>> origin/JJDZR12IL21-22
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -29,9 +20,8 @@ public class UserService {
         this.userManager = userManager;
     }
 
-    public User registerUser (String email, String password, String firstName, String lastName) {
+    public User registerUser(String email, String password, String firstName, String lastName) {
         User user = new User();
-        user.setId(UUID.randomUUID());
         user.setEmail(email);
         user.setPassword(password);
         user.setFirstName(firstName);
@@ -45,5 +35,13 @@ public class UserService {
                 .filter(u -> u.getPassword().equals(password));
     }
 
-    objectMapper.writerWithDefaultPrettyPrinter().writeValue(userFile, tasks)
+    public Map<Subjects, List<Integer>> getGradesForLoggedInUser(HttpSession session) {
+        User loggedInUser = (User) session.getAttribute("loggedInUser");
+
+        if (loggedInUser != null && loggedInUser.getGrades() != null && !loggedInUser.getGrades().isEmpty()) {
+            return loggedInUser.getGrades();
+        }
+
+        return Collections.emptyMap();
+    }
 }

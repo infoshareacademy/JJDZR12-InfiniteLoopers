@@ -6,10 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class MainController {
+public class HomeController {
 
     @GetMapping("/")
-     public String index(Model model) {
+    public String index(Model model) {
         model.addAttribute("content", "index");
         return "main";
     }
@@ -27,5 +27,4 @@ public class MainController {
         model.addAttribute("content", "login");
         return "main";
     }
-
 }

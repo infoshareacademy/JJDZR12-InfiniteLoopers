@@ -34,7 +34,7 @@ public class TeacherController {
         this.studentService = studentService;
     }
 
-    private static final String USERS_JSON_FILE = "/home/user/Desktop/JJDZR12-InfiniteLoopers/WebApp/src/main/resources/users.json";
+    private static final String USERS_JSON_FILE = "users.json";
 
     @GetMapping("/teacher/students")
     public String showStudentList(Model model) throws IOException {
@@ -61,12 +61,12 @@ public class TeacherController {
         return "teacher_view_grades";
     }
 
-
     @PostMapping("/teacher/add-grade")
     public String addGrade(@ModelAttribute("gradeForm") GradeForm gradeForm) {
         addGradeToStudent(gradeForm.getStudentId(), gradeForm.getSubject(), gradeForm.getGrade());
         return "redirect:/teacher/students";
     }
+
     public List<User> getStudentsForTeacher() throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         List<User> users = mapper.readValue(Files.newBufferedReader(Paths.get(USERS_JSON_FILE)), new TypeReference<>() {});
@@ -82,7 +82,7 @@ public class TeacherController {
             List<User> users = mapper.readValue(Files.newBufferedReader(Paths.get(USERS_JSON_FILE)), new TypeReference<>() {});
 
             for (User user : users) {
-                if (user.getUserId().equals(studentId)) {
+                if (user.getId().equals(studentId)) {
                     Map<Subjects, List<Integer>> grades = user.getGrades();
                     grades.computeIfAbsent(subject, key -> new ArrayList<>()).add(grade);
                     Files.write(Paths.get(USERS_JSON_FILE), mapper.writeValueAsBytes(users));
@@ -93,10 +93,4 @@ public class TeacherController {
             e.printStackTrace();
         }
     }
-
-
 }
-
-
-
-

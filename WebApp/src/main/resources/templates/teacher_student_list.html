@@ -21,12 +21,12 @@
     </thead>
     <tbody>
     <tr th:each="student : ${students}">
-      <td th:text="${student.firstNameUser}"></td>
-      <td th:text="${student.lastNameUser}"></td>
+      <td th:text="${student.firstName}"></td>
+      <td th:text="${student.lastName}"></td>
 
       <td>
-        <a class="btn btn-primary" th:href="'/teacher/add-grade/' + ${student.userId}">Dodaj Ocenę</a>
-        <a class="btn btn-success" th:href="'/teacher/view-grades/' + ${student.userId}">Wyświetl Oceny</a>
+        <a class="btn btn-primary" th:href="'/teacher/add-grade/' + ${student.id}">Dodaj Ocenę</a>
+        <a class="btn btn-success" th:href="'/teacher/view-grades/' + ${student.id}">Wyświetl Oceny</a>
       </td>
     </tr>
     </tbody>

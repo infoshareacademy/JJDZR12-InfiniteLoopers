@@ -13,7 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 public class StudentService {
     private final Map<String, Map<Subjects, List<Integer>>> studentGrades = new HashMap<>();
 
-    private static final String USERS_JSON_FILE = "/home/user/Desktop/JJDZR12-InfiniteLoopers/WebApp/src/main/resources/users.json";
+    private static final String USERS_JSON_FILE = "users.json";
 
     public Map<Subjects, List<Integer>> getGradesForStudent(String studentId) {
         loadStudentGradesFromJson();
@@ -25,7 +25,7 @@ public class StudentService {
             ObjectMapper objectMapper = new ObjectMapper();
             List<User> users = objectMapper.readValue(new File(USERS_JSON_FILE), new TypeReference<>() {});
             for (User user : users) {
-                studentGrades.put(user.getUserId(), user.getGrades());
+                studentGrades.put(user.getId(), user.getGrades());
             }
         } catch (IOException e) {
             e.printStackTrace();
