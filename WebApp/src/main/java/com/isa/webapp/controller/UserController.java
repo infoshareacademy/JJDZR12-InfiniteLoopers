@@ -1,47 +1,39 @@
 package com.isa.webapp.controller;
 
-import com.isa.webapp.service.UserService;
-import com.isa.webapp.util.User;
+import com.isa.webapp.service.IdGeneratorService;
+import com.isa.webapp.service.UserManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import com.isa.webapp.model.User;
 
-import java.util.Optional;
+import java.io.IOException;
 
-@RestController
-@RequestMapping("/api/users")
+@Controller
 public class UserController {
-
-    private UserService userService;
+    private final UserManager userManager;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
+    private IdGeneratorService idGeneratorService;
+
+    @Autowired
+    public UserController(UserManager userManager) {
+        this.userManager = userManager;
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestParam String email,
-                                      @RequestParam String confirmEmail,
-                                      @RequestParam String password,
-                                      @RequestParam String firstName,
-                                      @RequestParam String lastName) {
 
-        if (!email.equals(confirmEmail)) {
-            return ResponseEntity.badRequest().body("Weryfikacja email nie udała się");
-        }
-        User user = userService.registerUser(email,password,firstName,lastName);
-        return ResponseEntity.ok().body(user);
-    }
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    public String registerUser(@ModelAttribute User user) {
+        user.setUserId(idGeneratorService.generateUniqueId());
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
-        Optional<User> userOpt = userService.loginUser(email, password);
-        if (userOpt.isPresent()) {
-            User user = userOpt.get();
-            return ResponseEntity.ok().body(user);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body((Object) "Dane niepoprawne");
+        try {
+            userManager.registerUser(user);
+            return "registrationSuccessPage";
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "errorPage";
         }
     }
 }

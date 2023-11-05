@@ -1,24 +1,31 @@
 package com.isa.webapp.controller;
 
+import com.isa.webapp.model.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class HomeController {
+public class MainController {
 
     @GetMapping("/")
-    public String home() {
-        return "index";
+     public String index(Model model) {
+        model.addAttribute("content", "index");
+        return "main";
+    }
+
+    @GetMapping("/registration")
+    public String showRegistrationForm(Model model) {
+        User user = new User();
+        model.addAttribute("user", user);
+        model.addAttribute("content", "registration");
+        return "main";
     }
 
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public String getLoginPage(Model model) {
+        model.addAttribute("content", "login");
+        return "main";
     }
 
-    @GetMapping("/register")
-    public String register() {
-        return "register";
-    }
 }

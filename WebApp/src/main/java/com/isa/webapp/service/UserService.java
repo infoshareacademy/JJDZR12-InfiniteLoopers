@@ -1,11 +1,24 @@
 package com.isa.webapp.service;
 
+<<<<<<< HEAD
 import com.isa.webapp.util.User;
 import com.isa.webapp.util.UserManager;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
+=======
+
+import com.isa.webapp.model.Subjects;
+import com.isa.webapp.model.User;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.stereotype.Service;
+
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+>>>>>>> origin/JJDZR12IL21-22
 
 @Service
 public class UserService {
@@ -31,4 +44,6 @@ public class UserService {
         return userManager.findUserByEmail(email)
                 .filter(u -> u.getPassword().equals(password));
     }
+
+    objectMapper.writerWithDefaultPrettyPrinter().writeValue(userFile, tasks)
 }

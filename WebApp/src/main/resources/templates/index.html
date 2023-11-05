@@ -1,62 +1,7 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>JJDZR12</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body {
-            padding-top: 60px;
-        }
-    </style>
-</head>
-<body>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
-    <a class="navbar-brand" href="#">JJDZR12IL</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Moduły
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="/modules/grades">Oceny</a>
-                    <a class="dropdown-item" href="/modules/messages">Wiadomości</a>
-                    <a class="dropdown-item" href="/modules/calendar">Terminarz</a>
-                    <a class="dropdown-item" href="/modules/add-assignment">Zadania domowe</a>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/settings">Ustawienia</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/info">Ogłoszenia</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Logout/Login</a>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<div class="container mt-5">
-    <div class="jumbotron">
-        <h1 class="display-4">Witamy w aplikacji JJDZR12IL</h1>
-        <p class="lead">Strona startowa.</p>
+<div th:fragment="content" class="container text-center">
+    <div class="card index-card mt-5">
+        <div class="card-body">
+            <h3 class="card-title">Witaj w Dzienniku internetowym Infinite Loppers!</h3>
+        </div>
     </div>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
-</body>
-</html>
