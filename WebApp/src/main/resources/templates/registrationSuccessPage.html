@@ -1,10 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>error</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja udana.</title>
+  <script>
+    function startCountdown(duration, display) {
+      var timer = duration, seconds;
+      setInterval(function () {
+        seconds = parseInt(timer % 60, 10);
+
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = seconds;
+
+        if (--timer < 0) {
+          timer = duration;
+        }
+      }, 1000);
+    }
+
+    window.onload = function () {
+      var fiveSeconds = 5,
+              display = document.querySelector('#time');
+      startCountdown(fiveSeconds, display);
+      setTimeout(function() {
+        window.location.href = '/';
+      }, fiveSeconds * 1000);
+    };
+  </script>
 </head>
 <body>
-<h1>Rejestracja udana.</h1>
+  <h1>Rejestracja udana.</h1>
+  <p>Za <span id="time">05</span> sekund zostaniesz automatycznie przekierowany na stronę główną...</p>
 </body>

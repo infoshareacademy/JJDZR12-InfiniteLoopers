@@ -27,4 +27,10 @@ public class HomeController {
         model.addAttribute("content", "login");
         return "main";
     }
+
+    @GetMapping("/announcement")
+    public String getAnnouncementPage (Model model){
+        model.addAttribute("content", "announcement");
+        return "main";
+    }
 }

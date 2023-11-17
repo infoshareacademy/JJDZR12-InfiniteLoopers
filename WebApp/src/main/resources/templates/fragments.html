@@ -13,6 +13,7 @@
   <div class="container-fluid justify-content-center text-center">
     <a th:class="${content == 'main'} ? 'btn btn-primary me-2' : 'btn btn-outline-primary me-2'"  th:href="@{/}">Strona główna</a>
     <a th:class="${content == 'login'} ? 'btn btn-primary me-2' : 'btn btn-outline-primary me-2'" th:href="@{/login}">Zaloguj się</a>
+    <a th:class="${content == 'announcement'} ? 'btn btn-primary me-2' : 'btn btn-outline-primary me-2'" th:href="@{/announcement}">Ogłoszenia</a>
     <a th:class="${content == 'registration'} ? 'btn btn-primary me-2' : 'btn btn-outline-primary me-2'" th:href="@{/registration}">Zarejestruj się</a>
   </div>
 </nav>
