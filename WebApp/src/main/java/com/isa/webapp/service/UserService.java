@@ -5,6 +5,7 @@ import com.isa.webapp.model.User;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -20,13 +21,13 @@ public class UserService {
         this.userManager = userManager;
     }
 
-    public User registerUser(String email, String password, String firstName, String lastName) {
+    public User registerUser(String email, String password, String firstName, String lastName) throws IOException {
         User user = new User();
         user.setEmail(email);
         user.setPassword(password);
         user.setFirstName(firstName);
         user.setLastName(lastName);
-        userManager.saveUser(user);
+        userManager.registerUser(user);
         return user;
     }
 

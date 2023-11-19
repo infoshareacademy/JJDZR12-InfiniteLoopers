@@ -21,18 +21,18 @@ public class UserManager {
     private static final String USERS_FILE = "users.json";
 
     public void registerUser(User user) throws IOException {
-        ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
-
-        File file = new File(USERS_FILE);
-        List<User> userList = new ArrayList<>();
-
-        if (file.exists()) {
-            userList = objectMapper.readValue(file, new TypeReference<List<User>>() {
-            });
+        Optional<User> existingUser = findUserByEmail(user.getEmail());
+        if (existingUser.isPresent()) {
+            throw new IllegalStateException("Uzytkownik z takim email instnieje");
         }
-
+        List<User> userList = getAllUsers();
         userList.add(user);
+        saveUserList(userList);
+    }
 
+    private void saveUserList(List<User> userList) throws IOException {
+        File file = new File(USERS_FILE);
+        ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
         try (FileWriter fileWriter = new FileWriter(file)) {
             writer.writeValue(fileWriter, userList);
         }
@@ -40,22 +40,18 @@ public class UserManager {
 
     private List<User> getAllUsers() {
         try {
-            return objectMapper.readValue(new File(USERS_FILE), new TypeReference<List<User>>() {
-            });
+            File file = new File(USERS_FILE);
+            if (file.exists()) {
+                return objectMapper.readValue(file, new TypeReference<List<User>>() {});
+            } else {
+                return new ArrayList<>();
+            }
         } catch (IOException e) {
+            e.printStackTrace();
             return new ArrayList<>();
         }
     }
 
-    public void saveUser(User user) {
-        List<User> users = getAllUsers();
-        users.add(user);
-        try {
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(new File(USERS_FILE), users);
-        } catch (IOException e) {
-            //TODO
-        }
-    }
 
     public Optional<User> findUserByEmail(String email) {
         return getAllUsers().stream()

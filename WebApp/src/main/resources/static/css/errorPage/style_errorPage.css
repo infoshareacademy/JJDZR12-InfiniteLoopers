@@ -31,12 +31,14 @@ h1 {
     text-align: center;
 }
 
-span {
+h2 {
     font-size: 60px;
 }
 
-span.time {
+span {
     margin-top: 1rem;
+    color: red;
+    text-decoration: underline;
 }
 
 p {
