@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.isa.webapp.model.User;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -18,7 +19,14 @@ import java.util.Optional;
 public class UserManager {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    private final PasswordEncoder passwordEncoder;
+
     private static final String USERS_FILE = "users.json";
+
+    public UserManager(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     public void registerUser(User user) throws IOException {
         Optional<User> existingUser = findUserByEmail(user.getEmail());
@@ -26,6 +34,7 @@ public class UserManager {
             throw new IllegalStateException("Uzytkownik z takim email instnieje");
         }
         List<User> userList = getAllUsers();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userList.add(user);
         saveUserList(userList);
     }
