@@ -22,11 +22,11 @@ public class HomeController {
         return "main";
     }
 
-    @GetMapping("/login")
+/*    @GetMapping("/login")
     public String getLoginPage(Model model) {
         model.addAttribute("content", "login");
         return "main";
-    }
+    }*/
 
     @GetMapping("/announcement")
     public String getAnnouncementPage (Model model){

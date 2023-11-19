@@ -21,7 +21,7 @@ public class LoginController {
 
     private static final String USERS_JSON_FILE = "users.json";
 
-    @PostMapping("/login")
+   /* @PostMapping("/login")
     public String postLogin(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpSession session) {
         if (loginUser(user)) {
             redirectAttributes.addFlashAttribute("successMessage", "Zalogowano pomyślnie!");
@@ -45,7 +45,7 @@ public class LoginController {
             redirectAttributes.addFlashAttribute("errorMessage", "Błąd logowania. Spróbuj ponownie.");
             return "redirect:/login";
         }
-    }
+    }*/
 
     private User getUserFromRegistrationData(User user) {
         try {
