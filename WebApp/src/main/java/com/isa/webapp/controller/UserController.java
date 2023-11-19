@@ -31,10 +31,11 @@ public class UserController {
             e.printStackTrace();
             return "errorPage";
         } catch (IllegalStateException e) {
-            model.addAttribute("emailError",true);
-/*            model.addAttribute("errorMessage", "E-mail już istnieje");*/
+/*            model.addAttribute("emailError",true);*/
+            model.addAttribute("content", "registration");
+            model.addAttribute("errorMessage", "E-mail już istnieje");
             //TODO
-            return "registration";
+            return "main";
         }
     }
 }
