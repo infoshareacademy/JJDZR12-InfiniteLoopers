@@ -1,6 +1,8 @@
 package com.isa.webapp.controller;
 
 import com.isa.webapp.model.User;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,28 +13,38 @@ public class HomeController {
 
     @GetMapping("/")
     public String getIndex(Model model) {
-        model.addAttribute("content", "index");
-        return "main";
+/*        model.addAttribute("content", "index");*/
+        return "index";
     }
 
     @PostMapping("/")
     public String index(Model model) {
-        model.addAttribute("content", "index");
-        return "main";
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = auth.getName();
+        boolean isStudent = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("STUDENT"));
+        boolean isTeacher = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("TEACHER"));
+
+        model.addAttribute("isStudent", isStudent);
+        model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("username", currentUserName);
+
+        return "index";
     }
 
     @GetMapping("/registration")
     public String showRegistrationForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-        model.addAttribute("content", "registration");
-        return "main";
+/*        model.addAttribute("content", "registration");*/
+        return "registration";
     }
 
     @GetMapping("/login")
     public String getLoginPage(Model model) {
         model.addAttribute("content", "login");
-        return "main";
+        return "login";
     }
 
     @GetMapping("/announcement")
