@@ -36,16 +36,7 @@ public class UserController {
             model.addAttribute("content", "registration");
             model.addAttribute("errorMessage", "E-mail już istnieje");
             //TODO
-            return "main";
+            return "registration";
         }
     }
-
-/*        @GetMapping("/userProfile")
-        public String userProfile(Model model) {
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            String currentUserName = authentication.getName();
-
-            model.addAttribute("username", currentUserName);
-            return "index";
-        }*/
 }

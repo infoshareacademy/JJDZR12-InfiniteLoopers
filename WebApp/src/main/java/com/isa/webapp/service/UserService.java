@@ -3,7 +3,9 @@ package com.isa.webapp.service;
 import com.isa.webapp.model.Subjects;
 import com.isa.webapp.model.User;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+import org.thymeleaf.util.MapUtils;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -35,11 +37,9 @@ public class UserService {
                 .filter(u -> u.getPassword().equals(password));
     }
 
-    public Map<Subjects, List<Integer>> getGradesForLoggedInUser(HttpSession session) {
-        User loggedInUser = (User) session.getAttribute("loggedInUser");
-
-        if (loggedInUser != null && loggedInUser.getGrades() != null && !loggedInUser.getGrades().isEmpty()) {
-            return loggedInUser.getGrades();
+    public Map<Subjects, List<Integer>> getGradesForLoggedInUser(User user) {
+        if (user != null && !MapUtils.isEmpty(user.getGrades())) {
+            return user.getGrades();
         }
 
         return Collections.emptyMap();
