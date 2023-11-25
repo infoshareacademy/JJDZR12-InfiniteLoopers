@@ -44,4 +44,12 @@ public class UserService {
 
         return Collections.emptyMap();
     }
+
+/*    public Map<Subjects, List<Integer>> getFirstNameForLoggedInUser(User user) {
+        if (user != null && !MapUtils.isEmpty(user.getFirstName())) {
+            return user.getFirstName();
+        }
+
+        return Collections.emptyMap();
+    }*/
 }

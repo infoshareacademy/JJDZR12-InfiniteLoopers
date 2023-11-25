@@ -15,6 +15,7 @@ import java.security.Principal;
 @Controller
 public class HomeController {
 
+
     @GetMapping("/")
     public String getIndex(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
