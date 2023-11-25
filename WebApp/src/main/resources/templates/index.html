@@ -50,7 +50,7 @@
             color : #204063
         }
         .smallContainer {
-            max-width:720px;
+            max-width:520px;
             margin:0px auto;
             background: #c1d9ee;
         }
@@ -82,21 +82,21 @@
                 <div class="navLink navLinkActive">
                     <a th:href="@{/}"><div><i class="fa-solid fa-house"></i></div> <div class="navLabel">Home</div></a>
                 </div>
-                <div class="navLink">
+<!--                <div class="navLink">
                     <a href="#"><div><i class="fas fa-poo"></i></div> <div class="navLabel">Skarga</div></a>
-                </div>
-                <div class="navLink">
+                </div>-->
+<!--                <div class="navLink">
                     <a th:href="@{/announcement}"><div><i class="fas fa-bullhorn"></i></div> <div class="navLabel">Ogłoszenia</div></a>
-                </div>
+                </div>-->
                 <div class="navLink" th:if="${isTeacher}">
                     <a th:href="@{/teacher/students}"><div><i class="fa-solid fa-table-columns"></i></div> <div class="navLabel">Uczniowie</div></a>
                 </div>
                 <div class="navLink" th:if="${isStudent}">
                     <a th:href="@{/student/dashboard}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Oceny</div></a>
                 </div>
-                <div class="navLink">
+<!--                <div class="navLink">
                     <a href="#"><div><i class="fa-solid fa-circle-user"></i></div> <div class="navLabel">Account</div></a>
-                </div>
+                </div>-->
                 <div class="navLink">
                     <form th:action="@{/logout}" method="post" style="margin: 0;">
                         <button type="submit" class="btn btn-link" style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
@@ -112,17 +112,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="text-white"><span class="d-block display-1" style="font-family:impact">Witaj <span th:text="${username}"></span> ISchool</span><span class="d-block display-4">DZIENNIK ELEKTRONICZNY</span></h1>
+                    <h1 class="text-white"><span class="d-block display-4">Witaj <span style="font-family:impact" th:text="${username}"></span></span><span class="d-block display-5">DZIENNIK ELEKTRONICZNY</span>
+                        <span class="d-block display-3" style="font-family:impact">"ISchool"</span></h1>
                 </div>
             </div>
         </div>
     </div>
 </header>
-
-<!--<footer th:fragment="footer" class="footer bg-light text-center mt-auto">
-    <div class="container text-muted">
-        <small>Created by Infinite Loopers 2023</small>
-    </div>
-</footer>-->
 </body>
 </html>

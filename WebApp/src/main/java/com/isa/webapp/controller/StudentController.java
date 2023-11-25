@@ -27,7 +27,11 @@ public class StudentController {
         Map<Subjects, List<Integer>> grades = userService.getGradesForLoggedInUser((User) userDetails);
         if (!grades.isEmpty()) {
             model.addAttribute("grades", grades);
-
+            boolean isStudent = userDetails.getAuthorities().stream()
+                    .anyMatch(a -> a.getAuthority().equals("STUDENT"));
+            User user = (User) userDetails;
+            model.addAttribute("isStudent", isStudent);
+            model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
             return "student_dashboard";
         } else {
             return "redirect:/login";

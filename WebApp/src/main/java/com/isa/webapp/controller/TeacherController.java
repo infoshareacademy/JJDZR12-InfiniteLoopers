@@ -39,27 +39,44 @@ public class TeacherController {
     private static final String USERS_JSON_FILE = "users.json";
 
     @GetMapping("/teacher/students")
-    public String showStudentList(Model model) throws IOException {
+    public String showStudentList(Model model, @AuthenticationPrincipal UserDetails userDetails) throws IOException {
+        boolean isTeacher = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        User user = (User) userDetails;
         List<User> students = getStudentsForTeacher();
         model.addAttribute("students", students);
+        model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
         return "teacher_student_list";
     }
 
     @GetMapping("/teacher/add-grade/{studentId}")
-    public String showAddGradeForm(@PathVariable String studentId, Model model) {
+    public String showAddGradeForm(@PathVariable String studentId,
+                                   Model model,
+                                   @AuthenticationPrincipal UserDetails userDetails) {
+        boolean isTeacher = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("TEACHER"));
         GradeForm gradeForm = new GradeForm();
         gradeForm.setStudentId(studentId);
+        GradeForm user = new GradeForm();
 
         model.addAttribute("gradeForm", gradeForm);
         model.addAttribute("subjects", Subjects.values());
+        model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "teacher_add_grade";
     }
 
     @GetMapping("/teacher/view-grades/{studentId}")
-    public String viewGrades(@PathVariable String studentId, Model model) {
+    public String viewGrades(@PathVariable String studentId,
+                             Model model,
+                             @AuthenticationPrincipal UserDetails userDetails) {
+        boolean isTeacher = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("TEACHER"));
         Map<Subjects, List<Integer>> grades = studentService.getGradesForStudent(studentId);
         model.addAttribute("grades", grades);
+        model.addAttribute("isTeacher", isTeacher);
         return "teacher_view_grades";
     }
 

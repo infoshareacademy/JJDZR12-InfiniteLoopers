@@ -50,7 +50,7 @@
             color : #204063
         }
         .smallContainer {
-            max-width:720px;
+            max-width:520px;
             margin:0px auto;
             background: #c1d9ee;
         }
@@ -82,21 +82,21 @@
                 <div class="navLink navLinkActive">
                     <a th:href="@{/}"><div><i class="fa-solid fa-house"></i></div> <div class="navLabel">Home</div></a>
                 </div>
-                <div class="navLink">
+                <!--<div class="navLink">
                     <a href="#"><div><i class="fas fa-poo"></i></div> <div class="navLabel">Skarga</div></a>
                 </div>
                 <div class="navLink">
                     <a th:href="@{/announcement}"><div><i class="fas fa-bullhorn"></i></div> <div class="navLabel">Ogłoszenia</div></a>
-                </div>
+                </div>-->
                 <div class="navLink" th:if="${isTeacher}">
                     <a th:href="@{/teacher/students}"><div><i class="fa-solid fa-table-columns"></i></div> <div class="navLabel">Uczniowie</div></a>
                 </div>
                 <div class="navLink" th:if="${isStudent}">
                     <a th:href="@{/student/dashboard}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Oceny</div></a>
                 </div>
-                <div class="navLink">
+<!--                <div class="navLink">
                     <a href="#"><div><i class="fa-solid fa-circle-user"></i></div> <div class="navLabel">Account</div></a>
-                </div>
+                </div>-->
                 <div class="navLink">
                     <form th:action="@{/logout}" method="post" style="margin: 0;">
                         <button type="submit" class="btn btn-link" style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
@@ -109,8 +109,10 @@
         </div>
     </div>
     <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
-        <div class="container mt-5">
-            <h2 style="color: white">Dashboard Ucznia</h2>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-left" style="width: 50%">
+                    <h2 style="color: white">Dashboard Ucznia, <br><span style="color: #dfc2c4" th:text="${username}"></span></span></h2>
             <table class="table table-bordered">
                 <thead>
                 <tr>
@@ -127,7 +129,8 @@
                 </tr>
                 </tbody>
             </table>
-
+                </div>
+            </div>
         </div>
     </div>
 </header>
@@ -136,40 +139,3 @@
 </body>
 </html>
 
-
-
-<!--
-
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Dashboard Ucznia</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-
-<div class="container mt-5">
-    <h2>Dashboard Ucznia</h2>
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>Przedmiot</th>
-            <th>Oceny</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="entry : ${grades}">
-            <td th:text="${entry.key}"></td>
-            <td>
-                <span th:each="grade, iterStat : ${entry.value}" th:text="${grade + (iterStat.last ? '' : ', ')}"></span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-</body>
-</html>
--->

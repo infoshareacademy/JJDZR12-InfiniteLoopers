@@ -18,32 +18,28 @@ public class HomeController {
 
     @GetMapping("/")
     public String getIndex(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = auth.getName();
-        boolean isStudent = auth.getAuthorities().stream()
+        boolean isStudent = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("STUDENT"));
-        boolean isTeacher = auth.getAuthorities().stream()
+        boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
-
+        User user = (User) userDetails;
         model.addAttribute("isStudent", isStudent);
         model.addAttribute("isTeacher", isTeacher);
-        model.addAttribute("username", currentUserName);
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "index";
     }
 
     @PostMapping("/")
     public String index(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String currentUserName = auth.getName();
-        boolean isStudent = auth.getAuthorities().stream()
+        boolean isStudent = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("STUDENT"));
-        boolean isTeacher = auth.getAuthorities().stream()
+        boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
-
+        User user = (User) userDetails;
         model.addAttribute("isStudent", isStudent);
         model.addAttribute("isTeacher", isTeacher);
-        model.addAttribute("username", currentUserName);
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "index";
     }
