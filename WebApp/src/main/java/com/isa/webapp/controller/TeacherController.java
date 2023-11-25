@@ -63,7 +63,7 @@ public class TeacherController {
         model.addAttribute("gradeForm", gradeForm);
         model.addAttribute("subjects", Subjects.values());
         model.addAttribute("isTeacher", isTeacher);
-        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName()); //TODO fix
 
         return "teacher_add_grade";
     }
@@ -76,7 +76,7 @@ public class TeacherController {
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
         Map<Subjects, List<Integer>> grades = studentService.getGradesForStudent(studentId);
         model.addAttribute("grades", grades);
-        model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("isTeacher", isTeacher); //TODO fix
         return "teacher_view_grades";
     }
 
