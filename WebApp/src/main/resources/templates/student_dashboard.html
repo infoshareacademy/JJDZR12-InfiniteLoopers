@@ -82,10 +82,10 @@
                 <div class="navLink navLinkActive">
                     <a th:href="@{/}"><div><i class="fa-solid fa-house"></i></div> <div class="navLabel">Home</div></a>
                 </div>
-<!--                <div class="navLink">
+                <!--<div class="navLink">
                     <a href="#"><div><i class="fas fa-poo"></i></div> <div class="navLabel">Skarga</div></a>
-                </div>-->
-<!--                <div class="navLink">
+                </div>
+                <div class="navLink">
                     <a th:href="@{/announcement}"><div><i class="fas fa-bullhorn"></i></div> <div class="navLabel">Ogłoszenia</div></a>
                 </div>-->
                 <div class="navLink" th:if="${isTeacher}">
@@ -111,9 +111,24 @@
     <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="text-white"><span class="d-block display-4">Witaj <span style="font-family:impact" th:text="${username}"></span></span><span class="d-block display-5">DZIENNIK ELEKTRONICZNY</span>
-                        <span class="d-block display-3" style="font-family:impact">"ISchool"</span></h1>
+                <div class="col-lg-8 mx-auto text-left" style="width: 50%">
+                    <h2 style="color: white">Dashboard Ucznia, <br><span style="color: #dfc2c4" th:text="${username}"></span></span></h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="color: white">Przedmiot</th>
+                    <th style="color: white">Oceny</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr style="color: white" th:each="entry : ${grades}">
+                    <td style="color: white" th:text="${entry.key}"></td>
+                    <td>
+                        <span style="color: white" th:each="grade, iterStat : ${entry.value}" th:text="${grade + (iterStat.last ? '' : ', ')}"></span>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
                 </div>
             </div>
         </div>
@@ -121,3 +136,6 @@
 </header>
 </body>
 </html>
+</body>
+</html>
+
