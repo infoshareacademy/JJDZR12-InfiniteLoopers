@@ -1,0 +1,19 @@
+version: "3"
+
+services:
+  db:
+    image: mysql:8.2
+    restart: always
+    container_name: IL_PROJECT
+    environment:
+      MYSQL_DATABASE: 'JJDZR12'
+      MYSQL_USER: 'infiniteloopers'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
