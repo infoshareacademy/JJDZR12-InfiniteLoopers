@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
+import com.isa.webapp.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -19,9 +21,12 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
+@RequiredArgsConstructor
 @Controller
 public class LoginController {
 
+
+    private final UserService userService;
     private static final String USERS_JSON_FILE = "users.json";
 
     @PostMapping("/login")
@@ -51,21 +56,7 @@ public class LoginController {
     }
 
     private User getUserFromRegistrationData(User user) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            List<User> users = mapper.readValue(Files.newBufferedReader(Paths.get(USERS_JSON_FILE)), new TypeReference<>() {
-            });
-
-            for (User registeredUser : users) {
-                if (user.getEmail().equals(registeredUser.getEmail())) {
-                    return registeredUser;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return null;
+        return userService.getUserByEmail(user.getEmail());
     }
 
     private boolean loginUser(User user) {

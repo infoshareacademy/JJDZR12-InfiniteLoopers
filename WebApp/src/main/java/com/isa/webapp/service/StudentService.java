@@ -25,7 +25,7 @@ public class StudentService {
             ObjectMapper objectMapper = new ObjectMapper();
             List<User> users = objectMapper.readValue(new File(USERS_JSON_FILE), new TypeReference<>() {});
             for (User user : users) {
-                studentGrades.put(user.getId(), user.getGrades());
+                studentGrades.put(user.getUuid(), user.getGrades());
             }
         } catch (IOException e) {
             e.printStackTrace();

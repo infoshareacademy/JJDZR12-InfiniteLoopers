@@ -5,6 +5,9 @@ import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.isa.webapp.model.User;
+import com.isa.webapp.repository.UserRepository;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,36 +18,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@RequiredArgsConstructor
 @Service
 public class UserManager {
 
+    private final UserRepository userRepository;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final PasswordEncoder passwordEncoder;
 
     private static final String USERS_FILE = "users.json";
 
-    public UserManager(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
-
     public void registerUser(User user) throws IOException {
-        Optional<User> existingUser = findUserByEmail(user.getEmail());
-        if (existingUser.isPresent()) {
+        if (userRepository.existsByEmail(user.getEmail())) {
             throw new IllegalStateException("Uzytkownik z takim email instnieje");
         }
-        List<User> userList = getAllUsers();
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userList.add(user);
-        saveUserList(userList);
-    }
-
-    private void saveUserList(List<User> userList) throws IOException {
-        File file = new File(USERS_FILE);
-        ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
-        try (FileWriter fileWriter = new FileWriter(file)) {
-            writer.writeValue(fileWriter, userList);
-        }
+        userRepository.save(user);
     }
 
     private List<User> getAllUsers() {
@@ -63,8 +53,6 @@ public class UserManager {
 
 
     public Optional<User> findUserByEmail(String email) {
-        return getAllUsers().stream()
-                .filter(user -> user.getEmail().equals(email))
-                .findFirst();
+        return userRepository.findByEmail(email);
     }
 }

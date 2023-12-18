@@ -1,25 +1,33 @@
 package com.isa.webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
-
+@Entity
+@Table(name = "user")
 public class User implements UserDetails {
 
-    private final String id = UUID.randomUUID().toString();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private final String uuid = UUID.randomUUID().toString();
     private String password;
     private String email;
     private String firstName;
     private String lastName;
     private String schoolName;
-    private UserRole userRole;
-    private Map<Subjects, List<Integer>> grades;
 
-    public User() {
+    @Enumerated(EnumType.STRING)
+    private UserRole userRole;
+
+/*    private Map<Subjects, List<Integer>> grades;*/
+
+/*    public User() {
         this.grades = new HashMap<>();
         grades.put(Subjects.POLSKI, new ArrayList<>());
         grades.put(Subjects.WF, new ArrayList<>());
@@ -27,10 +35,14 @@ public class User implements UserDetails {
         grades.put(Subjects.MATEMATYKA, new ArrayList<>());
         grades.put(Subjects.ANGIELSKI, new ArrayList<>());
         grades.put(Subjects.SZTUKA, new ArrayList<>());
+    }*/
+
+    public Long getId() {
+        return id;
     }
 
-    public String getId() {
-        return id;
+    public String getUuid() {
+        return uuid;
     }
 
     @JsonIgnore
@@ -119,10 +131,10 @@ public class User implements UserDetails {
     }
 
     public Map<Subjects, List<Integer>> getGrades() {
-        return grades;
+        return Collections.emptyMap(); //grades
     }
 
     public void setGrades(Map<Subjects, List<Integer>> grades) {
-        this.grades = grades;
+/*        this.grades = grades;*/
     }
 }
