@@ -1,1 +1,49 @@
-[{"id":"5a0b544d-dace-4a4a-ad62-201be8269627","password":"1234","email":"m@m.com","firstName":"Adam","lastName":"Adam","schoolName":"XXX","userRole":"STUDENT","grades":{"BIOLOGIA":[],"POLSKI":[1],"ANGIELSKI":[],"MATEMATYKA":[],"SZTUKA":[],"WF":[]}},{"id":"f3feffec-4d3e-4abf-a32c-d7e8285de2c6","password":"1234","email":"x@x.com","firstName":"Tomasz","lastName":"Tomasz","schoolName":"xxx","userRole":"TEACHER","grades":{"WF":[],"MATEMATYKA":[],"ANGIELSKI":[],"SZTUKA":[],"POLSKI":[],"BIOLOGIA":[]}}]
+[ {
+  "id" : "5a0b544d-dace-4a4a-ad62-201be8269627",
+  "password" : "1234",
+  "email" : "m@m.com",
+  "firstName" : "Adam",
+  "lastName" : "Adam",
+  "schoolName" : "XXX",
+  "userRole" : "STUDENT",
+  "grades" : {
+    "BIOLOGIA" : [ ],
+    "POLSKI" : [ 1 ],
+    "ANGIELSKI" : [ ],
+    "MATEMATYKA" : [ ],
+    "SZTUKA" : [ ],
+    "WF" : [ ]
+  }
+}, {
+  "id" : "f3feffec-4d3e-4abf-a32c-d7e8285de2c6",
+  "password" : "1234",
+  "email" : "x@x.com",
+  "firstName" : "Tomasz",
+  "lastName" : "Tomasz",
+  "schoolName" : "xxx",
+  "userRole" : "TEACHER",
+  "grades" : {
+    "WF" : [ ],
+    "MATEMATYKA" : [ ],
+    "ANGIELSKI" : [ ],
+    "SZTUKA" : [ ],
+    "POLSKI" : [ ],
+    "BIOLOGIA" : [ ]
+  }
+}, {
+  "id" : "f385c217-c416-43b9-b73c-336798d7df00",
+  "password" : "$2a$10$Tp2w8bhvRREeN6trLKEnVeZjZrKJnL09PhlrHfgczNGA0BBgbYj02",
+  "email" : "roman.kachniuk@gmail.com",
+  "firstName" : "Roman",
+  "lastName" : "Kachniuk",
+  "schoolName" : "nr1",
+  "userRole" : "STUDENT",
+  "grades" : {
+    "MATEMATYKA" : [ ],
+    "POLSKI" : [ ],
+    "ANGIELSKI" : [ ],
+    "SZTUKA" : [ ],
+    "WF" : [ ],
+    "BIOLOGIA" : [ ]
+  }
+} ]

@@ -47,9 +47,18 @@ public class User implements UserDetails {
 
     @JsonIgnore
     @Override
+
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(userRole.name()));
+        if (userRole != null) {
+            return Collections.singleton(new SimpleGrantedAuthority(userRole.name()));
+        } else {
+            return Collections.emptyList();
+        }
     }
+
+/*    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return Collections.singleton(new SimpleGrantedAuthority(userRole.name()));
+    }*/
 
     @Override
     public String getPassword() {
