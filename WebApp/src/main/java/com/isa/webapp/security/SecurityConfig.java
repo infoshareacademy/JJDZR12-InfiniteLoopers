@@ -13,11 +13,9 @@ public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(authorize -> authorize
-                        .anyRequest()//todo
-                        .permitAll())//todo
-/*                        .requestMatchers("/login", "/registration").permitAll()
+                        .requestMatchers("/login", "/registration").permitAll()
                         .requestMatchers("/teacher/**").hasAuthority("TEACHER") //TODO zrobic dla STUDENT
-                        .anyRequest().authenticated())*/
+                        .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")

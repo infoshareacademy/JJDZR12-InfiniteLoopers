@@ -23,7 +23,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
-public class git LoginController {
+public class LoginController {
 
 
     private final UserService userService;
