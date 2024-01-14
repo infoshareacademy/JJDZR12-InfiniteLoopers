@@ -1,6 +1,6 @@
 package com.isa.webapp.service;
 
-import com.isa.webapp.model.Subjects;
+import com.isa.webapp.model.Subject;
 import com.isa.webapp.model.User;
 import com.isa.webapp.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -47,7 +47,7 @@ public class UserService {
                 .filter(u -> u.getPassword().equals(password));
     }
 
-    public Map<Subjects, List<Integer>> getGradesForLoggedInUser(User user) {
+    public Map<Subject, List<Integer>> getGradesForLoggedInUser(User user) {
 /*        if (user != null && !MapUtils.isEmpty(user.getGrades())) {
             return user.getGrades();
         }*/
@@ -55,7 +55,7 @@ public class UserService {
         return Collections.emptyMap();
     }
 
-    public Map<Subjects, List<Integer>> getFirstNameForLoggedInUser(User user) {
+    public Map<Subject, List<Integer>> getFirstNameForLoggedInUser(User user) {
 /*        if (user != null && !MapUtils.isEmpty(user.getFirstName())) {
             return user.getFirstName();
         }*/

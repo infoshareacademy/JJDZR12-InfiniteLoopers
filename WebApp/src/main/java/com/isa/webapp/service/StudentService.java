@@ -1,26 +1,32 @@
 package com.isa.webapp.service;
 
-import com.isa.webapp.model.Subjects;
-import com.isa.webapp.model.User;
+import com.isa.webapp.model.Grade;
+import com.isa.webapp.model.Subject;
+import com.isa.webapp.repository.StudentRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import java.io.File;
-import java.io.IOException;
+
 import java.util.*;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.core.type.TypeReference;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class StudentService {
-    private final Map<String, Map<Subjects, List<Integer>>> studentGrades = new HashMap<>();
+
+    private final StudentRepository studentRepository;
+    private final Map<String, Map<Subject, List<Integer>>> studentGrades = new HashMap<>();
 
     private static final String USERS_JSON_FILE = "users.json";
 
-    public Map<Subjects, List<Integer>> getGradesForStudent(String studentId) {
-        loadStudentGradesFromJson();
-        return studentGrades.getOrDefault(studentId, new HashMap<>());
+
+    public Map<Subject, List<Double>> getGradesForStudent(String studentId) {
+        return studentRepository.findByUuid(studentId)
+                .map(user -> user.getGrades().stream().collect(Collectors.groupingBy(Grade::getSubjects,
+                        Collectors.mapping(Grade::getValue,
+                                Collectors.toList())))).orElse(Map.of());
     }
 
-    private void loadStudentGradesFromJson() {
+/*    private void loadStudentGradesFromJson() {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             List<User> users = objectMapper.readValue(new File(USERS_JSON_FILE), new TypeReference<>() {});
@@ -30,5 +36,5 @@ public class StudentService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }

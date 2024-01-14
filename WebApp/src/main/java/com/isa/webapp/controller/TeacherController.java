@@ -3,7 +3,7 @@ package com.isa.webapp.controller;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isa.webapp.model.GradeForm;
-import com.isa.webapp.model.Subjects;
+import com.isa.webapp.model.Subject;
 import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
 import com.isa.webapp.service.StudentService;
@@ -61,7 +61,7 @@ public class TeacherController {
         GradeForm user = new GradeForm();
 
         model.addAttribute("gradeForm", gradeForm);
-        model.addAttribute("subjects", Subjects.values());
+        model.addAttribute("subjects", Subject.values());
         model.addAttribute("isTeacher", isTeacher);
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName()); //TODO fix
 
@@ -74,7 +74,7 @@ public class TeacherController {
                              @AuthenticationPrincipal UserDetails userDetails) {
         boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
-        Map<Subjects, List<Integer>> grades = studentService.getGradesForStudent(studentId);
+        Map<Subject, List<Double>> grades = studentService.getGradesForStudent(studentId);
         model.addAttribute("grades", grades);
         model.addAttribute("isTeacher", isTeacher); //TODO fix
         return "teacher_view_grades";
@@ -95,14 +95,14 @@ public class TeacherController {
                 .collect(Collectors.toList());
     }
 
-    public void addGradeToStudent(String studentId, Subjects subject, int grade) {
+    public void addGradeToStudent(String studentId, Subject subject, int grade) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             List<User> users = mapper.readValue(Files.newBufferedReader(Paths.get(USERS_JSON_FILE)), new TypeReference<>() {});
 
             for (User user : users) {
                 if (user.getId().equals(studentId)) {
-                    Map<Subjects, List<Integer>> grades = user.getGrades();
+                    Map<Subject, List<Integer>> grades = Map.of();
                     grades.computeIfAbsent(subject, key -> new ArrayList<>()).add(grade);
                     Files.write(Paths.get(USERS_JSON_FILE), mapper.writeValueAsBytes(users));
                     break;
