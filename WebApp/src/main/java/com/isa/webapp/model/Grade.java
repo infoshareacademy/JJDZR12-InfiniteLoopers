@@ -31,3 +31,5 @@ public class Grade extends AbstractUuidEntity { //TODO without Uuid
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
+
+//referencedColumnName = "uuid"
