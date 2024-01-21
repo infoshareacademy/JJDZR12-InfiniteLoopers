@@ -21,9 +21,9 @@ import java.util.List;
 @Controller
 public class LoginController {
 
+    private static final String USERS_JSON_FILE = "users.json";
 
     private final UserService userService;
-    private static final String USERS_JSON_FILE = "users.json";
 
     @PostMapping("/login")
     public String postLogin(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpSession session) {

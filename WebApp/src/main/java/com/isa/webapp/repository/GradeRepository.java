@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 import java.util.UUID;
 
-
 public interface GradeRepository extends JpaRepository<Grade, UUID> {
 
     @Query("select g from Grade g where g.user.uuid=:uuid")

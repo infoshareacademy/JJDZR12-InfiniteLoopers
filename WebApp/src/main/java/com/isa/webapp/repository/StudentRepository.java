@@ -1,3 +1,4 @@
+/*
 package com.isa.webapp.repository;
 
 import com.isa.webapp.model.User;
@@ -13,3 +14,4 @@ public interface StudentRepository extends JpaRepository<User, Long> {
     Optional<User> findByUuid(@Param("uuid") String uuid);
 
 }
+*/

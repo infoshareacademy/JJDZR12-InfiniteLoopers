@@ -22,7 +22,7 @@ public class StudentController {
     @GetMapping("/student/dashboard")
     public String studentDashboard(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User user = (User) userDetails;
-        Map<Subject, List<Double>> grades = userService.getGradesForLoggedInUser((User) userDetails);
+        Map<Subject, List<Double>> grades = userService.getGradesForLoggedInUser(user);
         if (!grades.isEmpty()) {
             model.addAttribute("grades", grades);
             boolean isStudent = userDetails.getAuthorities().stream()

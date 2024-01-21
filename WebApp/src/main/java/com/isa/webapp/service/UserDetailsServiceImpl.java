@@ -1,21 +1,19 @@
 package com.isa.webapp.service;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private final UserManager userManager;
-
-    public UserDetailsServiceImpl(UserManager userManager) {
-        this.userManager = userManager;
-    }
+    private final UserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userManager.findUserByEmail(email).orElseThrow(RuntimeException::new);
+        return userService.findUserByEmail(email).orElseThrow(RuntimeException::new);
     }
 }

@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GradeForm {
+public class GradeFormDto {
 
     private String studentId;
     private Subject subject;

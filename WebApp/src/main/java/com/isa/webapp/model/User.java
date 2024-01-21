@@ -28,10 +28,6 @@ public class User extends AbstractUuidEntity implements UserDetails {
     private String email;
     private String firstName;
     private String lastName;
-
-    /*    @ManyToOne
-        @JoinColumn(name = "school_id")
-        private School school;*/
     private String schoolName;
 
     @Enumerated(EnumType.STRING)
