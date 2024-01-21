@@ -55,15 +55,15 @@ public class TeacherController {
         return "teacher_student_list";
     }
 
-    @GetMapping("/teacher/add-grade/{studentId}")
-    public String showAddGradeForm(@PathVariable String studentId,
+    @GetMapping("/teacher/add-grade/{studentUuid}")
+    public String showAddGradeForm(@PathVariable String studentUuid,
                                    Model model,
                                    @AuthenticationPrincipal UserDetails userDetails) {
         boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
-        User student = userRepository.findById(Long.valueOf(studentId)).orElse(null);
+        User student = userRepository.findByUuid(studentUuid).orElse(null);
         GradeForm gradeForm = new GradeForm();
-        gradeForm.setStudentId(studentId);
+        gradeForm.setStudentId(studentUuid);
         GradeForm user = new GradeForm();
 
         model.addAttribute("gradeForm", gradeForm);
@@ -92,13 +92,13 @@ public class TeacherController {
     }
 
     @PostMapping("/teacher/add-grade")
-    public String addGrade(@RequestParam("studentId") Long studentId,
+    public String addGrade(@RequestParam("studentId") String studentUuid,
                            @RequestParam("subject") Subject subject,
                            @RequestParam("grade") Double grade,
                            @AuthenticationPrincipal UserDetails userDetails) {
 /*    public String addGrade(@ModelAttribute("gradeForm") GradeForm gradeForm) {
         addGradeToStudent(gradeForm.getStudentId(), gradeForm.getSubject(), gradeForm.getGrade());*/
-        User user = userRepository.findById(studentId).orElse(null);
+        User user = userRepository.findByUuid(studentUuid).orElse(null);
         Grade newGrade = new Grade();
         newGrade.setSubjects(subject);
         newGrade.setValue(grade);

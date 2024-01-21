@@ -138,9 +138,9 @@
       <td style="color: white" th:text="${student.lastName}"></td>
 
       <td>
-        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/add-grade/' + ${student.id}">Dodaj ocenę</a>
+        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/add-grade/' + ${student.uuid}">Dodaj ocenę</a>
         <br>
-        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/view-grades/' + ${student.id}">Wyświetl oceny</a>
+        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/view-grades/' + ${student.uuid}">Wyświetl oceny</a>
       </td>
     </tr>
     </tbody>
