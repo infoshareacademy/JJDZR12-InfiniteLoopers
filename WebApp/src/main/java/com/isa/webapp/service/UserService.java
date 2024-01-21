@@ -20,39 +20,12 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class UserService {
 
-    private final UserManager userManager;
     private final UserRepository userRepository;
     private GradeRepository gradeRepository;
 
-/*    public User registerUser(String email, String password, String firstName, String lastName) throws IOException {
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        userManager.registerUser(user);
-        return user;
-    }*/
-
-    public User getUserByEmail(String email){
+    public User getUserByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
     }
-
-/*
-    public void saveUser(){
-        User user = new User();
-        user.setEmail("test@test.com");
-        user.setFirstName("Test");
-        userRepository.save(user);
-    }
-*/
-
-
-
-/*    public Optional<User> loginUser(String email, String password) {
-        return userManager.findUserByEmail(email)
-                .filter(u -> u.getPassword().equals(password));
-    }*/
 
     public Map<Subject, List<Double>> getGradesForLoggedInUser(User user) {
         List<Grade> grades = gradeRepository.findByUserUuid(user.getUuid());
@@ -62,12 +35,4 @@ public class UserService {
                         Collectors.mapping(Grade::getValue, Collectors.toList())
                 ));
     }
-
-/*    public Map<Subject, List<Integer>> getFirstNameForLoggedInUser(User user) {
-*//*        if (user != null && !MapUtils.isEmpty(user.getFirstName())) {
-            return user.getFirstName();
-        }*//*
-
-        return Collections.emptyMap();
-    }*/
 }

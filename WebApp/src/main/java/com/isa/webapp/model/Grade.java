@@ -15,7 +15,7 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @FieldNameConstants
-public class Grade extends AbstractUuidEntity { //TODO without Uuid
+public class Grade extends AbstractUuidEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
@@ -31,5 +31,3 @@ public class Grade extends AbstractUuidEntity { //TODO without Uuid
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 }
-
-//referencedColumnName = "uuid"

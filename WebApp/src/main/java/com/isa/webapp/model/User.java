@@ -24,20 +24,18 @@ public class User extends AbstractUuidEntity implements UserDetails {
 
     private String password;
 
-    @Column(unique = true,length = 254)
+    @Column(unique = true, length = 254)
     private String email;
     private String firstName;
     private String lastName;
 
-/*    @ManyToOne
-    @JoinColumn(name = "school_id")
-    private School school;*/
+    /*    @ManyToOne
+        @JoinColumn(name = "school_id")
+        private School school;*/
     private String schoolName;
 
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-
-
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = Grade.Fields.user)
     private List<Grade> grades;

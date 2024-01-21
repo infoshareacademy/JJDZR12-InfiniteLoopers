@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface StudentRepository extends JpaRepository<User, Long> {
 
-    @Query("select u from User u left join fetch u.grades where u.uuid=:uuid") //TODO
+    @Query("select u from User u left join fetch u.grades where u.uuid=:uuid")
     Optional<User> findByUuid(@Param("uuid") String uuid);
 
 }

@@ -23,11 +23,8 @@ import java.util.Optional;
 public class UserManager {
 
     private final UserRepository userRepository;
-    private final ObjectMapper objectMapper = new ObjectMapper();
 
     private final PasswordEncoder passwordEncoder;
-
-    private static final String USERS_FILE = "users.json";
 
     public void registerUser(User user) throws IOException {
         if (userRepository.existsByEmail(user.getEmail())) {
@@ -36,21 +33,6 @@ public class UserManager {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
-    private List<User> getAllUsers() {
-        try {
-            File file = new File(USERS_FILE);
-            if (file.exists()) {
-                return objectMapper.readValue(file, new TypeReference<List<User>>() {});
-            } else {
-                return new ArrayList<>();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return new ArrayList<>();
-        }
-    }
-
 
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
