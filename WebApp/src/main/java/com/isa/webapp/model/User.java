@@ -36,7 +36,6 @@ public class User extends AbstractUuidEntity implements UserDetails {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = Grade.Fields.user)
     private List<Grade> grades;
 
-    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(userRole.name()));

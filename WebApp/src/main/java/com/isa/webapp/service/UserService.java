@@ -5,7 +5,10 @@ import com.isa.webapp.model.Subject;
 import com.isa.webapp.model.User;
 import com.isa.webapp.repository.GradeRepository;
 import com.isa.webapp.repository.UserRepository;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,8 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Getter
+@Setter
 public class UserService {
 
     private final UserRepository userRepository;
@@ -50,5 +55,4 @@ public class UserService {
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
-
 }

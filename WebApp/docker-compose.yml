@@ -6,8 +6,8 @@ services:
     restart: always
     container_name: IL_PROJECT
     environment:
-      MYSQL_DATABASE: 'JJDZR12'
-      MYSQL_USER: 'infiniteloopers'
+      MYSQL_DATABASE: 'InfiniteLoopers'
+      MYSQL_USER: 'user'
       MYSQL_PASSWORD: 'password'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:

@@ -1,5 +1,6 @@
-package com.isa.webapp.model;
+package com.isa.webapp.dto;
 
+import com.isa.webapp.model.Subject;
 import lombok.Getter;
 import lombok.Setter;
 

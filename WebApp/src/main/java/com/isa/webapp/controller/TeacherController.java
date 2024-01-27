@@ -1,5 +1,6 @@
 package com.isa.webapp.controller;
 
+import com.isa.webapp.dto.GradeFormDto;
 import com.isa.webapp.model.*;
 import com.isa.webapp.repository.GradeRepository;
 import com.isa.webapp.repository.UserRepository;
@@ -20,6 +21,7 @@ import java.util.Map;
 public class TeacherController {
 
     private final UserRepository userRepository;
+    private final UserService userService;
 
     private final GradeRepository gradeRepository;
 
@@ -33,6 +35,14 @@ public class TeacherController {
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
         return "teacher_student_list";
     }
+
+/*    @GetMapping("/teacher/students")
+    public String showStudentList(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        model.addAttribute("students", userService.getStudentsByRole(UserRole.STUDENT));
+        model.addAttribute("role", userService.getUserRole(userDetails)); // tutaj zamiast zwracania isTeacher, albo isStudent to dlaczego by nie zwrócić po prostu roli, ale jak chcesz to może być i isTeacher, ale jako metoda wydzielona do serwisu -> userService.isTeacherRole(userDetails)
+        model.addAttribute("username", userService.getUsername(userDetails));
+        return "teacher_student_list";
+    }*/
 
     @GetMapping("/teacher/add-grade/{studentUuid}")
     public String showAddGradeForm(@PathVariable String studentUuid, Model model, @AuthenticationPrincipal UserDetails userDetails) {

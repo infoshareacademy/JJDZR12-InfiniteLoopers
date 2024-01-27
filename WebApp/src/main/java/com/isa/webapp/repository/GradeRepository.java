@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.UUID;
 
 public interface GradeRepository extends JpaRepository<Grade, UUID> {
-
     @Query("select g from Grade g where g.user.uuid=:uuid")
     List<Grade> findByUserUuid(String uuid);
-
 }

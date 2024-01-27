@@ -1,6 +1,5 @@
 package com.isa.webapp.model;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 
