@@ -1,55 +1,58 @@
 package com.isa.webapp.service;
 
-import com.isa.webapp.model.Subjects;
+import com.isa.webapp.model.Grade;
+import com.isa.webapp.model.Subject;
 import com.isa.webapp.model.User;
-import jakarta.servlet.http.HttpSession;
+import com.isa.webapp.repository.GradeRepository;
+import com.isa.webapp.repository.UserRepository;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.thymeleaf.util.MapUtils;
 
-import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class UserService {
 
-    private final UserManager userManager;
+    private final UserRepository userRepository;
+    private final GradeRepository gradeRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserManager userManager) {
-        this.userManager = userManager;
+    public User getUserByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
     }
 
-    public User registerUser(String email, String password, String firstName, String lastName) throws IOException {
-        User user = new User();
-        user.setEmail(email);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setLastName(lastName);
-        userManager.registerUser(user);
-        return user;
+    public Map<Subject, List<Double>> getGradesForLoggedInUser(User user) {
+        List<Grade> grades = gradeRepository.findByUserUuid(user.getUuid());
+        return grades.stream()
+                .collect(Collectors.groupingBy(
+                        Grade::getSubjects,
+                        Collectors.mapping(Grade::getValue, Collectors.toList())
+                ));
     }
 
-    public Optional<User> loginUser(String email, String password) {
-        return userManager.findUserByEmail(email)
-                .filter(u -> u.getPassword().equals(password));
+    public static Map<Subject, List<Double>> convertGradesToMap(List<Grade> grades) {
+        return grades.stream().collect(Collectors.groupingBy(Grade::getSubjects, Collectors.mapping(Grade::getValue, Collectors.toList())));
     }
 
-    public Map<Subjects, List<Integer>> getGradesForLoggedInUser(User user) {
-        if (user != null && !MapUtils.isEmpty(user.getGrades())) {
-            return user.getGrades();
+    public void registerUser(User user) {
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new IllegalStateException("Uzytkownik z takim email instnieje");
         }
-
-        return Collections.emptyMap();
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
-/*    public Map<Subjects, List<Integer>> getFirstNameForLoggedInUser(User user) {
-        if (user != null && !MapUtils.isEmpty(user.getFirstName())) {
-            return user.getFirstName();
-        }
-
-        return Collections.emptyMap();
-    }*/
+    public Optional<User> findUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
 }

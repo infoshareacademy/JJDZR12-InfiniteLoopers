@@ -1,47 +1,44 @@
 package com.isa.webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "user")
+@FieldNameConstants
+public class User extends AbstractUuidEntity implements UserDetails {
 
-public class User implements UserDetails {
-
-    private final String id = UUID.randomUUID().toString();
     private String password;
+
+    @Column(unique = true, length = 254)
     private String email;
     private String firstName;
     private String lastName;
     private String schoolName;
+
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    private Map<Subjects, List<Integer>> grades;
 
-    public User() {
-        this.grades = new HashMap<>();
-        grades.put(Subjects.POLSKI, new ArrayList<>());
-        grades.put(Subjects.WF, new ArrayList<>());
-        grades.put(Subjects.BIOLOGIA, new ArrayList<>());
-        grades.put(Subjects.MATEMATYKA, new ArrayList<>());
-        grades.put(Subjects.ANGIELSKI, new ArrayList<>());
-        grades.put(Subjects.SZTUKA, new ArrayList<>());
-    }
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = Grade.Fields.user)
+    private List<Grade> grades;
 
-    public String getId() {
-        return id;
-    }
-
-    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Collections.singleton(new SimpleGrantedAuthority(userRole.name()));
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 
     @JsonIgnore
@@ -74,55 +71,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getSchoolName() {
-        return schoolName;
-    }
-
-    public void setSchoolName(String schoolName) {
-        this.schoolName = schoolName;
-    }
-
-    public UserRole getUserRole() {
-        return userRole;
-    }
-
-    public void setUserRole(UserRole userRole) {
-        this.userRole = userRole;
-    }
-
-    public Map<Subjects, List<Integer>> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(Map<Subjects, List<Integer>> grades) {
-        this.grades = grades;
-    }
 }
