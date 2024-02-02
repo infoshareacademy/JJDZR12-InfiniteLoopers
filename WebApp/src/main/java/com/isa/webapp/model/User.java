@@ -74,4 +74,8 @@ public class User extends AbstractUuidEntity implements UserDetails {
         return true;
     }
 
+    public boolean isApproved() {
+        return isApproved;
+    }
+
 }

@@ -94,6 +94,12 @@
                 <div class="navLink" th:if="${isStudent}">
                     <a th:href="@{/student/dashboard}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Oceny</div></a>
                 </div>
+                <div class="navLink" th:if="${isAdmin}">
+                    <a th:href="@{/admin/manage-users}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Usun/edytuj uzytkownika</div></a>
+                </div>
+                <div class="navLink" th:if="${isAdmin}">
+                    <a th:href="@{/admin/approve-roles}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Potwierdz role</div></a>
+                </div>
 <!--                <div class="navLink">
                     <a href="#"><div><i class="fa-solid fa-circle-user"></i></div> <div class="navLabel">Account</div></a>
                 </div>-->

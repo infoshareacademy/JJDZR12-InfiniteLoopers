@@ -30,17 +30,6 @@ public class UserManager {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public void registerUser(User user) throws IOException {
-        Optional<User> existingUser = findUserByEmail(user.getEmail());
-        if (existingUser.isPresent()) {
-            throw new IllegalStateException("Uzytkownik z takim email instnieje");
-        }
-        List<User> userList = getAllUsers();
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userList.add(user);
-        saveUserList(userList);
-    }
-
     private void saveUserList(List<User> userList) throws IOException {
         File file = new File(USERS_FILE);
         ObjectWriter writer = objectMapper.writer(new DefaultPrettyPrinter());
