@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Approve Roles</title>
+</head>
+<body>
+
+<h2>Approve Roles</h2>
+
+<form method="post" th:action="@{/admin/approve-roles}">
+    <div th:each="user : ${unapprovedUsers}">
+        <label>
+            <input type="checkbox" name="userIds" th:value="${user.id}"/>
+            <span th:text="${user.email}"></span> - <span th:text="${user.userRole}"></span>
+        </label><br/>
+    </div>
+
+    <label th:each="role : ${T(com.isa.webapp.model.UserRole).values()}" th:for="${'role-' + role}">
+        <input type="checkbox" name="roles" th:value="${role.name()}"/> <span th:text="${role.name()}"></span>
+    </label><br/>
+
+    <button type="submit">Approve Roles</button>
+</form>
+
+
+</body>
+</html>

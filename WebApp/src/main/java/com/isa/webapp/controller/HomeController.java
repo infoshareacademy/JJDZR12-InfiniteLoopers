@@ -18,9 +18,12 @@ public class HomeController {
                 .anyMatch(a -> a.getAuthority().equals("STUDENT"));
         boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
         User user = (User) userDetails;
         model.addAttribute("isStudent", isStudent);
         model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "index";
@@ -32,9 +35,12 @@ public class HomeController {
                 .anyMatch(a -> a.getAuthority().equals("STUDENT"));
         boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
         User user = (User) userDetails;
         model.addAttribute("isStudent", isStudent);
         model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "index";
