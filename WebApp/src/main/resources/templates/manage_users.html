@@ -102,6 +102,9 @@
         <div class="navLink" th:if="${isAdmin}">
           <a th:href="@{/admin/approve-roles}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Potwierdź role</div></a>
         </div>
+        <div class="navLink" th:if="${isAdmin}">
+          <a th:href="@{/admin/edit-profile}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Edytuj swoje dane</div></a>
+        </div>
         <div class="navLink">
           <form th:action="@{/logout}" method="post" style="margin: 0;">
             <button type="submit" class="btn btn-link" style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
@@ -119,7 +122,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 mx-auto text-left" style="width: 50%">
-        <h2 style="color: white">Manage Users</h2>
+        <h2 style="color: white">Zarzadzaj uzytkownikami</h2>
         <table class="table table-bordered" style="border: 1px solid white; color: white">
           <thead>
           <tr>
