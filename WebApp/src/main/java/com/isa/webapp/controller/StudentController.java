@@ -31,7 +31,7 @@ public class StudentController {
             model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
             return "student_dashboard";
         } else {
-            return "redirect:/login";
+            return "student_dashboard_empty";
         }
     }
 }
