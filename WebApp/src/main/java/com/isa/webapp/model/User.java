@@ -71,10 +71,6 @@ public class User extends AbstractUuidEntity implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isEnabled() {
-        return true;
-    }
-
-    public boolean isApproved() {
         return isApproved;
     }
 

@@ -23,7 +23,7 @@ public class LoginController {
 
     private final UserService userService;
 
-    @PostMapping("/login")
+    @PostMapping("/login2")
     public String postLogin(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpSession session) {
         User registeredUser = getUserFromRegistrationData(user);
 
@@ -31,8 +31,12 @@ public class LoginController {
             user.setGrades(registeredUser.getGrades());
             user.setUserRole(registeredUser.getUserRole());
             session.setAttribute("loggedInUser", user);
-
-            if (user.getUserRole() == UserRole.STUDENT) {
+            if (user.getUserRole() == UserRole.ADMIN) {
+               return user.getPassword().equals("admin")
+                       ? "redirect:/admin/edit-profile"
+                       : "redirect:/";
+            }
+            else if (user.getUserRole() == UserRole.STUDENT) {
                 return "redirect:/student/dashboard";
             } else if (user.getUserRole() == UserRole.TEACHER) {
                 return "redirect:/teacher/students";
