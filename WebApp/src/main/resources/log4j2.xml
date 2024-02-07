@@ -1,34 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
-    <Properties>
-        <Property name="logPattern">%d{yyyy-MM-dd HH:mm:ss} [%t] %-5level %logger{36} - %msg%n</Property>
-        <Property name="basePath">logs</Property>
-    </Properties>
-    <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <ThresholdFilter level="DEBUG" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout pattern="${logPattern}"/>
-        </Console>
-        <RollingFile name="RollingFileJson" fileName="${basePath}/app.json" filePattern="${basePath}/%d{yyyy-MM}/app-%d{yyyy-MM-dd}.json">
-            <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
-            <PatternLayout>
-                <Pattern>{"timestamp": "%d{yyyy-MM-dd HH:mm:ss}", "level": "%level", "thread": "%t", "logger": "%logger{36}", "message": "%enc{%msg}{JSON}"}</Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy/>
-            </Policies>
-            <DefaultRolloverStrategy>
-                <Delete basePath="${basePath}" maxDepth="2">
-                    <IfFileName glob="*/app-*.json"/>
-                    <IfLastModified age="30d"/>
-                </Delete>
-            </DefaultRolloverStrategy>
-        </RollingFile>
-    </Appenders>
-    <Loggers>
-        <Root level="DEBUG">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="RollingFileJson"/>
-        </Root>
-    </Loggers>
-</Configuration>
+<configuration debug="true">
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs-%d{dd-MM-yyyy}.json</fileNamePattern>
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+    </appender>
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+    <root level="info">
+        <appender-ref ref="FILE" />
+    </root>
+
+    <logger name="org.hibernate">
+        <level value="WARN"/>
+    </logger>
+</configuration>
