@@ -27,12 +27,16 @@ public class TeacherController {
 
     @GetMapping("/teacher/students")
     public String showStudentList(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
         User user = (User) userDetails;
-        List<User> students = userRepository.findAllByUserRole(UserRole.STUDENT);
-        model.addAttribute("students", students);
+        boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        if (isTeacher) {
+            List<User> students = userRepository.findAllByUserRoleAndSchoolName(UserRole.STUDENT, user.getSchoolName());
+            model.addAttribute("students", students);
+        }
         model.addAttribute("isTeacher", isTeacher);
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
+        model.addAttribute("schoolName", user.getSchoolName());
+
         return "teacher_student_list";
     }
 

@@ -123,7 +123,11 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto text-left" style="width: 50%">
-          <h2 style="color: white">Lista uczniów nauczyciela, <br><span style="color: #dfc2c4" th:text="${username}"></span></span></h2>
+          <h2 style="color: white">
+            Lista uczniów nauczyciela: <br>
+            <span style="color: #dfc2c4" th:text="${username}"></span><br>
+            Szkoła: <span style="color: #dfc2c4" th:text="${schoolName}"></span>
+          </h2>
           <table class="table table-bordered">
     <thead>
     <tr>
