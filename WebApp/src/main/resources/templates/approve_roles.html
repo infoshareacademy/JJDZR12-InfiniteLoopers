@@ -129,12 +129,8 @@
                             <span th:text="${user.email}"></span> - <span th:text="${user.userRole}"></span>
                         </label><br/>
                     </div>
-
-                    <label th:each="role : ${T(com.isa.webapp.model.UserRole).values()}" th:for="${'role-' + role}">
-                        <input type="checkbox" name="roles" th:value="${role.name()}"/> <span th:text="${role.name()}"></span>
-                    </label><br/>
-
-                    <button type="submit">Approve Roles</button>
+                    <input type="hidden" name="roles" value="STUDENT"/>
+                    <button type="submit">Zatwierdz uzytkownikow</button>
                 </form>
 
             </div>

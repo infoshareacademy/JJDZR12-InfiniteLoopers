@@ -36,14 +36,6 @@ public class TeacherController {
         return "teacher_student_list";
     }
 
-/*    @GetMapping("/teacher/students")
-    public String showStudentList(Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        model.addAttribute("students", userService.getStudentsByRole(UserRole.STUDENT));
-        model.addAttribute("role", userService.getUserRole(userDetails)); // tutaj zamiast zwracania isTeacher, albo isStudent to dlaczego by nie zwrócić po prostu roli, ale jak chcesz to może być i isTeacher, ale jako metoda wydzielona do serwisu -> userService.isTeacherRole(userDetails)
-        model.addAttribute("username", userService.getUsername(userDetails));
-        return "teacher_student_list";
-    }*/
-
     @GetMapping("/teacher/add-grade/{studentUuid}")
     public String showAddGradeForm(@PathVariable String studentUuid, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));

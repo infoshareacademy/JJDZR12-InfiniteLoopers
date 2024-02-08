@@ -1,7 +1,5 @@
 package com.isa.webapp.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
 import com.isa.webapp.service.UserService;
@@ -11,11 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
