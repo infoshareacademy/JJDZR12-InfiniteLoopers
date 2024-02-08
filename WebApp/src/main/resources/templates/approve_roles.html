@@ -126,7 +126,7 @@
                     <div th:each="user : ${unapprovedUsers}">
                         <label>
                             <input type="checkbox" name="userIds" th:value="${user.id}"/>
-                            <span th:text="${user.email}"></span> - <span th:text="${user.userRole}"></span>
+                            <span th:text="${user.email}"></span> - <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> - <span th:text="${user.userRole}"></span>
                         </label><br/>
                     </div>
                     <input type="hidden" name="roles" value="STUDENT"/>
