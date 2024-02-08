@@ -46,7 +46,7 @@ public class UserService {
 
     public void registerUser(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new IllegalStateException("Uzytkownik z takim email instnieje");
+            throw new IllegalStateException("User with that email already exist.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
