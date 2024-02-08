@@ -6,10 +6,11 @@ import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
 import com.isa.webapp.repository.GradeRepository;
 import com.isa.webapp.repository.UserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,11 +25,13 @@ import java.util.stream.Collectors;
 @Setter
 public class UserService {
 
+    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final GradeRepository gradeRepository;
     private final PasswordEncoder passwordEncoder;
 
     public User getUserByEmail(String email) {
+        LOGGER.debug(() -> "Fetching user by email: " + email);
         return userRepository.findByEmail(email).orElse(null);
     }
 
@@ -37,6 +40,7 @@ public class UserService {
     }
 
     public Map<Subject, List<Double>> getGradesForLoggedInUser(User user) {
+        LOGGER.debug(() -> "Getting grades for user: " + user.getEmail());
         List<Grade> grades = gradeRepository.findByUserUuid(user.getUuid());
         return grades.stream()
                 .collect(Collectors.groupingBy(
@@ -50,14 +54,18 @@ public class UserService {
     }
 
     public void registerUser(User user) {
+        LOGGER.info(() -> "Registering user: " + user.getEmail());
         if (userRepository.existsByEmail(user.getEmail())) {
+            LOGGER.warn(() -> "User with email " + user.getEmail() + " already exists");=======
             throw new IllegalStateException("User with that email already exist.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        LOGGER.info(() -> "User " + user.getEmail() + " registered successfully");
     }
 
     public Optional<User> findUserByEmail(String email) {
+        LOGGER.debug(() -> "Finding user by email: " + email);
         return userRepository.findByEmail(email);
     }
 

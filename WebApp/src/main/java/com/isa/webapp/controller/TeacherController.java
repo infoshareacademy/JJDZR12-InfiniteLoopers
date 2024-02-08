@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class TeacherController {
 
+    private static final Logger LOGGER = LogManager.getLogger(TeacherController.class);
     private final UserRepository userRepository;
     private final UserService userService;
 
@@ -27,6 +30,7 @@ public class TeacherController {
 
     @GetMapping("/teacher/students")
     public String showStudentList(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        LOGGER.info(() -> "Showing student list for teacher: " + userDetails.getUsername());
         User user = (User) userDetails;
         boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
         if (isTeacher) {
@@ -42,6 +46,7 @@ public class TeacherController {
 
     @GetMapping("/teacher/add-grade/{studentUuid}")
     public String showAddGradeForm(@PathVariable String studentUuid, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        LOGGER.info(() -> "Showing add grade form for studentUuid: " + studentUuid + ", by teacher: " + userDetails.getUsername());
         boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
         GradeFormDto gradeForm = new GradeFormDto();
         gradeForm.setStudentId(studentUuid);
@@ -56,6 +61,7 @@ public class TeacherController {
 
     @GetMapping("/teacher/view-grades/{studentId}")
     public String viewGrades(@PathVariable String studentId, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        LOGGER.info(() -> "Viewing grades for studentId: " + studentId + ", by teacher: " + userDetails.getUsername());
         boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
         List<Grade> studentGrades = gradeRepository.findByUserUuid(studentId);
         Map<Subject, List<Double>> grades = UserService.convertGradesToMap(studentGrades);
@@ -67,12 +73,14 @@ public class TeacherController {
     @PostMapping("/teacher/add-grade")
     public String addGrade(@RequestParam("studentId") String studentUuid, @RequestParam("subject") Subject subject, @RequestParam("grade") Double grade) {
         User user = userRepository.findByUuid(studentUuid).orElse(null);
+        LOGGER.info(() -> "Teacher adding grade for studentId: " + studentUuid);
         Grade newGrade = new Grade();
         newGrade.setSubjects(subject);
         newGrade.setValue(grade);
         newGrade.setDate(LocalDate.now());
         newGrade.setUser(user);
         gradeRepository.save(newGrade);
+        LOGGER.info(() -> "Grade successfully added for studentId: " + studentUuid);
         return "redirect:/teacher/students";
     }
 }
