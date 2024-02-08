@@ -30,6 +30,9 @@ public class User extends AbstractUuidEntity implements UserDetails {
     private String lastName;
     private String schoolName;
 
+    private List<UserRole> approvedRoles;
+    private boolean isApproved;
+
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
@@ -68,7 +71,7 @@ public class User extends AbstractUuidEntity implements UserDetails {
     @JsonIgnore
     @Override
     public boolean isEnabled() {
-        return true;
+        return isApproved;
     }
 
 }

@@ -16,11 +16,12 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/registration").permitAll()
                         .requestMatchers("/teacher/**").hasAuthority("TEACHER")
                         .requestMatchers("/student/**").hasAuthority("STUDENT")
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")
-                        .successForwardUrl("/"))
+                        .successForwardUrl("/login2"))
                 .logout(logout -> logout.logoutSuccessUrl("/"));
         return httpSecurity.build();
     }
