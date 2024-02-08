@@ -84,30 +84,27 @@
 </head>
 <body>
 <header>
-
-
-
-  <div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0 w-100" role="navigation">
+  <div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0" role="navigation">
     <div class="smallContainer p-3 shadow-lg rounded">
-      <div class="d-flex align-items-center justify-content-around">
+      <div class="d-flex flex-column align-items-center">
         <div class="navLink navLinkActive">
           <a th:href="@{/}"><div><i class="fa-solid fa-house"></i></div> <div class="navLabel">Home</div></a>
         </div>
-        <!--                <div class="navLink">
-                            <a href="#"><div><i class="fas fa-poo"></i></div> <div class="navLabel">Skarga</div></a>
-                        </div>-->
-        <!--                <div class="navLink">
-                            <a th:href="@{/announcement}"><div><i class="fas fa-bullhorn"></i></div> <div class="navLabel">Ogłoszenia</div></a>
-                        </div>-->
         <div class="navLink" th:if="${isTeacher}">
           <a th:href="@{/teacher/students}"><div><i class="fa-solid fa-table-columns"></i></div> <div class="navLabel">Uczniowie</div></a>
         </div>
         <div class="navLink" th:if="${isStudent}">
           <a th:href="@{/student/dashboard}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Oceny</div></a>
         </div>
-        <!--                <div class="navLink">
-                            <a href="#"><div><i class="fa-solid fa-circle-user"></i></div> <div class="navLabel">Account</div></a>
-                        </div>-->
+        <div class="navLink" th:if="${isAdmin}">
+          <a th:href="@{/admin/manage-users}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Usuń/edytuj użytkownika</div></a>
+        </div>
+        <div class="navLink" th:if="${isAdmin}">
+          <a th:href="@{/admin/approve-roles}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Potwierdź role</div></a>
+        </div>
+        <div class="navLink" th:if="${isAdmin}">
+          <a th:href="@{/admin/edit-profile}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Edytuj swoje dane</div></a>
+        </div>
         <div class="navLink">
           <form th:action="@{/logout}" method="post" style="margin: 0;">
             <button type="submit" class="btn btn-link" style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
@@ -119,36 +116,42 @@
       </div>
     </div>
   </div>
-  <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto text-left" style="width: 50%">
-          <h2 style="color: white">
-            Lista uczniów nauczyciela: <br>
-            <span style="color: #dfc2c4" th:text="${username}"></span><br>
-            Szkoła: <span style="color: #dfc2c4" th:text="${schoolName}"></span>
-          </h2>
-          <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th style="color: white">Imię</th>
-      <th style="color: white">Nazwisko</th>
-      <th style="color: white">Akcje</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr style="color: white" th:each="student : ${students}">
-      <td style="color: white" th:text="${student.firstName}"></td>
-      <td style="color: white" th:text="${student.lastName}"></td>
+</header>
 
-      <td>
-        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/add-grade/' + ${student.uuid}">Dodaj ocenę</a>
-        <br>
-        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/view-grades/' + ${student.uuid}">Wyświetl oceny</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+<div class="d-flex align-items-center" style="background:#344a5f">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-left" style="width: 50%">
+        <h2 style="color: white">Zarzadzaj uzytkownikami</h2>
+        <table class="table table-bordered" style="border: 1px solid white; color: white">
+          <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Email</th>
+            <th>Imie</th>
+            <th>Nazwisko</th>
+            <th>Acje</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="user : ${users}" style="color: white">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.firstName}"></td>
+            <td th:text="${user.lastName}"></td>
+            <td>
+              <a th:href="@{/admin/edit-user/{userId}(userId=${user.id})}" style="color: white">Edytuj</a>
+              <form method="post" th:action="@{/admin/delete-user}" th:if="${user.userRole != T(com.isa.webapp.model.UserRole).ADMIN}">
+                <input type="hidden" name="userId" th:value="${user.id}" />
+                <button type="submit" style="color: red">Usun</button>
+              </form>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
@@ -156,4 +159,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

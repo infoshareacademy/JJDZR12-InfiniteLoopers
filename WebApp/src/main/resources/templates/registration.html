@@ -244,7 +244,15 @@
                 <input type="text" id="lastNameUser" name="lastNameUser" placeholder="Nazwisko" th:field="*{user.lastName}" required="required" />
                 <input type="email" id="emailUser" name="emailUser" placeholder="Email" th:field="*{user.email}" required="required" />
                 <input type="password" id="passwordUser" name="passwordUser" placeholder="Hasło" th:field="*{user.password}" required="required" />
-                <input type="text" id="nameSchoolUser" name="nameSchoolUser" placeholder="Nazwa szkoły" th:field="*{user.schoolName}" required="required" />
+                <div class="input-style">
+                    <label for="nameSchoolUser">Nazwa szkoły</label>
+                    <select id="nameSchoolUser" name="nameSchoolUser" th:field="*{user.schoolName}" required="required">
+                        <option value="">Wybierz szkołę</option>
+                        <option value="Akademia Przyszłości">Szkoła Podstawowa Akademia Przyszłości</option>
+                        <option value="Szkoła Podstawowa nr 1 im. Jana Kowalskiego">Szkoła Podstawowa nr 1 im. Jana Kowalskiego</option>
+                        <option value="Liceum Ogólnokształcące im. Marii Skłodowskiej-Curie">Szkoła Podstawowa im. Jana Pawła II</option>
+                    </select>
+                </div>
                 <div class="input-style">
                     <select id="userRole" name="userRole" th:field="*{user.userRole}" required="required">
                         <option value="STUDENT">Uczeń</option>

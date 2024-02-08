@@ -77,37 +77,31 @@
 
   </style>
 
-  <title>Dziennik elektroniczny ISchool</title>
+  <title>Edycja uzytkownika</title>
   <meta name="description" content="{{meta}}">
   <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
 <header>
-
-
-
-  <div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0 w-100" role="navigation">
+  <div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0" role="navigation">
     <div class="smallContainer p-3 shadow-lg rounded">
-      <div class="d-flex align-items-center justify-content-around">
+      <div class="d-flex flex-column align-items-center">
         <div class="navLink navLinkActive">
           <a th:href="@{/}"><div><i class="fa-solid fa-house"></i></div> <div class="navLabel">Home</div></a>
         </div>
-        <!--                <div class="navLink">
-                            <a href="#"><div><i class="fas fa-poo"></i></div> <div class="navLabel">Skarga</div></a>
-                        </div>-->
-        <!--                <div class="navLink">
-                            <a th:href="@{/announcement}"><div><i class="fas fa-bullhorn"></i></div> <div class="navLabel">Ogłoszenia</div></a>
-                        </div>-->
         <div class="navLink" th:if="${isTeacher}">
           <a th:href="@{/teacher/students}"><div><i class="fa-solid fa-table-columns"></i></div> <div class="navLabel">Uczniowie</div></a>
         </div>
         <div class="navLink" th:if="${isStudent}">
           <a th:href="@{/student/dashboard}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Oceny</div></a>
         </div>
-        <!--                <div class="navLink">
-                            <a href="#"><div><i class="fa-solid fa-circle-user"></i></div> <div class="navLabel">Account</div></a>
-                        </div>-->
+        <div class="navLink" th:if="${isAdmin}">
+          <a th:href="@{/admin/manage-users}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Usuń/edytuj użytkownika</div></a>
+        </div>
+        <div class="navLink" th:if="${isAdmin}">
+          <a th:href="@{/admin/approve-roles}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Potwierdź role</div></a>
+        </div>
         <div class="navLink">
           <form th:action="@{/logout}" method="post" style="margin: 0;">
             <button type="submit" class="btn btn-link" style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
@@ -119,41 +113,53 @@
       </div>
     </div>
   </div>
-  <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto text-left" style="width: 50%">
-          <h2 style="color: white">
-            Lista uczniów nauczyciela: <br>
-            <span style="color: #dfc2c4" th:text="${username}"></span><br>
-            Szkoła: <span style="color: #dfc2c4" th:text="${schoolName}"></span>
-          </h2>
-          <table class="table table-bordered">
-    <thead>
-    <tr>
-      <th style="color: white">Imię</th>
-      <th style="color: white">Nazwisko</th>
-      <th style="color: white">Akcje</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr style="color: white" th:each="student : ${students}">
-      <td style="color: white" th:text="${student.firstName}"></td>
-      <td style="color: white" th:text="${student.lastName}"></td>
+</header>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-md-8 offset-md-4">
+      <h2 class="text-black">Edycja uzytkownika</h2>
 
-      <td>
-        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/add-grade/' + ${student.uuid}">Dodaj ocenę</a>
-        <br>
-        <a class="btn2 btn-primary btn-block btn-large" th:href="'/teacher/view-grades/' + ${student.uuid}">Wyświetl oceny</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+  <form method="post" th:action="@{/admin/update-user}" class="mt-3">
+    <input type="hidden" name="id" th:value="${user.id}"/>
+
+    <div class="mb-3">
+      <label for="email" class="form-label text-black">Email:</label>
+      <input type="text" name="email" class="form-control" id="email" th:value="${user.email}" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="firstName" class="form-label text-black">First Name:</label>
+      <input type="text" name="firstName" class="form-control" id="firstName" th:value="${user.firstName}" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="lastName" class="form-label text-black">Last Name:</label>
+      <input type="text" name="lastName" class="form-control" id="lastName" th:value="${user.lastName}" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="schoolName" class="form-label text-black">School Name:</label>
+      <input type="text" name="schoolName" class="form-control" id="schoolName" th:value="${user.schoolName}" required/>
+    </div>
+
+    <div class="mb-3">
+      <label for="userRole" class="form-label text-black">User Role:</label>
+      <select name="userRole" class="form-select" id="userRole" required>
+        <option th:each="role : ${T(com.isa.webapp.model.UserRole).values()}"
+                th:value="${role}"
+                th:text="${role}"
+                th:selected="${user.userRole == role}">
+        </option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Update User</button>
+  </form>
+    </div>
+  </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-

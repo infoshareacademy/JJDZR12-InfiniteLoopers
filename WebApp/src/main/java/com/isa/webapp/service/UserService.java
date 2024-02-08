@@ -3,6 +3,7 @@ package com.isa.webapp.service;
 import com.isa.webapp.model.Grade;
 import com.isa.webapp.model.Subject;
 import com.isa.webapp.model.User;
+import com.isa.webapp.model.UserRole;
 import com.isa.webapp.repository.GradeRepository;
 import com.isa.webapp.repository.UserRepository;
 import lombok.Getter;
@@ -31,6 +32,10 @@ public class UserService {
         return userRepository.findByEmail(email).orElse(null);
     }
 
+    public List<User> getUsersByRole(UserRole role) {
+        return userRepository.findAllByUserRole(role);
+    }
+
     public Map<Subject, List<Double>> getGradesForLoggedInUser(User user) {
         List<Grade> grades = gradeRepository.findByUserUuid(user.getUuid());
         return grades.stream()
@@ -55,4 +60,44 @@ public class UserService {
     public Optional<User> findUserByEmail(String email) {
         return userRepository.findByEmail(email);
     }
+
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
+    }
+
+    public void approveUserRoles(Long userId, List<UserRole> roles) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new RuntimeException("User not found with id: " + userId));
+        user.setApprovedRoles(roles);
+        user.setApproved(true);
+        userRepository.save(user);
+    }
+
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
+
+    public void updateUserRole(Long userId, UserRole newRole) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new RuntimeException("User not found with id: " + userId));
+        user.setUserRole(newRole);
+        userRepository.save(user);
+    }
+
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(() ->
+                new RuntimeException("User not found with id: " + userId));
+    }
+
+    public void updateUser(User updatedUser) {
+        User existingUser = userRepository.findById(updatedUser.getId()).orElseThrow(() ->
+                new RuntimeException("User not found with id: " + updatedUser.getId()));
+        userRepository.save(existingUser);
+    }
+
+    public List<User> getUnapprovedUsers() {
+        return userRepository.findAllByIsApproved(false);
+    }
+
+
 }

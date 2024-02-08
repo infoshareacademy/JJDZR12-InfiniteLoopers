@@ -18,4 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByUuid(String uuid);
 
     boolean existsByEmail(String email);
+
+    List<User> findAllByIsApproved(boolean b);
+
+    List<User> findAllByUserRoleAndSchoolName(UserRole student, String schoolName);
 }
