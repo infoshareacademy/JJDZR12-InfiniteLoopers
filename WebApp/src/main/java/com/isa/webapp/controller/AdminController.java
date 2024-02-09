@@ -3,7 +3,7 @@ package com.isa.webapp.controller;
 import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
 import com.isa.webapp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -12,28 +12,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
 
-    @Autowired
-    public AdminController(UserService userService, PasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
-    }
-
     @GetMapping("/manage-users")
     public String showManageUsersPage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<User> users = userService.getAllUsers();
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
         model.addAttribute("users", users);
-        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         return "manage_users";
     }
 
@@ -45,10 +37,8 @@ public class AdminController {
 
     @GetMapping("/edit-user/{userId}")
     public String showEditUserPage(@PathVariable Long userId, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
         User user = userService.getUserById(userId);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         model.addAttribute("user", user);
         return "edit_user";
     }
@@ -70,9 +60,7 @@ public class AdminController {
     @GetMapping("/approve-roles")
     public String showApproveRolesPage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<User> unapprovedUsers = userService.getUnapprovedUsers();
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         model.addAttribute("unapprovedUsers", unapprovedUsers);
         return "approve_roles";
     }
@@ -83,7 +71,7 @@ public class AdminController {
             @RequestParam(required = false) List<String> roles
     ) {
         if (roles != null && !roles.isEmpty()) {
-            List<UserRole> userRoles = roles.stream().map(UserRole::valueOf).collect(Collectors.toList());
+            List<UserRole> userRoles = roles.stream().map(UserRole::valueOf).toList();
             userIds.forEach(userId -> userService.approveUserRoles(userId, userRoles));
         }
         return "redirect:/admin/approve-roles";
@@ -92,9 +80,7 @@ public class AdminController {
     @GetMapping("/edit-profile")
     public String showEditProfile(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User user = userService.getUserByEmail(userDetails.getUsername());
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         model.addAttribute("user", user);
         return "edit-profile";
     }

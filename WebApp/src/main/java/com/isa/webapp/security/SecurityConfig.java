@@ -21,7 +21,7 @@ public class SecurityConfig {
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")
-                        .successForwardUrl("/login2"))
+                        .successForwardUrl("/sign-in"))
                 .logout(logout -> logout.logoutSuccessUrl("/"));
         return httpSecurity.build();
     }

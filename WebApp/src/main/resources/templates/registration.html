@@ -190,35 +190,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 <body>
-<!--<header>
-    <div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0 w-100" role="navigation">
-        <div class="smallContainer p-3 shadow-lg rounded">
-            <div class="d-flex align-items-center justify-content-around">
-                <div class="navLink navLinkActive">
-                    <a th:href="@{/}"><div><i class="fa-solid fa-house"></i></div> <div class="navLabel">Home</div></a>
-                </div>
-                <div class="navLink">
-                    <a href="#"><div><i class="fas fa-poo"></i></div> <div class="navLabel">Skarga</div></a>
-                </div>
-                <div class="navLink">
-                    <a th:href="@{/announcement}"><div><i class="fas fa-bullhorn"></i></div> <div class="navLabel">Ogłoszenia</div></a>
-                </div>
-                <div class="navLink" th:if="${isTeacher}">
-                    <a th:href="@{/student/dashboard}"><div><i class="fa-solid fa-table-columns"></i></div> <div class="navLabel">Uczniowie</div></a>
-                </div>
-                <div class="navLink" th:if="${isStudent}">
-                    <a th:href="@{/teacher/students}"><div><i class="fa-solid fa-user-graduate"></i></div> <div class="navLabel">Oceny</div></a>
-                </div>
-                <div class="navLink">
-                    <a href="#"><div><i class="fa-solid fa-circle-user"></i></div> <div class="navLabel">Account</div></a>
-                </div>
-
-                <div class="navLink">
-                    <a href="#"><div><i class="fas fa-sign-out"></i></div> <div class="navLabel">LogOut</div></a>
-                </div>
-            </div>
-        </div>
-    </div>-->
 
 <div id="myModal" class="modal">
     <div class="modal-content">
@@ -226,8 +197,6 @@
         <p id="errorMessage" th:text="${errorMessage}"></p>
     </div>
 </div>
-
-
     <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
         <div class="login">
             <h1>Rejestracja</h1>
@@ -248,9 +217,9 @@
                     <label for="nameSchoolUser">Nazwa szkoły</label>
                     <select id="nameSchoolUser" name="nameSchoolUser" th:field="*{user.schoolName}" required="required">
                         <option value="">Wybierz szkołę</option>
-                        <option value="Akademia Przyszłości">Szkoła Podstawowa Akademia Przyszłości</option>
+                        <option value="Szkoła Podstawowa Akademia Przyszłości">Szkoła Podstawowa Akademia Przyszłości</option>
                         <option value="Szkoła Podstawowa nr 1 im. Jana Kowalskiego">Szkoła Podstawowa nr 1 im. Jana Kowalskiego</option>
-                        <option value="Liceum Ogólnokształcące im. Marii Skłodowskiej-Curie">Szkoła Podstawowa im. Jana Pawła II</option>
+                        <option value="Szkoła Podstawowa im. Jana Pawła II">Szkoła Podstawowa im. Jana Pawła II</option>
                     </select>
                 </div>
                 <div class="input-style">
