@@ -121,18 +121,22 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 mx-auto text-left" style="width: 50%">
-                <h2 style="color: white">Zatwierdz role</h2>
+                <h2 style="color: white">Zatwierdź role</h2>
                 <form method="post" th:action="@{/admin/approve-roles}">
-                    <div th:each="user : ${unapprovedUsers}">
-                        <label>
-                            <input type="checkbox" name="userIds" th:value="${user.id}"/>
-                            <span th:text="${user.email}"></span> - <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> - <span th:text="${user.userRole}"></span>
-                        </label><br/>
+                    <div th:if="${!unapprovedUsers.isEmpty()}">
+                        <div th:each="user : ${unapprovedUsers}">
+                            <label>
+                                <input type="checkbox" name="userIds" th:value="${user.id}"/>
+                                <span th:text="${user.email}"></span> - <span th:text="${user.firstName}"></span> <span th:text="${user.lastName}"></span> - <span th:text="${user.userRole}"></span>
+                            </label><br/>
+                        </div>
+                        <input type="hidden" name="roles" value="STUDENT"/>
+                        <button type="submit">Zatwierdź użytkowników</button>
                     </div>
-                    <input type="hidden" name="roles" value="STUDENT"/>
-                    <button type="submit">Zatwierdz uzytkownikow</button>
+                    <div th:if="${unapprovedUsers.isEmpty()}">
+                        <p>Nie ma użytkowników do zatwierdzenia.</p>
+                    </div>
                 </form>
-
             </div>
         </div>
     </div>

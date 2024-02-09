@@ -12,7 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
@@ -83,7 +82,7 @@ public class AdminController {
             @RequestParam(required = false) List<String> roles
     ) {
         if (roles != null && !roles.isEmpty()) {
-            List<UserRole> userRoles = roles.stream().map(UserRole::valueOf).collect(Collectors.toList());
+            List<UserRole> userRoles = roles.stream().map(UserRole::valueOf).toList();
             userIds.forEach(userId -> userService.approveUserRoles(userId, userRoles));
         }
         return "redirect:/admin/approve-roles";

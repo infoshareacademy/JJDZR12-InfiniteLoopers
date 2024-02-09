@@ -19,7 +19,7 @@ public class LoginController {
     private static final Logger LOGGER = LogManager.getLogger(LoginController.class);
     private final UserService userService;
 
-    @PostMapping("/login2")
+    @PostMapping("/sign-in")
     public String postLogin(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes, HttpSession session) {
         LOGGER.debug(() -> "Attempt to login by user: " + user.getEmail());
         User registeredUser = getUserFromRegistrationData(user);
@@ -36,10 +36,10 @@ public class LoginController {
                        : "redirect:/";
             } else if (user.getUserRole() == UserRole.STUDENT) {
                 LOGGER.debug(() -> "Redirecting to student dashboard for user: " + user.getEmail());
-                return "redirect:/student/dashboard";
+                return "redirect:/";
             } else if (user.getUserRole() == UserRole.TEACHER) {
                 LOGGER.debug(() -> "Redirecting to teacher students list for user: " + user.getEmail());
-                return "redirect:/teacher/students";
+                return "redirect:/";
             } else {
                 LOGGER.debug(() -> "Redirecting to home for user: " + user.getEmail());
                 return "redirect:/";
