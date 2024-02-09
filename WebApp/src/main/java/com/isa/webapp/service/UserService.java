@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -103,5 +104,10 @@ public class UserService {
     public List<User> getUnapprovedUsers() {
         log.debug("Fetching unapproved users");
         return userRepository.findAllByIsApproved(false);
+    }
+
+    public boolean isAdmin(UserDetails userDetails) {
+        return userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals(UserRole.ADMIN.name()));
     }
 }

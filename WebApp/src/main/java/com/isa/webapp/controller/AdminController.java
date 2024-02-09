@@ -24,10 +24,8 @@ public class AdminController {
     @GetMapping("/manage-users")
     public String showManageUsersPage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<User> users = userService.getAllUsers();
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
         model.addAttribute("users", users);
-        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         return "manage_users";
     }
 
@@ -39,10 +37,8 @@ public class AdminController {
 
     @GetMapping("/edit-user/{userId}")
     public String showEditUserPage(@PathVariable Long userId, Model model, @AuthenticationPrincipal UserDetails userDetails) {
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
         User user = userService.getUserById(userId);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         model.addAttribute("user", user);
         return "edit_user";
     }
@@ -64,9 +60,7 @@ public class AdminController {
     @GetMapping("/approve-roles")
     public String showApproveRolesPage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         List<User> unapprovedUsers = userService.getUnapprovedUsers();
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         model.addAttribute("unapprovedUsers", unapprovedUsers);
         return "approve_roles";
     }
@@ -86,9 +80,7 @@ public class AdminController {
     @GetMapping("/edit-profile")
     public String showEditProfile(Model model, @AuthenticationPrincipal UserDetails userDetails) {
         User user = userService.getUserByEmail(userDetails.getUsername());
-        boolean isAdmin = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
-        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("isAdmin", userService.isAdmin(userDetails));
         model.addAttribute("user", user);
         return "edit-profile";
     }
