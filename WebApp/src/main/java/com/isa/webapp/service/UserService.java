@@ -6,11 +6,10 @@ import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
 import com.isa.webapp.repository.GradeRepository;
 import com.isa.webapp.repository.UserRepository;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,24 +22,25 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Getter
 @Setter
+@Slf4j
 public class UserService {
 
-    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
     private final UserRepository userRepository;
     private final GradeRepository gradeRepository;
     private final PasswordEncoder passwordEncoder;
 
     public User getUserByEmail(String email) {
-        LOGGER.debug(() -> "Fetching user by email: " + email);
+        log.debug("Fetching user by email: {}", email);
         return userRepository.findByEmail(email).orElse(null);
     }
 
     public List<User> getUsersByRole(UserRole role) {
+        log.debug("Fetching users by role: {}", role);
         return userRepository.findAllByUserRole(role);
     }
 
     public Map<Subject, List<Double>> getGradesForLoggedInUser(User user) {
-        LOGGER.debug(() -> "Getting grades for user: " + user.getEmail());
+        log.debug("Getting grades for user: {}", user.getEmail());
         List<Grade> grades = gradeRepository.findByUserUuid(user.getUuid());
         return grades.stream()
                 .collect(Collectors.groupingBy(
@@ -50,22 +50,22 @@ public class UserService {
     }
 
     public static Map<Subject, List<Double>> convertGradesToMap(List<Grade> grades) {
+        log.debug("Converting grades list to map");
         return grades.stream().collect(Collectors.groupingBy(Grade::getSubjects, Collectors.mapping(Grade::getValue, Collectors.toList())));
     }
 
     public void registerUser(User user) {
-        LOGGER.info(() -> "Registering user: " + user.getEmail());
+        log.info("Registering user: {}", user.getEmail());
         if (userRepository.existsByEmail(user.getEmail())) {
-            LOGGER.warn(() -> "User with email " + user.getEmail() + " already exists");
+            log.warn("User with email {} already exists", user.getEmail());
             throw new IllegalStateException("User with that email already exist.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-        LOGGER.info(() -> "User " + user.getEmail() + " registered successfully");
+        log.info("User {} registered successfully", user.getEmail());
     }
 
     public Optional<User> findUserByEmail(String email) {
-        LOGGER.debug(() -> "Finding user by email: " + email);
         return userRepository.findByEmail(email);
     }
 
@@ -79,20 +79,16 @@ public class UserService {
         user.setApprovedRoles(roles);
         user.setApproved(true);
         userRepository.save(user);
+        log.info("User roles approved for user id: {}", userId);
     }
 
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
-    }
-
-    public void updateUserRole(Long userId, UserRole newRole) {
-        User user = userRepository.findById(userId).orElseThrow(() ->
-                new RuntimeException("User not found with id: " + userId));
-        user.setUserRole(newRole);
-        userRepository.save(user);
+        log.info("User with id {} deleted successfully", userId);
     }
 
     public User getUserById(Long userId) {
+        log.debug("Fetching user by id: {}", userId);
         return userRepository.findById(userId).orElseThrow(() ->
                 new RuntimeException("User not found with id: " + userId));
     }
@@ -101,11 +97,11 @@ public class UserService {
         User existingUser = userRepository.findById(updatedUser.getId()).orElseThrow(() ->
                 new RuntimeException("User not found with id: " + updatedUser.getId()));
         userRepository.save(existingUser);
+        log.info("User with id {} updated successfully", updatedUser.getId());
     }
 
     public List<User> getUnapprovedUsers() {
+        log.debug("Fetching unapproved users");
         return userRepository.findAllByIsApproved(false);
     }
-
-
 }

@@ -3,7 +3,7 @@ package com.isa.webapp.controller;
 import com.isa.webapp.model.User;
 import com.isa.webapp.model.UserRole;
 import com.isa.webapp.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -14,17 +14,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/admin")
 public class AdminController {
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
-
-    @Autowired
-    public AdminController(UserService userService, PasswordEncoder passwordEncoder) {
-        this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
-    }
 
     @GetMapping("/manage-users")
     public String showManageUsersPage(Model model, @AuthenticationPrincipal UserDetails userDetails) {
