@@ -374,11 +374,16 @@
                 <input type="text" name="lastName" class="form-control" id="lastName" th:value="${user.lastName}"
                        required/>
             </div>
-            <div class="mb-3">
-                <label for="schoolName" class="form-label">School Name:</label>
-                <input type="text" name="schoolName" class="form-control" id="schoolName" th:value="${user.schoolName}"
-                       required/>
-            </div>
+          
+    <div class="mb-3">
+      <label for="nameSchoolUser" class="form-label">Szkoła:</label>
+      <select id="nameSchoolUser" name="nameSchoolUser" class="form-select" th:field="*{user.schoolName}" required="required">
+        <option value="">Wybierz szkołę</option>
+        <option value="Szkoła Podstawowa Akademia Przyszłości">Szkoła Podstawowa Akademia Przyszłości</option>
+        <option value="Szkoła Podstawowa nr 1 im. Jana Kowalskiego">Szkoła Podstawowa nr 1 im. Jana Kowalskiego</option>
+        <option value="Szkoła Podstawowa im. Jana Pawła II">Szkoła Podstawowa im. Jana Pawła II</option>
+      </select>
+    </div>
             <div class="mb-3">
                 <label for="userRole" class="form-label">User Role:</label>
                 <select name="userRole" class="form-select" id="userRole" required>

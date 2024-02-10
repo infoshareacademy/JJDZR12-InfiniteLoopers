@@ -24,7 +24,6 @@ public class TeacherController {
 
     private static final Logger LOGGER = LogManager.getLogger(TeacherController.class);
     private final UserRepository userRepository;
-    private final UserService userService;
 
     private final GradeRepository gradeRepository;
 
