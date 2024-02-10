@@ -56,7 +56,7 @@ public class UserService {
     public void registerUser(User user) {
         LOGGER.info(() -> "Registering user: " + user.getEmail());
         if (userRepository.existsByEmail(user.getEmail())) {
-            LOGGER.warn(() -> "User with email " + user.getEmail() + " already exists");=======
+            LOGGER.warn(() -> "User with email " + user.getEmail() + " already exists");
             throw new IllegalStateException("User with that email already exist.");
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
