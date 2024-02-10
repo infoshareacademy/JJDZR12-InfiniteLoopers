@@ -50,7 +50,6 @@ public class HomeController {
     public String showRegistrationForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-/*        model.addAttribute("content", "registration");*/
         return "registration";
     }
 
@@ -58,11 +57,5 @@ public class HomeController {
     public String getLoginPage(Model model) {
         model.addAttribute("content", "login");
         return "login";
-    }
-
-    @GetMapping("/announcement")
-    public String getAnnouncementPage (Model model){
-        model.addAttribute("content", "announcement");
-        return "announcement";
     }
 }

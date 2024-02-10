@@ -36,10 +36,10 @@ public class LoginController {
                        : "redirect:/";
             } else if (user.getUserRole() == UserRole.STUDENT) {
                 LOGGER.debug(() -> "Redirecting to student dashboard for user: " + user.getEmail());
-                return "redirect:/student/dashboard";
+                return "redirect:/";
             } else if (user.getUserRole() == UserRole.TEACHER) {
                 LOGGER.debug(() -> "Redirecting to teacher students list for user: " + user.getEmail());
-                return "redirect:/teacher/students";
+                return "redirect:/";
             } else {
                 LOGGER.debug(() -> "Redirecting to home for user: " + user.getEmail());
                 return "redirect:/";

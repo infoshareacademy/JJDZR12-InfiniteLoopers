@@ -13,7 +13,6 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
         @import url(https://fonts.googleapis.com/css?family=Open+Sans);
-
         .btn {
             display: inline-block;
             *display: inline;
@@ -237,7 +236,6 @@
             background-color: white;
         }
     </style>
-
     <title>Dziennik elektroniczny ISchool</title>
     <meta name="description" content="{{meta}}">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
@@ -247,10 +245,10 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:if="${param.error}" class="alert alert-danger">
-    Invalid username and/or password.
+<div th:if="${param.error}" class="alert alert-danger" style="margin-bottom: 0">
+    <a>Invalid username/password or awaiting approve role.</a>
 </div>
-<div class="vh-100 d-flex align-items-center" style="background:#344a5f">
+<div class="vh-100 d-flex align-items-center" style="background:#344a5f; ">
     <div class="login">
         <h1>Logowanie</h1>
         <form th:action="@{/login}" method="post">
