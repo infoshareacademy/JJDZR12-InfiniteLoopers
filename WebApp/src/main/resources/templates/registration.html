@@ -231,14 +231,14 @@
     <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
         <div class="login">
             <h1>Rejestracja</h1>
-            <div class="social-container" style="display: flex; justify-content: center; align-items: center; height: 40px;">
+<!--            <div class="social-container" style="display: flex; justify-content: center; align-items: center; height: 40px;">
                 <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
                 <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
             </div>
             <div style="display: flex; justify-content: center; align-items: center; height: 40px;">
                 <span style="color: white">lub użyj adresu e-mail do rejestracji</span>
-            </div>
+            </div>-->
             <form th:action="@{/registration}" method="post">
                 <input type="text" id="firstNameUser" name="firstNameUser" placeholder="Imię" th:field="*{user.firstName}" required="required" />
                 <input type="text" id="lastNameUser" name="lastNameUser" placeholder="Nazwisko" th:field="*{user.lastName}" required="required" />
@@ -263,7 +263,7 @@
             </form>
         </div>
     </div>
-</header>
+
 
 <script>
     window.onload = function() {
