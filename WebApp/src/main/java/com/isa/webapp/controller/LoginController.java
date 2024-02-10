@@ -28,6 +28,7 @@ public class LoginController {
             user.setUserRole(registeredUser.getUserRole());
             session.setAttribute("loggedInUser", user);
 
+
             if (user.getUserRole() == UserRole.ADMIN && user.getPassword().equals("admin")) {
                 return "redirect:/admin/edit-profile";
             } else {

@@ -58,10 +58,4 @@ public class HomeController {
         model.addAttribute("content", "login");
         return "login";
     }
-
-    @GetMapping("/announcement")
-    public String getAnnouncementPage (Model model){
-        model.addAttribute("content", "announcement");
-        return "announcement";
-    }
 }

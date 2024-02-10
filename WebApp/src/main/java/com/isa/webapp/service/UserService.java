@@ -58,6 +58,7 @@ public class UserService {
     public void registerUser(User user) {
         log.info("Registering user: {}", user.getEmail());
         if (userRepository.existsByEmail(user.getEmail())) {
+
             log.warn("User with email {} already exists", user.getEmail());
             throw new IllegalStateException("User with that email already exist.");
         }
