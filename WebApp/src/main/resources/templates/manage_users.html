@@ -393,7 +393,7 @@
                         <form method="post" th:action="@{/admin/delete-user}"
                               th:if="${user.userRole != T(com.isa.webapp.model.UserRole).ADMIN}">
                             <input type="hidden" name="userId" th:value="${user.id}"/>
-                            <button type="submit" class="btn btn-primary">Usun</button>
+                            <button type="submit" class="btn btn-primary">Usuń</button>
                         </form>
                     </td>
                 </tr>

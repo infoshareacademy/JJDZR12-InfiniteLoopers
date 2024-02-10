@@ -356,27 +356,27 @@
 </div>
 <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
     <div class="login">
-        <h1>Edytuj dane</h1>
+        <h1 style="color: #ced4da;">Edytuj dane</h1>
         <form th:action="@{/admin/update-profile}" th:object="${user}" method="post" id="updateProfileForm">
             <div class="mb-3">
                 <label for="firstName">Imię</label>
-                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" required>
+                <input type="text" class="form-control" id="firstName" style="background-color: #ced4da;" th:field="*{firstName}" required>
             </div>
             <div class="mb-3">
                 <label for="lastName" class="form-label">Nazwisko</label>
-                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" required>
+                <input type="text" class="form-control" id="lastName" style="background-color: #ced4da;" th:field="*{lastName}" required>
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="email" th:field="*{email}" required>
+                <input type="email" class="form-control" id="email" style="background-color: #ced4da;" th:field="*{email}" required>
             </div>
             <div class="mb-3">
                 <label for="newPassword" class="form-label">Nowe hasło</label>
-                <input type="password" class="form-control" id="newPassword" name="newPassword">
+                <input type="password" class="form-control" id="newPassword" style="background-color: #ced4da;" name="newPassword">
             </div>
             <div class="mb-3">
                 <label for="confirmPassword" class="form-label">Potwierdź nowe hasło</label>
-                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                <input type="password" class="form-control" id="confirmPassword" style="background-color: #ced4da;" name="confirmPassword">
             </div>
             <button type="submit" class="btn btn-primary">Update Profile</button>
         </form>
@@ -400,4 +400,9 @@
     });
 </script>
 </body>
+<footer style="background:#344a5f; margin-bottom: inherit">
+    <small>
+        Copyright © 2023 Football History Archives. All Rights Reserved.
+    </small>
+</footer>
 </html>

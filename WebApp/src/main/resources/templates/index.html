@@ -303,66 +303,65 @@
     </style>
 </head>
 <body>
-<header>
-    <div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0 w-100" role="navigation">
-        <div class="smallContainer p-3 shadow-lg rounded">
-            <div class="d-flex align-items-center justify-content-around">
-                <div class="navLink navLinkActive">
-                    <a th:href="@{/}">
-                        <div><i class="fa-solid fa-house"></i></div>
-                        <div class="navLabel">Home</div>
-                    </a>
-                </div>
-                <div class="navLink" th:if="${isTeacher}">
-                    <a th:href="@{/teacher/students}">
-                        <div><i class="fa-solid fa-table-columns"></i></div>
-                        <div class="navLabel">Uczniowie</div>
-                    </a>
-                </div>
-                <div class="navLink" th:if="${isStudent}">
-                    <a th:href="@{/student/dashboard}">
-                        <div><i class="fa-solid fa-user-graduate"></i></div>
-                        <div class="navLabel">Oceny</div>
-                    </a>
-                </div>
-                <div class="navLink" th:if="${isAdmin}">
-                    <a th:href="@{/admin/manage-users}">
-                        <div><i class="fa-solid fa-user-graduate"></i></div>
-                        <div class="navLabel">Zarządzanie użytkownikami</div>
-                    </a>
-                </div>
-                <div class="navLink" th:if="${isAdmin}">
-                    <a th:href="@{/admin/approve-roles}">
-                        <div><i class="fa-solid fa-user-graduate"></i></div>
-                        <div class="navLabel">Zarządzanie rolami</div>
-                    </a>
-                </div>
-                <div class="navLink" th:if="${isAdmin}">
-                    <a th:href="@{/admin/edit-profile}">
-                        <div><i class="fa-solid fa-user-graduate"></i></div>
-                        <div class="navLabel">Edytuja danych</div>
-                    </a>
-                </div>
-                <div class="navLink">
-                    <form th:action="@{/logout}" method="post" style="margin: 0;">
-                        <button type="submit" class="btn btn-link"
-                                style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
-                            <div><i class="fas fa-sign-out"></i></div>
-                            <div class="navLabel">LogOut</div>
-                        </button>
-                    </form>
-                </div>
+<div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0 w-100" role="navigation">
+    <div class="smallContainer p-3 shadow-lg rounded">
+        <div class="d-flex align-items-center justify-content-around">
+            <div class="navLink navLinkActive">
+                <a th:href="@{/}">
+                    <div><i class="fa-solid fa-house"></i></div>
+                    <div class="navLabel">Home</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isTeacher}">
+                <a th:href="@{/teacher/students}">
+                    <div><i class="fa-solid fa-table-columns"></i></div>
+                    <div class="navLabel">Uczniowie</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isStudent}">
+                <a th:href="@{/student/dashboard}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Oceny</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isAdmin}">
+                <a th:href="@{/admin/manage-users}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Zarządzanie użytkownikami</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isAdmin}">
+                <a th:href="@{/admin/approve-roles}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Zarządzanie rolami</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isAdmin}">
+                <a th:href="@{/admin/edit-profile}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Edytuja danych</div>
+                </a>
+            </div>
+            <div class="navLink">
+                <form th:action="@{/logout}" method="post" style="margin: 0;">
+                    <button type="submit" class="btn btn-link"
+                            style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
+                        <div><i class="fas fa-sign-out"></i></div>
+                        <div class="navLabel">LogOut</div>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
+</div>
     <div class="vh-100 d-flex align-items-center" style="background:#344a5f">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 mx-auto text-center">
-                    <h1 class="text-white"><span class="d-block display-4">Witaj <span style="font-family:impact"
+                    <h1 class="text-white"><span class="d-block display-6" style="color: #ced4da;">Witaj <span style="font-family:impact"
                                                                                        th:text="${username}"></span></span><span
-                            class="d-block display-5">DZIENNIK ELEKTRONICZNY</span>
-                        <span class="d-block display-3" style="font-family:impact">"ISchool"</span></h1>
+                            class="d-block display-6" style="color: #ced4da;">DZIENNIK ELEKTRONICZNY</span>
+                        <span class="d-block display-5" style="font-family:impact; color: #ced4da;">"ISchool"</span></h1>
                 </div>
             </div>
         </div>
