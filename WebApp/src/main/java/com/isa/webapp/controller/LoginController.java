@@ -6,8 +6,6 @@ import com.isa.webapp.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,17 +27,9 @@ public class LoginController {
             user.setGrades(registeredUser.getGrades());
             user.setUserRole(registeredUser.getUserRole());
             session.setAttribute("loggedInUser", user);
-          
-            if (user.getUserRole() == UserRole.ADMIN) {
-               return user.getPassword().equals("admin")
-                       ? "redirect:/admin/edit-profile"
-                       : "redirect:/";
-            } else if (user.getUserRole() == UserRole.STUDENT) {
-                log.debug("Redirecting to home page for user: " + user.getEmail());
-                return "redirect:/";
-            } else if (user.getUserRole() == UserRole.TEACHER) {
-                log.debug("Redirecting to home page for user: " + user.getEmail());
-                return "redirect:/";
+
+            if (user.getUserRole() == UserRole.ADMIN && user.getPassword().equals("admin")) {
+                return "redirect:/admin/edit-profile";
             } else {
                 log.debug("Redirecting to home page for user: " + user.getEmail());
                 return "redirect:/";

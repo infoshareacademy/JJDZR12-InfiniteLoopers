@@ -50,7 +50,6 @@ public class HomeController {
     public String showRegistrationForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-/*        model.addAttribute("content", "registration");*/
         return "registration";
     }
 
