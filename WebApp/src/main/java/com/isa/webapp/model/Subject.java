@@ -1,6 +1,6 @@
 package com.isa.webapp.model;
 
-public enum Subjects {
+public enum Subject {
     POLSKI,
     ANGIELSKI,
     MATEMATYKA,

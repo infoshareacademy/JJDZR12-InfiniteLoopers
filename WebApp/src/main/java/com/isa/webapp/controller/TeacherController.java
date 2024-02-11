@@ -1,115 +1,85 @@
 package com.isa.webapp.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.isa.webapp.model.GradeForm;
-import com.isa.webapp.model.Subjects;
-import com.isa.webapp.model.User;
-import com.isa.webapp.model.UserRole;
-import com.isa.webapp.service.StudentService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.isa.webapp.dto.GradeFormDto;
+import com.isa.webapp.model.*;
+import com.isa.webapp.repository.GradeRepository;
+import com.isa.webapp.repository.UserRepository;
+import com.isa.webapp.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 
 @Controller
+@RequiredArgsConstructor
 public class TeacherController {
 
-    private final StudentService studentService;
+    private static final Logger LOGGER = LogManager.getLogger(TeacherController.class);
+    private final UserRepository userRepository;
 
-    @Autowired
-    public TeacherController(StudentService studentService) {
-        this.studentService = studentService;
-    }
-
-    private static final String USERS_JSON_FILE = "users.json";
+    private final GradeRepository gradeRepository;
 
     @GetMapping("/teacher/students")
-    public String showStudentList(Model model, @AuthenticationPrincipal UserDetails userDetails) throws IOException {
-        boolean isTeacher = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("TEACHER"));
+    public String showStudentList(Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        LOGGER.info(() -> "Showing student list for teacher: " + userDetails.getUsername());
         User user = (User) userDetails;
-        List<User> students = getStudentsForTeacher();
-        model.addAttribute("students", students);
+        boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        if (isTeacher) {
+            List<User> students = userRepository.findAllByUserRoleAndSchoolName(UserRole.STUDENT, user.getSchoolName());
+            model.addAttribute("students", students);
+        }
         model.addAttribute("isTeacher", isTeacher);
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
+        model.addAttribute("schoolName", user.getSchoolName());
+
         return "teacher_student_list";
     }
 
-    @GetMapping("/teacher/add-grade/{studentId}")
-    public String showAddGradeForm(@PathVariable String studentId,
-                                   Model model,
-                                   @AuthenticationPrincipal UserDetails userDetails) {
-        boolean isTeacher = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("TEACHER"));
-        GradeForm gradeForm = new GradeForm();
-        gradeForm.setStudentId(studentId);
-        GradeForm user = new GradeForm();
-
+    @GetMapping("/teacher/add-grade/{studentUuid}")
+    public String showAddGradeForm(@PathVariable String studentUuid, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        LOGGER.info(() -> "Showing add grade form for studentUuid: " + studentUuid + ", by teacher: " + userDetails.getUsername());
+        boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        GradeFormDto gradeForm = new GradeFormDto();
+        gradeForm.setStudentId(studentUuid);
+        GradeFormDto user = new GradeFormDto();
         model.addAttribute("gradeForm", gradeForm);
-        model.addAttribute("subjects", Subjects.values());
+        model.addAttribute("subjects", Subject.values());
         model.addAttribute("isTeacher", isTeacher);
-        model.addAttribute("username", user.getFirstName() + " " + user.getLastName()); //TODO fix
+        model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "teacher_add_grade";
     }
 
     @GetMapping("/teacher/view-grades/{studentId}")
-    public String viewGrades(@PathVariable String studentId,
-                             Model model,
-                             @AuthenticationPrincipal UserDetails userDetails) {
-        boolean isTeacher = userDetails.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("TEACHER"));
-        Map<Subjects, List<Integer>> grades = studentService.getGradesForStudent(studentId);
+    public String viewGrades(@PathVariable String studentId, Model model, @AuthenticationPrincipal UserDetails userDetails) {
+        LOGGER.info(() -> "Viewing grades for studentId: " + studentId + ", by teacher: " + userDetails.getUsername());
+        boolean isTeacher = userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        List<Grade> studentGrades = gradeRepository.findByUserUuid(studentId);
+        Map<Subject, List<Double>> grades = UserService.convertGradesToMap(studentGrades);
         model.addAttribute("grades", grades);
-        model.addAttribute("isTeacher", isTeacher); //TODO fix
+        model.addAttribute("isTeacher", isTeacher);
         return "teacher_view_grades";
     }
 
     @PostMapping("/teacher/add-grade")
-    public String addGrade(@ModelAttribute("gradeForm") GradeForm gradeForm) {
-        addGradeToStudent(gradeForm.getStudentId(), gradeForm.getSubject(), gradeForm.getGrade());
+    public String addGrade(@RequestParam("studentId") String studentUuid, @RequestParam("subject") Subject subject, @RequestParam("grade") Double grade) {
+        User user = userRepository.findByUuid(studentUuid).orElse(null);
+        LOGGER.info(() -> "Teacher adding grade for studentId: " + studentUuid);
+        Grade newGrade = new Grade();
+        newGrade.setSubjects(subject);
+        newGrade.setValue(grade);
+        newGrade.setDate(LocalDate.now());
+        newGrade.setUser(user);
+        gradeRepository.save(newGrade);
+        LOGGER.info(() -> "Grade successfully added for studentId: " + studentUuid);
         return "redirect:/teacher/students";
-    }
-
-    public List<User> getStudentsForTeacher() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        List<User> users = mapper.readValue(Files.newBufferedReader(Paths.get(USERS_JSON_FILE)), new TypeReference<>() {});
-
-        return users.stream()
-                .filter(user -> user.getUserRole() == UserRole.STUDENT)
-                .collect(Collectors.toList());
-    }
-
-    public void addGradeToStudent(String studentId, Subjects subject, int grade) {
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            List<User> users = mapper.readValue(Files.newBufferedReader(Paths.get(USERS_JSON_FILE)), new TypeReference<>() {});
-
-            for (User user : users) {
-                if (user.getId().equals(studentId)) {
-                    Map<Subjects, List<Integer>> grades = user.getGrades();
-                    grades.computeIfAbsent(subject, key -> new ArrayList<>()).add(grade);
-                    Files.write(Paths.get(USERS_JSON_FILE), mapper.writeValueAsBytes(users));
-                    break;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

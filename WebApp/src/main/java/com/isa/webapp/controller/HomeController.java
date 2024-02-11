@@ -1,16 +1,12 @@
 package com.isa.webapp.controller;
 
 import com.isa.webapp.model.User;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-
-import java.security.Principal;
 
 @Controller
 public class HomeController {
@@ -22,9 +18,12 @@ public class HomeController {
                 .anyMatch(a -> a.getAuthority().equals("STUDENT"));
         boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
         User user = (User) userDetails;
         model.addAttribute("isStudent", isStudent);
         model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "index";
@@ -36,9 +35,12 @@ public class HomeController {
                 .anyMatch(a -> a.getAuthority().equals("STUDENT"));
         boolean isTeacher = userDetails.getAuthorities().stream()
                 .anyMatch(a -> a.getAuthority().equals("TEACHER"));
+        boolean isAdmin = userDetails.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ADMIN"));
         User user = (User) userDetails;
         model.addAttribute("isStudent", isStudent);
         model.addAttribute("isTeacher", isTeacher);
+        model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("username", user.getFirstName() + " " + user.getLastName());
 
         return "index";
@@ -48,7 +50,6 @@ public class HomeController {
     public String showRegistrationForm(Model model) {
         User user = new User();
         model.addAttribute("user", user);
-/*        model.addAttribute("content", "registration");*/
         return "registration";
     }
 
@@ -56,11 +57,5 @@ public class HomeController {
     public String getLoginPage(Model model) {
         model.addAttribute("content", "login");
         return "login";
-    }
-
-    @GetMapping("/announcement")
-    public String getAnnouncementPage (Model model){
-        model.addAttribute("content", "announcement");
-        return "announcement";
     }
 }

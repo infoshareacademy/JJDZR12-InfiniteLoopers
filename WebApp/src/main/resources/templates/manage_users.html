@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="/static_files/images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope&display=swap" rel="stylesheet">
@@ -121,12 +122,9 @@
         }
 
         .login {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin: -150px 0 0 -150px;
-            width: 300px;
-            height: 300px;
+            width: 100%;
+            max-width: 1100px;
+            margin: auto;
         }
 
         .login h1 {
@@ -168,7 +166,6 @@
             transition: all 200ms linear;
             padding: 8px;
             width: 110px;
-            height: 72px;
             border-radius: 8px;
             border: 1px solid #c1d9ee;
             background: linear-gradient(225deg, #d3eeff, #b1c8e0);
@@ -235,6 +232,81 @@
             width: 40px;
             background-color: white;
         }
+
+        .input-style select {
+            width: 100%;
+            margin-bottom: 10px;
+            background: rgba(0, 0, 0, 0.3);
+            border: none;
+            outline: none;
+            padding: 10px;
+            font-size: 13px;
+            color: #fff;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.2), 0 1px 1px rgba(255, 255, 255, 0.2);
+            -webkit-transition: box-shadow .5s ease;
+            -moz-transition: box-shadow .5s ease;
+            -o-transition: box-shadow .5s ease;
+            -ms-transition: box-shadow .5s ease;
+            transition: box-shadow .5s ease;
+        }
+
+        .input-style select:focus {
+            box-shadow: inset 0 -5px 45px rgba(100, 100, 100, 0.4), 0 1px 1px rgba(255, 255, 255, 0.2);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            color: #ced4da;
+        }
+
+        th {
+            background-color: #FFFFFF33;
+            color: #ced4da;
+        }
+
     </style>
     <title>Dziennik elektroniczny ISchool</title>
     <meta name="description" content="{{meta}}">
@@ -245,21 +317,93 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<div th:if="${param.error}" class="alert alert-danger" style="margin-bottom: 0">
-    <a>Invalid username/password or awaiting approve role.</a>
-</div>
-<div class="vh-100 d-flex align-items-center" style="background:#344a5f; ">
-    <div class="login">
-        <h1>Logowanie</h1>
-        <form th:action="@{/login}" method="post">
-            <input type="text" id="email" name="email" placeholder="Email" required="required"/>
-            <input type="password" id="password" name="password" placeholder="Hasło" required="required"/>
-            <button type="submit" class="btn btn-primary btn-block btn-large">Zaloguj się</button>
-        </form>
-        <div style="display: flex; justify-content: center; align-items: center; height: 40px;">
-            <a th:href="@{/registration}" style="color: white">Nie masz konta? Zarejestruj się</a>
+<div class="position-fixed text-uppercase mb-2 p-2 start-0 text-center bottom-0 w-100" role="navigation">
+    <div class="smallContainer p-3 shadow-lg rounded">
+        <div class="d-flex align-items-center justify-content-around">
+            <div class="navLink navLinkActive">
+                <a th:href="@{/}">
+                    <div><i class="fa-solid fa-house"></i></div>
+                    <div class="navLabel">Home</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isTeacher}">
+                <a th:href="@{/teacher/students}">
+                    <div><i class="fa-solid fa-table-columns"></i></div>
+                    <div class="navLabel">Uczniowie</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isStudent}">
+                <a th:href="@{/student/dashboard}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Oceny</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isAdmin}">
+                <a th:href="@{/admin/manage-users}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Zarządzanie użytkownikami</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isAdmin}">
+                <a th:href="@{/admin/approve-roles}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Zarządzanie rolami</div>
+                </a>
+            </div>
+            <div class="navLink" th:if="${isAdmin}">
+                <a th:href="@{/admin/edit-profile}">
+                    <div><i class="fa-solid fa-user-graduate"></i></div>
+                    <div class="navLabel">Edycja danych</div>
+                </a>
+            </div>
+            <div class="navLink">
+                <form th:action="@{/logout}" method="post" style="margin: 0;">
+                    <button type="submit" class="btn btn-link"
+                            style="color: inherit; text-decoration: none; padding: 0; background: none; border: none;">
+                        <div><i class="fas fa-sign-out"></i></div>
+                        <div class="navLabel">LogOut</div>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
+<div class="vh-100 d-flex justify-content-center align-items-center" style="background:#344a5f">
+    <div class="login">
+        <div class="col-lg-8 mx-auto text-center" style="width: 50%">
+            <h1 style="color: #ced4da">Zarządzaj użytkownikami</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>E-mail</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Akcje</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${users}" style="color: white">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td th:text="${user.firstName}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td>
+                        <a th:href="@{/admin/edit-user/{userId}(userId=${user.id})}" class="btn btn-primary">Edytuj</a>
+                        <form method="post" th:action="@{/admin/delete-user}"
+                              th:if="${user.userRole != T(com.isa.webapp.model.UserRole).ADMIN}">
+                            <input type="hidden" name="userId" th:value="${user.id}"/>
+                            <button type="submit" class="btn btn-primary" style="background-color: red; ">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

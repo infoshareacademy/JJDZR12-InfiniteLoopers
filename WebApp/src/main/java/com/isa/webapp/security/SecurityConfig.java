@@ -14,14 +14,15 @@ public class SecurityConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/login", "/registration").permitAll()
-                        .requestMatchers("/teacher/**").hasAuthority("TEACHER") //TODO zrobic dla STUDENT
+                        .requestMatchers("/teacher/**").hasAuthority("TEACHER")
+                        .requestMatchers("/student/**").hasAuthority("STUDENT")
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated())
                 .formLogin(form -> form
                         .loginPage("/login")
                         .usernameParameter("email")
-                        .successForwardUrl("/"))
-                .logout(logout -> logout.logoutSuccessUrl("/"))
-                /*.exceptionHandling(exception -> exception.accessDeniedPage("/sing"))*/;
+                        .successForwardUrl("/sign-in"))
+                .logout(logout -> logout.logoutSuccessUrl("/"));
         return httpSecurity.build();
     }
 
