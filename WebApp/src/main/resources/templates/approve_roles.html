@@ -357,7 +357,7 @@
             <div class="navLink" th:if="${isAdmin}">
                 <a th:href="@{/admin/edit-profile}">
                     <div><i class="fa-solid fa-user-graduate"></i></div>
-                    <div class="navLabel">Edytuja danych</div>
+                    <div class="navLabel">Edycja danych</div>
                 </a>
             </div>
             <div class="navLink">
@@ -375,7 +375,7 @@
 <div class="vh-100 d-flex justify-content-center align-items-center" style="background:#344a5f">
     <div class="login">
         <div class="col-lg-8 mx-auto text-center" style="width: 50%">
-            <h1 style="color: #ced4da">Zatwierdzenie role</h1>
+            <h1 style="color: #ced4da">Zatwierdź role</h1>
             <form method="post" th:action="@{/admin/approve-roles}">
                 <table>
                     <thead>
@@ -400,7 +400,7 @@
                     </tbody>
                 </table>
                 <input type="hidden" name="roles" value="STUDENT"/>
-                <button type="submit" class="btn btn-primary">Zatwierdz uzytkownikow</button>
+                <button type="submit" class="btn btn-primary">Zaktualizuj</button>
             </form>
         </div>
     </div>

@@ -353,7 +353,7 @@
             <div class="navLink" th:if="${isAdmin}">
                 <a th:href="@{/admin/edit-profile}">
                     <div><i class="fa-solid fa-user-graduate"></i></div>
-                    <div class="navLabel">Edytuja danych</div>
+                    <div class="navLabel">Edycja danych</div>
                 </a>
             </div>
             <div class="navLink">
@@ -371,15 +371,15 @@
 <div class="vh-100 d-flex justify-content-center align-items-center" style="background:#344a5f">
     <div class="login">
         <div class="col-lg-8 mx-auto text-center" style="width: 50%">
-            <h1 style="color: #ced4da">Zarzadzaj uzytkownikami</h1>
+            <h1 style="color: #ced4da">Zarządzaj użytkownikami</h1>
             <table>
                 <thead>
                 <tr>
                     <th>User ID</th>
-                    <th>Email</th>
-                    <th>Imie</th>
+                    <th>E-mail</th>
+                    <th>Imię</th>
                     <th>Nazwisko</th>
-                    <th>Acje</th>
+                    <th>Akcje</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -393,7 +393,7 @@
                         <form method="post" th:action="@{/admin/delete-user}"
                               th:if="${user.userRole != T(com.isa.webapp.model.UserRole).ADMIN}">
                             <input type="hidden" name="userId" th:value="${user.id}"/>
-                            <button type="submit" class="btn btn-primary">Usuń</button>
+                            <button type="submit" class="btn btn-primary" style="background-color: red; ">Usuń</button>
                         </form>
                     </td>
                 </tr>
